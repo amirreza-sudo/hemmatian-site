@@ -1160,6 +1160,7 @@ function submitLeadWA(){
     'Looking forward to our 15-minute consultation!'
   );
   sendToHubSpot(n,e,cc,p,b,g);
+  sendToBrevo(n,e,cc,p);
   fetch('https://formspree.io/f/xjgzkbjn',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
@@ -1222,6 +1223,24 @@ function sendToHubSpot(n,e,cc,p,b,g){
     })
   }).catch(err=>console.log('HubSpot submission error:',err));
 }
+function sendToBrevo(n,e,cc,p){
+  const parts=n.trim().split(/\s+/);
+  const firstName=parts[0]||'';
+  const lastName=parts.slice(1).join(' ')||'';
+  const fullPhone=(cc||'')+(p||'');
+  const fd=new FormData();
+  fd.append('EMAIL',e);
+  fd.append('FIRSTNAME',firstName);
+  fd.append('LASTNAME',lastName);
+  fd.append('SMS',fullPhone);
+  fd.append('email_address_check','');
+  fd.append('locale','en');
+  return fetch('https://7251e893.sibforms.com/serve/MUIFAJ_srspl7QBOnNWZ9HMzkTeQRBrHbK28M8kwpvZ-a5L1EJ1wr6m69UC-grR8xNictH_fuMDwXtXNkk4V9wxRjNH3YO82Ltbwm6BFoDRa7_adFLNJ-lHQuWOPmKDfZLtAGDQaaE8xleATlLhiCx2CHgEEzbIavUNvkltGy6o8cOj9fOtEHWB-ezNZMkkj7ki_P3rpLdoL1N4yLA==',{
+    method:'POST',
+    mode:'no-cors',
+    body:fd
+  }).catch(err=>console.log('Brevo submission error:',err));
+}
 function submitLead(){
   const n=document.getElementById('lf-name').value.trim();
   const e=document.getElementById('lf-email').value.trim();
@@ -1248,6 +1267,7 @@ function submitLead(){
   btn.textContent='Sending...';btn.disabled=true;
   const waMsg=encodeURIComponent('Hi AmirReza, I just submitted your consultation form.\n\nName: '+n+'\nEmail: '+e+'\nPhone: '+cc+p+'\nBudget: '+(b||'Not specified')+'\nGoal: '+(g||'Not specified')+'\n\nLooking forward to our 15-min call!');
   sendToHubSpot(n,e,cc,p,b,g);
+  sendToBrevo(n,e,cc,p);
   fetch('https://formspree.io/f/xjgzkbjn',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
