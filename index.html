@@ -1161,6 +1161,7 @@ function submitLeadWA(){
   );
   sendToHubSpot(n,e,cc,p,b,g);
   sendToBrevo(n,e,cc,p);
+  sendToTelegram(n,e,cc,p,b,g);
   fetch('https://formspree.io/f/xjgzkbjn',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
@@ -1241,6 +1242,18 @@ function sendToBrevo(n,e,cc,p){
     body:fd
   }).catch(err=>console.log('Brevo submission error:',err));
 }
+function sendToTelegram(n,e,cc,p,b,g){
+  const phone=(cc||'')+(p||'');
+  const msg='\u{1F514} NEW LEAD - DXB Property Expert\n\n'+
+            '\u{1F464} Name: '+n+'\n'+
+            '\u{1F4E7} Email: '+e+'\n'+
+            '\u{1F4F1} Phone: '+phone+'\n'+
+            '\u{1F4B0} Budget: '+(b||'Not specified')+'\n'+
+            '\u{1F3AF} Goal: '+(g||'Not specified')+'\n\n'+
+            '\u{1F550} '+new Date().toLocaleString();
+  const url='https://api.telegram.org/bot8850503390:AAHix7bCywjQ60K_sjBT06n1cqLPUoaCWcc/sendMessage?chat_id=8591239181&text='+encodeURIComponent(msg);
+  return fetch(url).catch(err=>console.log('Telegram error:',err));
+}
 function submitLead(){
   const n=document.getElementById('lf-name').value.trim();
   const e=document.getElementById('lf-email').value.trim();
@@ -1268,6 +1281,7 @@ function submitLead(){
   const waMsg=encodeURIComponent('Hi AmirReza, I just submitted your consultation form.\n\nName: '+n+'\nEmail: '+e+'\nPhone: '+cc+p+'\nBudget: '+(b||'Not specified')+'\nGoal: '+(g||'Not specified')+'\n\nLooking forward to our 15-min call!');
   sendToHubSpot(n,e,cc,p,b,g);
   sendToBrevo(n,e,cc,p);
+  sendToTelegram(n,e,cc,p,b,g);
   fetch('https://formspree.io/f/xjgzkbjn',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
