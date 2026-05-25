@@ -84,36 +84,38 @@ async function addToHubSpot({ firstName, lastName, email, phone, budget, goal })
   }
 }
 
-// ── Brevo — POST to form URL (triggers 5-email welcome sequence) ──
+// ── Brevo — API v3 (adds to "Website Leads" list ID 3, triggers automation) ──
 async function addToBrevo({ firstName, email, phone, budget, goal }) {
-  const url = process.env.BREVO_FORM_URL;
-  if (!url) {
-    console.error('Brevo: missing BREVO_FORM_URL');
+  const key = process.env.BREVO_API_KEY;
+  if (!key) {
+    console.error('Brevo: missing BREVO_API_KEY');
     return;
   }
 
-  // Build URL-encoded form body (Brevo form submission format)
-  const params = new URLSearchParams({
-    EMAIL:     email,
-    FIRSTNAME: firstName,
-    SMS:       phone,
-    BUDGET:    budget || '',
-    GOAL:      goal   || '',
-    email_address_check: '',
-    locale: 'en'
-  });
-
-  const res = await fetch(url, {
+  const res = await fetch('https://api.brevo.com/v3/contacts', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params.toString()
+    headers: {
+      'Content-Type': 'application/json',
+      'api-key': key
+    },
+    body: JSON.stringify({
+      email,
+      attributes: {
+        FIRSTNAME: firstName,
+        SMS:       phone,
+        BUDGET:    budget || '',
+        GOAL:      goal   || ''
+      },
+      listIds:       [3],
+      updateEnabled: true
+    })
   });
 
   if (!res.ok) {
     const body = await res.text();
     console.error('Brevo error:', res.status, body);
   } else {
-    console.log('Brevo: contact added OK');
+    console.log('Brevo: contact added to list 3 OK');
   }
 }
 
