@@ -1,7 +1,7 @@
 // submit-lead.js — DXB Property Expert
 // Handles two paths:
 //   source:'hero-form'          → role:'buyer', emailSequence:'full-5-sequence'  → Brevo list 3
-//   source:'price-checker-signup' → role:'agent'  → emailSequence:'agent-welcome-only' → Brevo list 4
+//   source:'price-checker-signup' → role:'agent'  → emailSequence:'agent-welcome-only' → Brevo list 6
 //                                 → role:'buyer'|'owner' → emailSequence:'full-5-sequence'  → Brevo list 3
 
 exports.handler = async (event) => {
@@ -44,7 +44,7 @@ exports.handler = async (event) => {
   //   list 3 = Full 5-email sequence (buyers, owners, hero form)
   //   list 4 = Agent welcome only (1 email)
   // ⚠️  Update list IDs if you change them in Brevo
-  const brevoListId = (emailSequence === 'agent-welcome-only') ? 4 : 3;
+  const brevoListId = (emailSequence === 'agent-welcome-only') ? 6 : 3;
 
   await Promise.allSettled([
     addToHubSpot({ firstName, lastName, email, phone, budget, goal, role, source }),
