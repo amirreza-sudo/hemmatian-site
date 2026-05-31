@@ -115,7 +115,13 @@ async function addToBrevo({ firstName, email, phone, budget, goal, role, source,
     console.error('Brevo: missing BREVO_API_KEY');
     return;
   }
-
+// Normalize phone to international format for Brevo
+  let smsPhone = phone ? phone.replace(/[^0-9+]/g, "") : "";
+  if (smsPhone && !smsPhone.startsWith("+")) {
+    if (smsPhone.startsWith("00")) smsPhone = "+" + smsPhone.slice(2);
+    else if (smsPhone.startsWith("971")) smsPhone = "+" + smsPhone;
+    else smsPhone = "+971" + smsPhone;
+  }
   const res = await fetch('https://api.brevo.com/v3/contacts', {
     method: 'POST',
     headers: {
@@ -126,7 +132,7 @@ async function addToBrevo({ firstName, email, phone, budget, goal, role, source,
       email,
       attributes: {
         FIRSTNAME:   firstName,
-        SMS:         phone,
+        SMS:         smsphone,
         BUDGET:      budget || '',
         GOAL:        goal   || '',
         ROLE:        role   || 'buyer',
