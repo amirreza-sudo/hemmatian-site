@@ -42,7 +42,7 @@ exports.handler = async (event) => {
 
   // Brevo list routing:
   //   list 3 = Full 5-email sequence (buyers, owners, hero form)
-  //   list 4 = Agent welcome only (1 email)
+  //   list 6 = Agent welcome only (1 email)
   // ⚠️  Update list IDs if you change them in Brevo
   const brevoListId = (emailSequence === 'agent-welcome-only') ? 6 : 3;
 
@@ -110,18 +110,19 @@ async function addToHubSpot({ firstName, lastName, email, phone, budget, goal, r
 //   List 4 → Agent welcome email only
 // Set up the automation in Brevo → Automations → "Contact added to list X"
 async function addToBrevo({ firstName, email, phone, budget, goal, role, source, listId }) {
-  const key = process.env.BREVO_API_KEY;
-  if (!key) {
-    console.error('Brevo: missing BREVO_API_KEY');
-    return;
-  }
-// Normalize phone to international format for Brevo
+  // Normalize phone to international format for Brevo
   let smsPhone = phone ? phone.replace(/[^0-9+]/g, "") : "";
   if (smsPhone && !smsPhone.startsWith("+")) {
     if (smsPhone.startsWith("00")) smsPhone = "+" + smsPhone.slice(2);
     else if (smsPhone.startsWith("971")) smsPhone = "+" + smsPhone;
     else smsPhone = "+971" + smsPhone;
   }
+  const key = process.env.BREVO_API_KEY;
+  if (!key) {
+    console.error('Brevo: missing BREVO_API_KEY');
+    return;
+  }
+
   const res = await fetch('https://api.brevo.com/v3/contacts', {
     method: 'POST',
     headers: {
@@ -132,7 +133,7 @@ async function addToBrevo({ firstName, email, phone, budget, goal, role, source,
       email,
       attributes: {
         FIRSTNAME:   firstName,
-        SMS:         smsphone,
+        SMS:         smsPhone,
         BUDGET:      budget || '',
         GOAL:        goal   || '',
         ROLE:        role   || 'buyer',
