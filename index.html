@@ -4063,197 +4063,186 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 </script>
 
 
+
 <style>
-/* ============================================
-   MOBILE TAB APP — DXB Property Expert
-   Desktop: ZERO changes (all inside max-width:768px)
-   ============================================ */
+/* ================================================
+   MOBILE TAB APP v2 — DXB Property Expert
+   Desktop: ZERO changes (100% inside max-width:768px)
+   ================================================ */
 @media(max-width:768px){
-  /* Hide old sticky bar */
+  /* Hide old sticky bar + footer on mobile */
   .mob{display:none!important}
+  footer{display:none!important}
   body{padding-bottom:72px!important}
 
-  /* Nav */
+  /* Nav - compact */
   .n-links{display:none!important}
   nav{padding:0 16px!important;height:52px!important}
   .n-logo-sub{display:none!important}
 
-  /* All main sections hidden by default, only active shown */
-  .mob-section{display:none!important}
-  .mob-section.mob-active{display:block!important}
+  /* HOME tab layout fixes */
+  #contact{display:block}
+  .hero{grid-template-columns:1fr!important}
+  .h-left{padding:28px 16px!important}
+  .h-right{height:55vw!important;min-height:190px}
+  .stats{grid-template-columns:1fr 1fr 1fr!important}
+  .stat{padding:14px 6px!important;text-align:center}
+  .stat-n{font-size:20px!important}
+  .stat-l{font-size:7px!important}
+  .lrow{grid-template-columns:1fr!important}
+  .lphone{grid-template-columns:1fr!important}
+  .lbtns{flex-direction:column!important}
+  .btn{width:100%!important;justify-content:center!important}
+  .sec{padding:32px 16px!important}
+  .sh2{font-size:26px!important;line-height:1.2!important}
+  .ssub{font-size:13px!important;margin-bottom:20px!important}
+  .vg{grid-template-columns:1fr!important}
 
-  /* HERO */
-  .mob-active.hero-wrap .hero{grid-template-columns:1fr!important}
-  .mob-active.hero-wrap .h-left{padding:28px 16px!important}
-  .mob-active.hero-wrap .h-right{height:55vw!important;min-height:200px}
-  .mob-active.hero-wrap .stats{grid-template-columns:1fr 1fr 1fr!important}
-  .mob-active.hero-wrap .stat{padding:14px 8px!important}
-  .mob-active.hero-wrap .stat-n{font-size:20px!important}
-  .mob-active.hero-wrap .stat-l{font-size:7px!important}
-  .mob-active.hero-wrap .lrow{grid-template-columns:1fr!important}
-  .mob-active.hero-wrap .lphone{grid-template-columns:1fr!important}
-  .mob-active.hero-wrap .lbtns{flex-direction:column!important}
-  .mob-active.hero-wrap .btn{width:100%!important;justify-content:center!important}
+  /* AREAS inside home - bigger text */
+  #areas .aslider-wrap{padding:0 28px!important}
+  #areas .aslide{flex:0 0 82%!important}
 
-  /* LAUNCHES — keep photo, stack vertically */
-  #launches.mob-active{flex-direction:column!important}
-  #launches.mob-active>div:last-child{min-height:260px!important}
-  #launches.mob-active .launch-content{padding:24px 16px!important}
-  #launches.mob-active .unit-grid{grid-template-columns:1fr!important;gap:8px!important}
+  /* LAUNCHES tab */
+  #launches{flex-direction:column!important}
+  #launches>div:last-child{min-height:260px!important}
+  .launch-content{padding:24px 16px!important}
+  .unit-grid{grid-template-columns:1fr!important;gap:8px!important}
 
-  /* AREAS — keep slider with photos */
-  #areas.mob-active .sec{padding:32px 16px!important}
-  #areas.mob-active .aslider-wrap{padding:0 28px!important}
-  #areas.mob-active .aslide{flex:0 0 82%!important}
+  /* CALC tab */
+  #calc .cw{padding:20px 14px!important}
+  #calc .crow{grid-template-columns:1fr!important;gap:10px!important}
+  #calc .rg{grid-template-columns:1fr 1fr 1fr!important}
+  #calc .ri{padding:10px 6px!important}
+  #calc .rc{font-size:7px!important}
+  #calc .rv{font-size:15px!important}
+  #calc .pg{grid-template-columns:1fr!important}
 
-  /* CALC — keep background photo, just stack content */
-  #calc.mob-active .cw{padding:20px 14px!important}
-  #calc.mob-active .crow{grid-template-columns:1fr!important;gap:10px!important}
-  #calc.mob-active .rg{grid-template-columns:1fr 1fr 1fr!important}
-  #calc.mob-active .ri{padding:10px 6px!important}
-  #calc.mob-active .rc{font-size:7px!important}
-  #calc.mob-active .rv{font-size:15px!important}
-  #calc.mob-active .pg{grid-template-columns:1fr!important}
-  #calc.mob-active [style*="display:grid;grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  /* PRICE CHECKER tab */
+  #pricechecker{flex-direction:column!important}
+  #pricechecker>div:first-child{padding:24px 16px!important;flex:none!important}
+  #pricechecker>div:last-child{min-height:220px!important;flex:none!important}
 
-  /* PRICE CHECKER — keep photo */
-  #pricechecker.mob-active{flex-direction:column!important}
-  #pricechecker.mob-active>div:first-child{padding:24px 16px!important;flex:none!important}
-  #pricechecker.mob-active>div:last-child{min-height:220px!important;flex:none!important}
-
-  /* SECONDARY MARKET — keep photos */
-  #market.mob-active .mkt-hero{grid-template-columns:1fr!important;min-height:unset!important}
-  #market.mob-active .mkt-panel{min-height:170px}
-  #market.mob-active .mkt-form-area{padding:24px 16px!important}
-
-  /* General */
-  .mob-active .sec{padding:32px 16px!important}
-  .mob-active .sh2{font-size:26px!important;line-height:1.2!important}
-  .mob-active .ssub{font-size:13px!important;margin-bottom:20px!important}
+  /* SECONDARY MARKET tab */
+  #market .mkt-hero{grid-template-columns:1fr!important;min-height:unset!important}
+  #market .mkt-panel{min-height:170px}
+  #market .mkt-form-area{padding:24px 16px!important}
 }
 
-/* TAB BAR */
+/* TAB BAR - only shows on mobile */
 #mob-tabbar{
   display:none;
   position:fixed;
   bottom:0;left:0;right:0;
   z-index:9999;
   background:#0d0d0d;
-  border-top:1px solid rgba(255,255,255,.1);
+  border-top:1px solid rgba(255,255,255,.12);
   padding:5px 0 10px;
-  grid-template-columns:repeat(6,1fr);
+  grid-template-columns:repeat(5,1fr);
 }
 @media(max-width:768px){#mob-tabbar{display:grid!important}}
-.mob-tab{
+.mtab{
   display:flex;flex-direction:column;align-items:center;
   gap:2px;cursor:pointer;padding:4px 2px;
-  border:none;background:transparent;
+  border:none;background:transparent;transition:opacity .1s;
 }
-.mob-tab-icon{font-size:19px;line-height:1;transition:transform .15s}
-.mob-tab-label{
+.mtab:active{opacity:.7}
+.mtab-icon{font-size:20px;line-height:1}
+.mtab-label{
   font-size:7.5px;letter-spacing:.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.3);font-family:inherit;
-  transition:color .15s;white-space:nowrap;
+  color:rgba(255,255,255,.3);font-family:inherit;white-space:nowrap;
 }
-.mob-tab-bar{width:26px;height:2px;background:transparent;border-radius:0 0 2px 2px;margin-top:1px;transition:background .15s}
-.mob-tab.active .mob-tab-label{color:#d4a853}
-.mob-tab.active .mob-tab-bar{background:#d4a853}
-.mob-tab.active .mob-tab-icon{transform:translateY(-1px)}
+.mtab-bar{width:28px;height:2px;background:transparent;border-radius:0 0 2px 2px;margin-top:2px}
+.mtab.on .mtab-label{color:#d4a853}
+.mtab.on .mtab-bar{background:#d4a853}
 </style>
 
-<!-- MOBILE TAB BAR -->
+<!-- MOBILE TAB BAR (hidden on desktop via CSS) -->
 <div id="mob-tabbar">
-  <button class="mob-tab active" onclick="mobTab('home',this)">
-    <span class="mob-tab-icon">🏠</span>
-    <span class="mob-tab-label">Home</span>
-    <span class="mob-tab-bar"></span>
+  <button class="mtab on" data-tab="home">
+    <span class="mtab-icon">🏠</span>
+    <span class="mtab-label">Home</span>
+    <span class="mtab-bar"></span>
   </button>
-  <button class="mob-tab" onclick="mobTab('launches',this)">
-    <span class="mob-tab-icon">🚀</span>
-    <span class="mob-tab-label">Launch</span>
-    <span class="mob-tab-bar"></span>
+  <button class="mtab" data-tab="launches">
+    <span class="mtab-icon">🚀</span>
+    <span class="mtab-label">Launch</span>
+    <span class="mtab-bar"></span>
   </button>
-  <button class="mob-tab" onclick="mobTab('areas',this)">
-    <span class="mob-tab-icon">🏙️</span>
-    <span class="mob-tab-label">Areas</span>
-    <span class="mob-tab-bar"></span>
+  <button class="mtab" data-tab="calc">
+    <span class="mtab-icon">🧮</span>
+    <span class="mtab-label">Calc</span>
+    <span class="mtab-bar"></span>
   </button>
-  <button class="mob-tab" onclick="mobTab('calc',this)">
-    <span class="mob-tab-icon">🧮</span>
-    <span class="mob-tab-label">Calc</span>
-    <span class="mob-tab-bar"></span>
+  <button class="mtab" data-tab="pricechecker">
+    <span class="mtab-icon">🔍</span>
+    <span class="mtab-label">Price</span>
+    <span class="mtab-bar"></span>
   </button>
-  <button class="mob-tab" onclick="mobTab('pricechecker',this)">
-    <span class="mob-tab-icon">🔍</span>
-    <span class="mob-tab-label">Price</span>
-    <span class="mob-tab-bar"></span>
-  </button>
-  <button class="mob-tab" onclick="mobTab('market',this)">
-    <span class="mob-tab-icon">🔄</span>
-    <span class="mob-tab-label">Buy/Sell</span>
-    <span class="mob-tab-bar"></span>
+  <button class="mtab" data-tab="market">
+    <span class="mtab-icon">🔄</span>
+    <span class="mtab-label">Buy/Sell</span>
+    <span class="mtab-bar"></span>
   </button>
 </div>
 
 <script>
 (function(){
-  var SECTIONS = {
-    home:         'mob-hero-wrap',
-    launches:     'launches',
-    areas:        'areas',
-    calc:         'calc',
-    pricechecker: 'pricechecker',
-    market:       'market'
+  // Tab → section IDs to show (all others hidden)
+  var TAB_SECTIONS = {
+    home:         ['contact','statsbar','visa','roi','areas','guide'],
+    launches:     ['launches'],
+    calc:         ['calc'],
+    pricechecker: ['pricechecker'],
+    market:       ['market']
   };
-  var current = 'home';
 
-  function isMobile(){ return window.innerWidth <= 768; }
+  // All managed section IDs
+  var ALL = ['contact','statsbar','visa','roi','areas','guide','launches','calc','pricechecker','market'];
 
-  function init(){
-    if(!isMobile()) return;
-    // Wrap hero + stats into one wrapper
-    if(!document.getElementById('mob-hero-wrap')){
-      var hero = document.getElementById('contact');
-      if(!hero) return;
-      var wrapper = document.createElement('div');
-      wrapper.id = 'mob-hero-wrap';
-      wrapper.className = 'mob-section mob-active hero-wrap';
-      hero.parentNode.insertBefore(wrapper, hero);
-      wrapper.appendChild(hero);
-      // Grab stats bar (next sibling)
-      var next = wrapper.nextElementSibling;
-      if(next && next.classList.contains('stats')) wrapper.appendChild(next);
+  function isMob(){ return window.innerWidth <= 768; }
+
+  function wrapStats(){
+    // Give the stats bar an ID so we can find it
+    if(document.getElementById('statsbar')) return;
+    var hero = document.getElementById('contact');
+    if(!hero) return;
+    var next = hero.nextElementSibling;
+    if(next && next.classList.contains('stats')){
+      next.id = 'statsbar';
     }
-    // Mark all sections
-    Object.values(SECTIONS).forEach(function(id){
-      var el = document.getElementById(id);
-      if(el && !el.classList.contains('mob-section')) el.classList.add('mob-section');
-    });
-    // Show only home
-    showTab(current);
   }
 
   function showTab(name){
-    Object.values(SECTIONS).forEach(function(id){
+    if(!isMob()) return;
+    var show = TAB_SECTIONS[name] || [];
+    ALL.forEach(function(id){
       var el = document.getElementById(id);
-      if(el) el.classList.remove('mob-active');
+      if(!el) return;
+      el.style.display = show.indexOf(id) !== -1 ? '' : 'none';
     });
-    var el = document.getElementById(SECTIONS[name]);
-    if(el){ el.classList.add('mob-active'); window.scrollTo(0,0); }
+    window.scrollTo(0,0);
   }
 
-  window.mobTab = function(name, btn){
-    if(!isMobile()) return;
-    current = name;
-    document.querySelectorAll('.mob-tab').forEach(function(t){ t.classList.remove('active'); });
-    btn.classList.add('active');
-    showTab(name);
-  };
+  function initMobile(){
+    if(!isMob()) return;
+    wrapStats();
+    // Hide all non-home sections
+    showTab('home');
+    // Wire up tab buttons
+    document.querySelectorAll('.mtab').forEach(function(btn){
+      btn.onclick = function(){
+        document.querySelectorAll('.mtab').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        showTab(btn.getAttribute('data-tab'));
+      };
+    });
+  }
 
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  } else { init(); }
-  window.addEventListener('resize', init);
+    document.addEventListener('DOMContentLoaded', initMobile);
+  } else {
+    initMobile();
+  }
 })();
 </script>
 </body>
