@@ -1081,7 +1081,26 @@ a[href="#launches"] { color: #f59e0b !important; }
 <link rel="apple-touch-startup-image" href="/icon-512.png">
 
 
-</head>
+<style>
+@media(max-width:768px){
+  /* Calculator — fix split layout on mobile */
+  #calc{min-height:unset!important;background-attachment:scroll!important}
+  #calc>div:first-child{display:none!important} /* hide dark overlay - keep bg */
+  #calc [style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    padding:32px 16px!important;
+  }
+  #calc-results-panel{display:none!important} /* hide left results panel */
+  #calc .cw{padding:20px 14px!important;margin-bottom:14px!important}
+  #calc .crow{grid-template-columns:1fr!important;gap:10px!important}
+  #calc .rg{grid-template-columns:1fr 1fr 1fr!important}
+  #calc .ri{padding:10px 6px!important}
+  #calc .rc{font-size:7px!important}
+  #calc .rv{font-size:15px!important}
+  #calc .pg{grid-template-columns:1fr!important;gap:8px!important}
+}
+</style></head>
 <body>
 
 <!-- NAV -->
