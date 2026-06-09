@@ -1081,26 +1081,7 @@ a[href="#launches"] { color: #f59e0b !important; }
 <link rel="apple-touch-startup-image" href="/icon-512.png">
 
 
-<style>
-@media(max-width:768px){
-  /* Calculator — fix split layout on mobile */
-  #calc{min-height:unset!important;background-attachment:scroll!important}
-  #calc>div:first-child{display:none!important} /* hide dark overlay - keep bg */
-  #calc [style*="grid-template-columns:1fr 1fr"]{
-    grid-template-columns:1fr!important;
-    gap:0!important;
-    padding:32px 16px!important;
-  }
-  #calc-results-panel{display:none!important} /* hide left results panel */
-  #calc .cw{padding:20px 14px!important;margin-bottom:14px!important}
-  #calc .crow{grid-template-columns:1fr!important;gap:10px!important}
-  #calc .rg{grid-template-columns:1fr 1fr 1fr!important}
-  #calc .ri{padding:10px 6px!important}
-  #calc .rc{font-size:7px!important}
-  #calc .rv{font-size:15px!important}
-  #calc .pg{grid-template-columns:1fr!important;gap:8px!important}
-}
-</style></head>
+</head>
 <body>
 
 <!-- NAV -->
@@ -4083,24 +4064,29 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 
 
 
+
 <style>
 /* ================================================
-   MOBILE TAB APP v2 — DXB Property Expert
+   MOBILE TAB APP v3 — SCROLL BASED
+   All sections remain visible = all JS works perfectly
    Desktop: ZERO changes (100% inside max-width:768px)
    ================================================ */
 @media(max-width:768px){
-  /* Hide old sticky bar + footer on mobile */
+  /* Hide old sticky bar */
   .mob{display:none!important}
-  footer{display:none!important}
   body{padding-bottom:72px!important}
 
-  /* Nav - compact */
+  /* Nav compact */
   .n-links{display:none!important}
   nav{padding:0 16px!important;height:52px!important}
   .n-logo-sub{display:none!important}
 
-  /* HOME tab layout fixes */
-  #contact{display:block}
+  /* General section padding */
+  .sec{padding:36px 16px!important}
+  .sh2{font-size:26px!important;line-height:1.2!important}
+  .ssub{font-size:13px!important;margin-bottom:20px!important}
+
+  /* HERO */
   .hero{grid-template-columns:1fr!important}
   .h-left{padding:28px 16px!important}
   .h-right{height:55vw!important;min-height:190px}
@@ -4112,42 +4098,52 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   .lphone{grid-template-columns:1fr!important}
   .lbtns{flex-direction:column!important}
   .btn{width:100%!important;justify-content:center!important}
-  .sec{padding:32px 16px!important}
-  .sh2{font-size:26px!important;line-height:1.2!important}
-  .ssub{font-size:13px!important;margin-bottom:20px!important}
+
+  /* VISA */
   .vg{grid-template-columns:1fr!important}
 
-  /* AREAS inside home - bigger text */
-  #areas .aslider-wrap{padding:0 28px!important}
-  #areas .aslide{flex:0 0 82%!important}
+  /* AREAS */
+  .aslider-wrap{padding:0 28px!important}
+  .aslide{flex:0 0 82%!important}
 
-  /* LAUNCHES tab */
+  /* LAUNCHES */
   #launches{flex-direction:column!important}
   #launches>div:last-child{min-height:260px!important}
   .launch-content{padding:24px 16px!important}
   .unit-grid{grid-template-columns:1fr!important;gap:8px!important}
 
-  /* CALC tab */
-  #calc .cw{padding:20px 14px!important}
+  /* CALCULATOR — fix split layout */
+  #calc{min-height:unset!important}
+  #calc-results-panel{display:none!important}
+  #calc [style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    padding:28px 16px!important;
+  }
+  #calc .cw{padding:20px 14px!important;margin-bottom:14px!important}
   #calc .crow{grid-template-columns:1fr!important;gap:10px!important}
   #calc .rg{grid-template-columns:1fr 1fr 1fr!important}
   #calc .ri{padding:10px 6px!important}
   #calc .rc{font-size:7px!important}
   #calc .rv{font-size:15px!important}
-  #calc .pg{grid-template-columns:1fr!important}
+  #calc .pg{grid-template-columns:1fr!important;gap:8px!important}
 
-  /* PRICE CHECKER tab */
+  /* PRICE CHECKER */
   #pricechecker{flex-direction:column!important}
   #pricechecker>div:first-child{padding:24px 16px!important;flex:none!important}
   #pricechecker>div:last-child{min-height:220px!important;flex:none!important}
 
-  /* SECONDARY MARKET tab */
+  /* SECONDARY MARKET */
   #market .mkt-hero{grid-template-columns:1fr!important;min-height:unset!important}
   #market .mkt-panel{min-height:170px}
   #market .mkt-form-area{padding:24px 16px!important}
+
+  /* Footer compact */
+  .ft-inner{grid-template-columns:1fr!important;padding:28px 16px 16px!important;gap:20px!important}
+  .ft-bar{padding:12px 16px!important}
 }
 
-/* TAB BAR - only shows on mobile */
+/* TAB BAR */
 #mob-tabbar{
   display:none;
   position:fixed;
@@ -4162,42 +4158,42 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 .mtab{
   display:flex;flex-direction:column;align-items:center;
   gap:2px;cursor:pointer;padding:4px 2px;
-  border:none;background:transparent;transition:opacity .1s;
+  border:none;background:transparent;
 }
-.mtab:active{opacity:.7}
+.mtab:active{opacity:.6}
 .mtab-icon{font-size:20px;line-height:1}
 .mtab-label{
   font-size:7.5px;letter-spacing:.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.3);font-family:inherit;white-space:nowrap;
+  color:rgba(255,255,255,.35);font-family:inherit;white-space:nowrap;
 }
 .mtab-bar{width:28px;height:2px;background:transparent;border-radius:0 0 2px 2px;margin-top:2px}
 .mtab.on .mtab-label{color:#d4a853}
 .mtab.on .mtab-bar{background:#d4a853}
 </style>
 
-<!-- MOBILE TAB BAR (hidden on desktop via CSS) -->
+<!-- MOBILE TAB BAR -->
 <div id="mob-tabbar">
-  <button class="mtab on" data-tab="home">
+  <button class="mtab on" onclick="mobScroll('contact',this)">
     <span class="mtab-icon">🏠</span>
     <span class="mtab-label">Home</span>
     <span class="mtab-bar"></span>
   </button>
-  <button class="mtab" data-tab="launches">
+  <button class="mtab" onclick="mobScroll('launches',this)">
     <span class="mtab-icon">🚀</span>
     <span class="mtab-label">Launch</span>
     <span class="mtab-bar"></span>
   </button>
-  <button class="mtab" data-tab="calc">
+  <button class="mtab" onclick="mobScroll('calc',this)">
     <span class="mtab-icon">🧮</span>
     <span class="mtab-label">Calc</span>
     <span class="mtab-bar"></span>
   </button>
-  <button class="mtab" data-tab="pricechecker">
+  <button class="mtab" onclick="mobScroll('pricechecker',this)">
     <span class="mtab-icon">🔍</span>
     <span class="mtab-label">Price</span>
     <span class="mtab-bar"></span>
   </button>
-  <button class="mtab" data-tab="market">
+  <button class="mtab" onclick="mobScroll('market',this)">
     <span class="mtab-icon">🔄</span>
     <span class="mtab-label">Buy/Sell</span>
     <span class="mtab-bar"></span>
@@ -4205,63 +4201,33 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 </div>
 
 <script>
-(function(){
-  // Tab → section IDs to show (all others hidden)
-  var TAB_SECTIONS = {
-    home:         ['contact','statsbar','visa','roi','areas','guide'],
-    launches:     ['launches'],
-    calc:         ['calc'],
-    pricechecker: ['pricechecker'],
-    market:       ['market']
-  };
-
-  // All managed section IDs
-  var ALL = ['contact','statsbar','visa','roi','areas','guide','launches','calc','pricechecker','market'];
-
-  function isMob(){ return window.innerWidth <= 768; }
-
-  function wrapStats(){
-    // Give the stats bar an ID so we can find it
-    if(document.getElementById('statsbar')) return;
-    var hero = document.getElementById('contact');
-    if(!hero) return;
-    var next = hero.nextElementSibling;
-    if(next && next.classList.contains('stats')){
-      next.id = 'statsbar';
-    }
+function mobScroll(id, btn){
+  // Update active tab
+  document.querySelectorAll('.mtab').forEach(function(t){ t.classList.remove('on'); });
+  btn.classList.add('on');
+  // Scroll to section
+  var el = document.getElementById(id);
+  if(el){
+    var navH = 52;
+    var y = el.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({top: y, behavior: 'smooth'});
   }
+}
 
-  function showTab(name){
-    if(!isMob()) return;
-    var show = TAB_SECTIONS[name] || [];
-    ALL.forEach(function(id){
+// Highlight active tab on scroll
+if(window.innerWidth <= 768){
+  var sections = ['contact','launches','calc','pricechecker','market'];
+  window.addEventListener('scroll', function(){
+    var scrollY = window.scrollY + 80;
+    var active = sections[0];
+    sections.forEach(function(id){
       var el = document.getElementById(id);
-      if(!el) return;
-      el.style.display = show.indexOf(id) !== -1 ? '' : 'none';
+      if(el && el.offsetTop <= scrollY) active = id;
     });
-    window.scrollTo(0,0);
-  }
-
-  function initMobile(){
-    if(!isMob()) return;
-    wrapStats();
-    // Hide all non-home sections
-    showTab('home');
-    // Wire up tab buttons
-    document.querySelectorAll('.mtab').forEach(function(btn){
-      btn.onclick = function(){
-        document.querySelectorAll('.mtab').forEach(function(b){ b.classList.remove('on'); });
-        btn.classList.add('on');
-        showTab(btn.getAttribute('data-tab'));
-      };
+    document.querySelectorAll('.mtab').forEach(function(btn, i){
+      btn.classList.toggle('on', sections[i] === active);
     });
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initMobile);
-  } else {
-    initMobile();
-  }
-})();
+  }, {passive:true});
+}
 </script>
 </body>
