@@ -3064,7 +3064,7 @@ function submitLead(){
     document.getElementById('lf-ok').style.display='block';
   });
   // Also save to Google Sheet CRM
-  fetch('https://script.google.com/macros/s/SCRIPT_ID_HERE/exec',{
+  fetch('https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbznUYGDe-KCBm4B2BcIIu151Bw_vetv8uOOqhkG8P1bgoCfxP8ct_WSuybrVkboFzRt/exec/exec',{
     method:'POST',mode:'no-cors',
     body:JSON.stringify({action:'lead',name:n,email:e,phone:p,budget:b,goal:g,source:'CONSULTATION',status:'🔴 HOT',emailSequence:'full-5-sequence',date:new Date().toISOString()})
   }).catch(()=>{});
@@ -3204,9 +3204,9 @@ function resetPC(){
 <script>
 /* =============================================
    DXB Property Expert — All JS
-   Replace SCRIPT_ID_HERE after deploying Apps Script
+   Replace https://script.google.com/macros/s/AKfycbznUYGDe-KCBm4B2BcIIu151Bw_vetv8uOOqhkG8P1bgoCfxP8ct_WSuybrVkboFzRt/exec after deploying Apps Script
    ============================================= */
-const GAS = 'https://script.google.com/macros/s/SCRIPT_ID_HERE/exec';
+const GAS = 'https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbznUYGDe-KCBm4B2BcIIu151Bw_vetv8uOOqhkG8P1bgoCfxP8ct_WSuybrVkboFzRt/exec/exec';
 const _F = {};
 let _selUnit = null;
 
@@ -3425,7 +3425,7 @@ body.fa *,body.ar *{font-family:'Vazirmatn',sans-serif!important}
 
 
 <script>
-const GAS='https://script.google.com/macros/s/SCRIPT_ID_HERE/exec';
+const GAS='https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbznUYGDe-KCBm4B2BcIIu151Bw_vetv8uOOqhkG8P1bgoCfxP8ct_WSuybrVkboFzRt/exec/exec';
 const _WF={};
 let _sel=null;
 
@@ -3645,7 +3645,7 @@ function pcRegister(){
   if(!n||!e||!p){alert('Please fill in Name, Email and WhatsApp to register.');return;}
   const btn=document.querySelector('#pc-register-tab .pc-reg-btn');
   if(btn){btn.disabled=true;btn.textContent='Registering...';}
-  fetch('https://script.google.com/macros/s/SCRIPT_ID_HERE/exec',{method:'POST',mode:'no-cors',
+  fetch('https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbznUYGDe-KCBm4B2BcIIu151Bw_vetv8uOOqhkG8P1bgoCfxP8ct_WSuybrVkboFzRt/exec/exec',{method:'POST',mode:'no-cors',
     body:JSON.stringify({action:'lead',name:n,email:e,phone:cc+p,source:'PRICE_CHECK_REGISTER',
     budget:'TBD',goal:'Price Check',emailSequence:'full-5-sequence',date:new Date().toISOString()})
   }).catch(()=>{});
@@ -3698,7 +3698,7 @@ document.addEventListener('DOMContentLoaded', function(){
 /* ── LAUNCH SECTION ── */
 const _LF = {};
 let _lSel = null;
-const GAS_URL = 'https://script.google.com/macros/s/SCRIPT_ID_HERE/exec';
+const GAS_URL = 'https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbznUYGDe-KCBm4B2BcIIu151Bw_vetv8uOOqhkG8P1bgoCfxP8ct_WSuybrVkboFzRt/exec/exec';
 
 function lnchSelect(id, label, price, eoi, plan) {
   _lSel = {id, label, price, eoi, plan};
