@@ -4065,28 +4065,22 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 
 
 
+
 <style>
-/* ================================================
-   MOBILE TAB APP v3 — SCROLL BASED
-   All sections remain visible = all JS works perfectly
-   Desktop: ZERO changes (100% inside max-width:768px)
-   ================================================ */
+/* MOBILE TAB APP v4 — Desktop untouched */
 @media(max-width:768px){
-  /* Hide old sticky bar */
   .mob{display:none!important}
   body{padding-bottom:72px!important}
-
-  /* Nav compact */
   .n-links{display:none!important}
   nav{padding:0 16px!important;height:52px!important}
   .n-logo-sub{display:none!important}
 
-  /* General section padding */
+  /* General */
   .sec{padding:36px 16px!important}
   .sh2{font-size:26px!important;line-height:1.2!important}
   .ssub{font-size:13px!important;margin-bottom:20px!important}
 
-  /* HERO */
+  /* Hero */
   .hero{grid-template-columns:1fr!important}
   .h-left{padding:28px 16px!important}
   .h-right{height:55vw!important;min-height:190px}
@@ -4099,28 +4093,27 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   .lbtns{flex-direction:column!important}
   .btn{width:100%!important;justify-content:center!important}
 
-  /* VISA */
+  /* Visa */
   .vg{grid-template-columns:1fr!important}
 
-  /* AREAS */
+  /* Areas */
   .aslider-wrap{padding:0 28px!important}
   .aslide{flex:0 0 82%!important}
 
-  /* LAUNCHES */
+  /* Launches */
   #launches{flex-direction:column!important}
   #launches>div:last-child{min-height:260px!important}
   .launch-content{padding:24px 16px!important}
   .unit-grid{grid-template-columns:1fr!important;gap:8px!important}
 
-  /* CALCULATOR — fix split layout */
+  /* Calculator — stack vertically, keep ALL JS elements visible */
   #calc{min-height:unset!important}
-  #calc-results-panel{display:none!important}
   #calc [style*="grid-template-columns:1fr 1fr"]{
     grid-template-columns:1fr!important;
-    gap:0!important;
-    padding:28px 16px!important;
+    gap:16px!important;
+    padding:24px 16px!important;
   }
-  #calc .cw{padding:20px 14px!important;margin-bottom:14px!important}
+  #calc .cw{padding:20px 14px!important;margin-bottom:12px!important}
   #calc .crow{grid-template-columns:1fr!important;gap:10px!important}
   #calc .rg{grid-template-columns:1fr 1fr 1fr!important}
   #calc .ri{padding:10px 6px!important}
@@ -4128,22 +4121,22 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   #calc .rv{font-size:15px!important}
   #calc .pg{grid-template-columns:1fr!important;gap:8px!important}
 
-  /* PRICE CHECKER */
+  /* Price Checker */
   #pricechecker{flex-direction:column!important}
   #pricechecker>div:first-child{padding:24px 16px!important;flex:none!important}
   #pricechecker>div:last-child{min-height:220px!important;flex:none!important}
 
-  /* SECONDARY MARKET */
+  /* Secondary Market */
   #market .mkt-hero{grid-template-columns:1fr!important;min-height:unset!important}
   #market .mkt-panel{min-height:170px}
   #market .mkt-form-area{padding:24px 16px!important}
 
-  /* Footer compact */
+  /* Footer */
   .ft-inner{grid-template-columns:1fr!important;padding:28px 16px 16px!important;gap:20px!important}
   .ft-bar{padding:12px 16px!important}
 }
 
-/* TAB BAR */
+/* Tab bar */
 #mob-tabbar{
   display:none;
   position:fixed;
@@ -4155,79 +4148,93 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   grid-template-columns:repeat(5,1fr);
 }
 @media(max-width:768px){#mob-tabbar{display:grid!important}}
-.mtab{
-  display:flex;flex-direction:column;align-items:center;
-  gap:2px;cursor:pointer;padding:4px 2px;
-  border:none;background:transparent;
-}
+.mtab{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 2px;border:none;background:transparent;}
 .mtab:active{opacity:.6}
 .mtab-icon{font-size:20px;line-height:1}
-.mtab-label{
-  font-size:7.5px;letter-spacing:.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.35);font-family:inherit;white-space:nowrap;
-}
+.mtab-label{font-size:7.5px;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:inherit;white-space:nowrap;}
 .mtab-bar{width:28px;height:2px;background:transparent;border-radius:0 0 2px 2px;margin-top:2px}
 .mtab.on .mtab-label{color:#d4a853}
 .mtab.on .mtab-bar{background:#d4a853}
 </style>
 
-<!-- MOBILE TAB BAR -->
 <div id="mob-tabbar">
-  <button class="mtab on" onclick="mobScroll('contact',this)">
-    <span class="mtab-icon">🏠</span>
-    <span class="mtab-label">Home</span>
-    <span class="mtab-bar"></span>
+  <button class="mtab on" onclick="mobTab('home',this)">
+    <span class="mtab-icon">🏠</span><span class="mtab-label">Home</span><span class="mtab-bar"></span>
   </button>
-  <button class="mtab" onclick="mobScroll('launches',this)">
-    <span class="mtab-icon">🚀</span>
-    <span class="mtab-label">Launch</span>
-    <span class="mtab-bar"></span>
+  <button class="mtab" onclick="mobTab('launches',this)">
+    <span class="mtab-icon">🚀</span><span class="mtab-label">Launch</span><span class="mtab-bar"></span>
   </button>
-  <button class="mtab" onclick="mobScroll('calc',this)">
-    <span class="mtab-icon">🧮</span>
-    <span class="mtab-label">Calc</span>
-    <span class="mtab-bar"></span>
+  <button class="mtab" onclick="mobTab('calc',this)">
+    <span class="mtab-icon">🧮</span><span class="mtab-label">Calc</span><span class="mtab-bar"></span>
   </button>
-  <button class="mtab" onclick="mobScroll('pricechecker',this)">
-    <span class="mtab-icon">🔍</span>
-    <span class="mtab-label">Price</span>
-    <span class="mtab-bar"></span>
+  <button class="mtab" onclick="mobTab('pricechecker',this)">
+    <span class="mtab-icon">🔍</span><span class="mtab-label">Price</span><span class="mtab-bar"></span>
   </button>
-  <button class="mtab" onclick="mobScroll('market',this)">
-    <span class="mtab-icon">🔄</span>
-    <span class="mtab-label">Buy/Sell</span>
-    <span class="mtab-bar"></span>
+  <button class="mtab" onclick="mobTab('market',this)">
+    <span class="mtab-icon">🔄</span><span class="mtab-label">Buy/Sell</span><span class="mtab-bar"></span>
   </button>
 </div>
 
 <script>
-function mobScroll(id, btn){
-  // Update active tab
-  document.querySelectorAll('.mtab').forEach(function(t){ t.classList.remove('on'); });
-  btn.classList.add('on');
-  // Scroll to section
-  var el = document.getElementById(id);
-  if(el){
-    var navH = 52;
-    var y = el.getBoundingClientRect().top + window.scrollY - navH;
-    window.scrollTo({top: y, behavior: 'smooth'});
-  }
-}
+(function(){
+  if(window.innerWidth > 768) return;
 
-// Highlight active tab on scroll
-if(window.innerWidth <= 768){
-  var sections = ['contact','launches','calc','pricechecker','market'];
-  window.addEventListener('scroll', function(){
-    var scrollY = window.scrollY + 80;
-    var active = sections[0];
-    sections.forEach(function(id){
-      var el = document.getElementById(id);
-      if(el && el.offsetTop <= scrollY) active = id;
+  // Tab → which section IDs to show
+  var TABS = {
+    home:         ['contact','statsbar','visa','roi','areas','guide','footer-wrap'],
+    launches:     ['launches'],
+    calc:         ['calc'],
+    pricechecker: ['pricechecker'],
+    market:       ['market']
+  };
+  var ALL_IDS = ['contact','statsbar','visa','roi','areas','guide','launches','calc','pricechecker','market','footer-wrap'];
+  var current = 'home';
+
+  function getEl(id){ return document.getElementById(id); }
+
+  function setupIds(){
+    // Give stats bar an ID
+    var hero = getEl('contact');
+    if(hero){
+      var next = hero.nextElementSibling;
+      if(next && next.classList.contains('stats') && !next.id) next.id = 'statsbar';
+    }
+    // Give footer an ID
+    var footer = document.querySelector('footer');
+    if(footer && !footer.id) footer.id = 'footer-wrap';
+  }
+
+  function showTab(name){
+    var show = TABS[name] || [];
+    ALL_IDS.forEach(function(id){
+      var el = getEl(id);
+      if(!el) return;
+      el.style.display = show.indexOf(id) !== -1 ? '' : 'none';
     });
-    document.querySelectorAll('.mtab').forEach(function(btn, i){
-      btn.classList.toggle('on', sections[i] === active);
-    });
-  }, {passive:true});
-}
+    window.scrollTo(0,0);
+  }
+
+  window.mobTab = function(name, btn){
+    current = name;
+    document.querySelectorAll('.mtab').forEach(function(t){ t.classList.remove('on'); });
+    btn.classList.add('on');
+    showTab(name);
+  };
+
+  // KEY FIX: wait for full page load + 600ms so all JS initializes first
+  function init(){
+    setupIds();
+    // Show everything for 600ms so JS can initialize
+    setTimeout(function(){
+      showTab('home');
+    }, 600);
+  }
+
+  if(document.readyState === 'complete'){
+    init();
+  } else {
+    window.addEventListener('load', init);
+  }
+})();
 </script>
 </body>
