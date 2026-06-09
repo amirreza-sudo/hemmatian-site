@@ -1,0 +1,92 @@
+{
+  "name": "DXB Property Expert \u2014 AmirReza Hemmatian",
+  "short_name": "DXB Property",
+  "description": "Dubai real estate investment \u2014 licensed broker AmirReza Hemmatian. New launches, price checker, buy/sell properties.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f9f9f7",
+  "theme_color": "#111111",
+  "orientation": "any",
+  "lang": "en",
+  "categories": [
+    "finance",
+    "business",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "DXB Property Expert Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Launches",
+      "short_name": "Launches",
+      "description": "View latest Dubai property launches",
+      "url": "/#launches",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Price Checker",
+      "short_name": "Price Check",
+      "description": "Check if a property is fairly priced",
+      "url": "/#pricechecker",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Buy or Sell",
+      "short_name": "Market",
+      "description": "Secondary market listings",
+      "url": "/#market",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Calculator",
+      "short_name": "Calc",
+      "description": "Investment payment calculator",
+      "url": "/#calc",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
