@@ -1248,6 +1248,14 @@ a[href="#launches"] { color: #f59e0b !important; }
     <div style="position:absolute;top:32px;left:32px;z-index:3">
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border:1px solid rgba(245,158,11,.4);color:#f59e0b;padding:6px 16px;border-radius:2px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-family:Inter,sans-serif"><span style="width:7px;height:7px;background:#f59e0b;border-radius:50%;display:inline-block;animation:blink 1.2s infinite"></span> Live Launch</div>
     </div>
+    <!-- Project name badge top-right -->
+    <div style="position:absolute;top:32px;right:32px;z-index:3;text-align:right">
+      <div style="background:rgba(0,0,0,.6);padding:8px 12px;backdrop-filter:blur(6px);border-radius:2px;display:inline-block">
+        <div style="font-size:7px;letter-spacing:2.5px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:3px">NAKHEEL</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.3px;line-height:1.2">Palm Central</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">Palm Jebel Ali · Dubai</div>
+      </div>
+    </div>
 
     <!-- Thumbnail strip bottom-left -->
     <div style="position:absolute;bottom:24px;left:24px;display:flex;gap:6px;z-index:4;flex-wrap:wrap;max-width:380px" id="lnch-thumbs">
@@ -1541,10 +1549,10 @@ a[href="#launches"] { color: #f59e0b !important; }
       <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(10,26,10,.85);color:#7ec87e;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(126,200,126,.3)">
         <span style="width:6px;height:6px;background:#7ec87e;border-radius:50%"></span> NEW LAUNCH
       </div>
-      <div style="margin-top:12px;background:rgba(0,0,0,.65);padding:14px 18px;backdrop-filter:blur(8px)">
-        <div style="font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.5);text-transform:uppercase">BEYOND DEVELOPMENTS</div>
-        <div style="font-family:Georgia,serif;font-size:30px;font-weight:300;color:#fff;line-height:1.1">Arancia<br><em style="color:rgba(255,255,255,.35)">Yards.</em></div>
-        <div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:5px">The Yards · City of Arabia · Dubai</div>
+      <div style="margin-top:8px;background:rgba(0,0,0,.6);padding:8px 12px;backdrop-filter:blur(6px);border-radius:2px">
+        <div style="font-size:7px;letter-spacing:2.5px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:3px">BEYOND DEVELOPMENTS</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.3px;line-height:1.2">Arancia Yards</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">City of Arabia · Dubai</div>
       </div>
     </div>
     <div style="position:absolute;bottom:20px;left:0;right:0;display:flex;gap:8px;justify-content:center;z-index:10;padding:0 20px;flex-wrap:wrap">
@@ -4436,10 +4444,10 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   .launch-content{padding:24px 16px!important}
   .unit-grid{grid-template-columns:1fr!important;gap:8px!important}
 
-  /* Arancia — stack on mobile */
+  /* Arancia — stack on mobile, photo FIRST */
   #arancia{flex-direction:column!important;min-height:unset!important}
-  #arancia>div:first-child{padding:24px 16px!important;overflow-y:visible!important;border-right:none!important;border-bottom:1px solid rgba(0,0,0,.08)!important}
-  #arancia>div:last-child{min-height:260px!important;flex:none!important}
+  #arancia>div:first-child{padding:24px 16px!important;overflow-y:visible!important;border-right:none!important;order:2!important}
+  #ay-photo-panel{order:1!important;min-height:260px!important;flex:none!important}
   /* Unit cards: stack vertically, full width */
   #ay-unit-cards{flex-direction:column!important;gap:8px!important}
   #ay-unit-cards .lnch-uc{flex:none!important;width:100%!important;display:flex!important;flex-direction:row!important;align-items:center!important}
@@ -4471,12 +4479,13 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   #pricechecker>div:first-child{padding:24px 16px!important;flex:none!important}
   #pricechecker>div:last-child{min-height:220px!important;flex:none!important}
 
-  /* Secondary Market */
-  #market>div:first-child[style*="grid-template-columns"]{grid-template-columns:1fr!important;min-height:unset!important}
-  #market>div:first-child>div{min-height:160px!important;padding:0!important}
-  #market>div:first-child>div>div[style*="position:absolute;inset:0;display:flex"]{padding:20px 18px!important}
-  #market>div:first-child>div [style*="clamp(32px"]{font-size:26px!important;letter-spacing:-0.5px!important}
+  /* Secondary Market — keep side by side, fix heights */
+  #market>div:first-child[style*="grid-template-columns"]{min-height:unset!important}
+  #market>div:first-child>div{min-height:180px!important;padding:0!important}
+  #market>div:first-child>div>div[style*="position:absolute;inset:0;display:flex"]{padding:16px 14px!important}
+  #market>div:first-child>div [style*="clamp(32px"]{font-size:20px!important;letter-spacing:-0.5px!important;line-height:1!important}
   #market>div:first-child>div [style*="max-width:260px"]{display:none!important}
+  #market>div:first-child>div [style*="display:inline-flex;align-items:center;gap:8px;background:#fff"]{padding:9px 12px!important;font-size:8px!important}
   #market #mkt-form-area{padding:24px 16px!important}
 
   /* Footer */
