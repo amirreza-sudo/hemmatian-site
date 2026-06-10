@@ -4121,8 +4121,23 @@ function lnchDetails() {
   const n = document.getElementById('lnch-name').value.trim();
   const e = document.getElementById('lnch-email').value.trim();
   const p = document.getElementById('lnch-phone').value.trim();
-  const addr = document.getElementById('lnch-address') ? document.getElementById('lnch-address').value.trim() : '';
-  if (!n || !e || !p || !addr) { alert('Please fill in all required fields including your city/address.'); return; }
+  const addrEl = document.getElementById('lnch-address');
+  const addr = addrEl ? addrEl.value.trim() : 'ok';
+  // Highlight missing fields in red
+  const chk = [['lnch-name',n],['lnch-email',e],['lnch-phone',p]];
+  if (addrEl) chk.push(['lnch-address',addr]);
+  let firstMissing = null;
+  chk.forEach(([id,v]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (!v) { el.style.borderColor='rgba(220,38,38,.6)'; el.style.background='rgba(220,38,38,.04)'; if(!firstMissing) firstMissing=el; }
+    else { el.style.borderColor=''; el.style.background=''; }
+  });
+  if (firstMissing) {
+    firstMissing.scrollIntoView({behavior:'smooth',block:'center'});
+    firstMissing.focus();
+    return;
+  }
   // Save lead + trigger email sequence
   fetch(GAS, {method:'POST',mode:'no-cors',body:JSON.stringify({
     action:'lead', name:n, email:e,
@@ -4421,13 +4436,28 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   .launch-content{padding:24px 16px!important}
   .unit-grid{grid-template-columns:1fr!important;gap:8px!important}
 
-  /* Calculator — stack vertically, keep ALL JS elements visible */
+  /* Arancia — stack on mobile */
+  #arancia{flex-direction:column!important;min-height:unset!important}
+  #arancia>div:first-child{padding:24px 16px!important;overflow-y:visible!important;border-right:none!important;border-bottom:1px solid rgba(0,0,0,.08)!important}
+  #arancia>div:last-child{min-height:260px!important;flex:none!important}
+  /* Unit cards: stack vertically, full width */
+  #ay-unit-cards{flex-direction:column!important;gap:8px!important}
+  #ay-unit-cards .lnch-uc{flex:none!important;width:100%!important;display:flex!important;flex-direction:row!important;align-items:center!important}
+  #ay-unit-cards .lnch-uc img{width:88px!important;height:88px!important;object-fit:cover!important;flex-shrink:0!important;border-radius:0!important}
+  #ay-unit-cards .lnch-uc>div{flex:1!important;padding:12px 14px!important}
+  /* Countdown row wrap */
+  #arancia [style*="display:flex;gap:8px;align-items:center"]{flex-wrap:wrap!important;gap:6px!important}
+
+  /* Calculator — stack vertically, INPUT on top, results below */
   #calc{min-height:unset!important}
   #calc [style*="grid-template-columns:1fr 1fr"]{
     grid-template-columns:1fr!important;
     gap:16px!important;
     padding:24px 16px!important;
   }
+  /* Swap order: input card first, results panel second */
+  #calc-results-panel{order:2!important}
+  #calc [style*="z-index:2"] > div:last-child{order:1!important;max-width:none!important;margin:0!important}
   #calc .cw{padding:20px 14px!important;margin-bottom:12px!important}
   #calc .crow{grid-template-columns:1fr!important;gap:10px!important}
   #calc .rg{grid-template-columns:1fr 1fr 1fr!important}
@@ -4443,7 +4473,10 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 
   /* Secondary Market */
   #market>div:first-child[style*="grid-template-columns"]{grid-template-columns:1fr!important;min-height:unset!important}
-  #market>div:first-child>div{min-height:170px!important}
+  #market>div:first-child>div{min-height:160px!important;padding:0!important}
+  #market>div:first-child>div>div[style*="position:absolute;inset:0;display:flex"]{padding:20px 18px!important}
+  #market>div:first-child>div [style*="clamp(32px"]{font-size:26px!important;letter-spacing:-0.5px!important}
+  #market>div:first-child>div [style*="max-width:260px"]{display:none!important}
   #market #mkt-form-area{padding:24px 16px!important}
 
   /* Footer */
