@@ -2994,6 +2994,7 @@ document.addEventListener('keydown',e=>{
 
     <!-- Price check form (hidden until registered) -->
     <div id="pc-wrap-main" style="display:none"><div class="pc-wrap">
+    <div id="pc-warn" class="pc-warn" style="display:none">Please register above to use the Price Checker. <a onclick="document.getElementById('pc-reg-section').style.display='block';document.getElementById('pc-wrap-main').style.display='none'">Register here →</a></div>
     <div class="pc-form" id="pc-form">
       <div class="pc-grid">
         <div class="pc-field">
@@ -3442,12 +3443,12 @@ function isRegistered(){
 }
 
 function runPriceCheck(){
+  const _warn = document.getElementById('pc-warn');
   if(!isRegistered()){
-    document.getElementById('pc-warn').style.display='block';
-    document.getElementById('pc-warn').scrollIntoView({behavior:'smooth',block:'center'});
+    if(_warn){_warn.style.display='block';_warn.scrollIntoView({behavior:'smooth',block:'center'});}
     return;
   }
-  document.getElementById('pc-warn').style.display='none';
+  if(_warn) _warn.style.display='none';
 
   const fields=['pc-project','pc-area','pc-beds','pc-type','pc-size','pc-floor','pc-cond','pc-price'];
   let ok=true;
