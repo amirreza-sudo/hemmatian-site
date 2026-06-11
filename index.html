@@ -3427,6 +3427,12 @@ function submitLead(){
 
 <script>
 function isRegistered(){
+  // Check Price Check's own registration session first
+  try{
+    const sess=JSON.parse(sessionStorage.getItem('dxb_pc_session')||'null');
+    if(sess&&sess.email) return true;
+  }catch(ex){}
+  // Fallback: hero form fully filled
   const n=document.getElementById('lf-name')?.value.trim();
   const e=document.getElementById('lf-email')?.value.trim();
   const p=document.getElementById('lf-phone')?.value.trim();
