@@ -2976,7 +2976,13 @@ document.addEventListener('keydown',e=>{
           <select class="pc-reg-inp" id="pc-reg-cc" style="width:130px;flex-shrink:0;margin:0;padding:10px 8px"><optgroup label="GCC"><option value="+971" selected>🇦🇪 +971</option><option value="+966">🇸🇦 +966</option><option value="+965">🇰🇼 +965</option><option value="+974">🇶🇦 +974</option><option value="+968">🇴🇲 +968</option></optgroup><optgroup label="Iran·Russia"><option value="+98">🇮🇷 +98</option><option value="+7">🇷🇺 +7</option></optgroup><optgroup label="Europe"><option value="+44">🇬🇧 +44</option><option value="+49">🇩🇪 +49</option><option value="+33">🇫🇷 +33</option><option value="+34">🇪🇸 +34</option><option value="+357">🇨🇾 +357</option></optgroup><optgroup label="Americas"><option value="+1">🇺🇸🇨🇦 +1</option></optgroup><optgroup label="Asia"><option value="+91">🇮🇳 +91</option><option value="+65">🇸🇬 +65</option></optgroup><optgroup label="Middle East"><option value="+90">🇹🇷 +90</option><option value="+20">🇪🇬 +20</option></optgroup></select>
           <input class="pc-reg-inp" type="tel" id="pc-reg-phone" placeholder="5XX XXX XXXX" dir="ltr" style="margin:0;flex:1">
         </div>
-        <div style="background:#f5f5f3;border:1px solid rgba(0,0,0,.08);border-radius:3px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#888">✅ By registering: new launches · market updates · exclusive deals</div>
+        <label class="pc-reg-lbl">I am a *</label>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <button type="button" onclick="pcSelectRole('buyer',this)" style="flex:1;padding:10px 6px;font-size:11px;font-weight:600;border:1px solid rgba(0,0,0,.15);border-radius:3px;background:#111;color:#fff;cursor:pointer;font-family:Inter,sans-serif" data-role="buyer">🏠 Buyer / Owner</button>
+          <button type="button" onclick="pcSelectRole('agent',this)" style="flex:1;padding:10px 6px;font-size:11px;font-weight:600;border:1px solid rgba(0,0,0,.15);border-radius:3px;background:#fff;color:#888;cursor:pointer;font-family:Inter,sans-serif" data-role="agent">🤝 Agent</button>
+        </div>
+        <input type="hidden" id="pc-reg-role" value="buyer">
+        <div id="pc-role-note" style="background:#f5f5f3;border:1px solid rgba(0,0,0,.08);border-radius:3px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:#888">✅ Buyer/Owner: you'll receive new launches, market updates &amp; exclusive deals</div>
         <button class="pc-reg-btn" onclick="pcRegister()">Register &amp; Check Price →</button>
       </div>
       <div id="pc-login-tab" style="display:none">
@@ -3158,6 +3164,13 @@ document.addEventListener('keydown',e=>{
         <div class="mkt-box" id="bs1">
           <div class="s-ind"><div class="s-dot on"></div><div class="s-dot"></div><div class="s-dot"></div></div>
           <h3 class="mkt-h">Find Your Property</h3><p class="mkt-p">Tell us who you are — we show only what matches.</p>
+          <label class="xl">I am a *</label>
+          <div style="display:flex;gap:8px;margin-bottom:10px">
+            <button type="button" onclick="buySelectRole('buyer',this)" style="flex:1;padding:10px 6px;font-size:11px;font-weight:600;border:1px solid rgba(0,0,0,.15);border-radius:3px;background:#111;color:#fff;cursor:pointer;font-family:Inter,sans-serif" data-role="buyer">🏠 Buyer / Owner</button>
+            <button type="button" onclick="buySelectRole('agent',this)" style="flex:1;padding:10px 6px;font-size:11px;font-weight:600;border:1px solid rgba(0,0,0,.15);border-radius:3px;background:#fff;color:#888;cursor:pointer;font-family:Inter,sans-serif" data-role="agent">🤝 Agent</button>
+          </div>
+          <input type="hidden" id="buy-role" value="buyer">
+          <div id="buy-role-note" style="background:#f5f5f3;border:1px solid rgba(0,0,0,.08);border-radius:3px;padding:8px 12px;margin-bottom:12px;font-size:11px;color:#888">✅ Buyer/Owner: you'll receive new launches, market updates &amp; exclusive deals</div>
           <label class="xl">Full Name *</label><input class="xi" id="bn" placeholder="Your name">
           <label class="xl">Email *</label><input class="xi" type="email" id="be" placeholder="your@email.com">
           <label class="xl">WhatsApp *</label>
@@ -3184,6 +3197,13 @@ document.addEventListener('keydown',e=>{
         <div class="mkt-box" id="ss1">
           <div class="s-ind"><div class="s-dot on"></div><div class="s-dot"></div><div class="s-dot"></div></div>
           <h3 class="mkt-h">List Your Property</h3><p class="mkt-p">AmirReza reviews and lists within 24 hours.</p>
+          <label class="xl">I am a *</label>
+          <div style="display:flex;gap:8px;margin-bottom:10px">
+            <button type="button" onclick="sellSelectRole('seller',this)" style="flex:1;padding:10px 6px;font-size:11px;font-weight:600;border:1px solid rgba(0,0,0,.15);border-radius:3px;background:#111;color:#fff;cursor:pointer;font-family:Inter,sans-serif" data-role="seller">🏠 Owner / Seller</button>
+            <button type="button" onclick="sellSelectRole('agent',this)" style="flex:1;padding:10px 6px;font-size:11px;font-weight:600;border:1px solid rgba(0,0,0,.15);border-radius:3px;background:#fff;color:#888;cursor:pointer;font-family:Inter,sans-serif" data-role="agent">🤝 Agent</button>
+          </div>
+          <input type="hidden" id="sell-role" value="seller">
+          <div id="sell-role-note" style="background:#f5f5f3;border:1px solid rgba(0,0,0,.08);border-radius:3px;padding:8px 12px;margin-bottom:12px;font-size:11px;color:#888">✅ Owner/Seller: you'll receive new launches, market updates &amp; exclusive deals</div>
           <label class="xl">Full Name *</label><input class="xi" id="sn" placeholder="Your name">
           <label class="xl">Email *</label><input class="xi" type="email" id="se" placeholder="your@email.com">
           <label class="xl">WhatsApp *</label>
@@ -3705,6 +3725,22 @@ function mktTab(tab,btn){
   document.getElementById('pane-'+tab).classList.add('on'); btn.classList.add('on');
 }
 
+/* BUY / SELL ROLE SELECTORS */
+function buySelectRole(role,btn){
+  document.getElementById('buy-role').value=role;
+  btn.parentElement.querySelectorAll('button').forEach(function(b){b.style.background='#fff';b.style.color='#888';});
+  btn.style.background='#111';btn.style.color='#fff';
+  const note=document.getElementById('buy-role-note');
+  if(note) note.textContent=role==='agent'?'✅ Agent: you\'ll receive access to the search tool only':'✅ Buyer/Owner: you\'ll receive new launches, market updates & exclusive deals';
+}
+function sellSelectRole(role,btn){
+  document.getElementById('sell-role').value=role;
+  btn.parentElement.querySelectorAll('button').forEach(function(b){b.style.background='#fff';b.style.color='#888';});
+  btn.style.background='#111';btn.style.color='#fff';
+  const note=document.getElementById('sell-role-note');
+  if(note) note.textContent=role==='agent'?'✅ Agent: you\'ll receive access to the listing tool only':'✅ Owner/Seller: you\'ll receive new launches, market updates & exclusive deals';
+}
+
 /* BUY */
 function buyN1(){
   const n=document.getElementById('bn').value.trim(),e=document.getElementById('be').value.trim(),p=document.getElementById('bp').value.trim();
@@ -3714,7 +3750,7 @@ function buyN1(){
 function buyBack(){ document.getElementById('bs2').style.display='none'; document.getElementById('bs1').style.display='block'; }
 function buySearch(){
   const name=document.getElementById('bn').value.trim(),beds=document.getElementById('bbeds').value,type=document.getElementById('btype').value,minB=parseInt(document.getElementById('bmin').value)||0,maxB=parseInt(document.getElementById('bmax').value)||999999999,stat=document.getElementById('bstat').value,pay=document.getElementById('bpay').value,cc=document.getElementById('bcc').value,ph=document.getElementById('bp').value.trim();
-  fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'buyer',name,email:document.getElementById('be').value.trim(),phone:cc+ph,beds,type,minBudget:minB,maxBudget:maxB===999999999?'No limit':maxB,status:stat,payment:pay,source:'website',date:new Date().toISOString()})}).catch(()=>{});
+  fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'buyer',name,email:document.getElementById('be').value.trim(),phone:cc+ph,beds,type,minBudget:minB,maxBudget:maxB===999999999?'No limit':maxB,status:stat,payment:pay,role:document.getElementById('buy-role').value||'buyer',source:'website',date:new Date().toISOString()})}).catch(()=>{});
   document.getElementById('bs2').style.display='none'; document.getElementById('bs3').style.display='block';
   const wa=encodeURIComponent('Hi AmirReza, I searched secondary market: '+(beds||'any')+' '+(type||'')+' AED '+minB.toLocaleString()+'-'+(maxB===999999999?'open':maxB.toLocaleString())+'. Name: '+name+'.');
   document.getElementById('bwa').href='https://wa.me/971542347774?text='+wa;
@@ -3746,7 +3782,7 @@ function sellSub(){
   const n=document.getElementById('sn').value.trim(),cc=document.getElementById('scc').value,ph=document.getElementById('sp').value.trim(),prN=parseInt(pr)||0;
   const wa=encodeURIComponent('Hi AmirReza, property submitted: '+pt+' '+bd+' in '+ar+' AED '+prN.toLocaleString()+'. Name: '+n+'.');
   document.getElementById('sell-wa').href='https://wa.me/971542347774?text='+wa;
-  fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'seller',name:n,email:document.getElementById('se').value.trim(),phone:cc+ph,propType:pt,beds:bd,area:ar,price:'AED '+prN.toLocaleString(),size:document.getElementById('ssz').value||'',propStatus:st,payment:document.getElementById('spay').value,notes:document.getElementById('snotes').value,idFile:_F.sid||'',docFile:_F.sdoc||'',source:'website',date:new Date().toISOString()})}).catch(()=>{});
+  fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'seller',name:n,email:document.getElementById('se').value.trim(),phone:cc+ph,propType:pt,beds:bd,area:ar,price:'AED '+prN.toLocaleString(),size:document.getElementById('ssz').value||'',propStatus:st,payment:document.getElementById('spay').value,notes:document.getElementById('snotes').value,idFile:_F.sid||'',docFile:_F.sdoc||'',role:document.getElementById('sell-role').value||'seller',source:'website',date:new Date().toISOString()})}).catch(()=>{});
   document.getElementById('ss2').style.display='none'; document.getElementById('ss3').style.display='block';
 }
 
@@ -3896,7 +3932,7 @@ function buyN1(){const n=document.getElementById('bn').value.trim(),e=document.g
 function buyBack(){document.getElementById('bs2').style.display='none';document.getElementById('bs1').style.display='block';}
 function buySearch(){
   const name=document.getElementById('bn').value.trim(),beds=document.getElementById('bbeds').value,type=document.getElementById('btype').value,minB=parseInt(document.getElementById('bmin').value)||0,maxB=parseInt(document.getElementById('bmax').value)||999999999,stat=document.getElementById('bstat').value,pay=document.getElementById('bpay').value,cc=document.getElementById('bcc').value,ph=document.getElementById('bp').value.trim();
-  fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'buyer',name,email:document.getElementById('be').value.trim(),phone:cc+ph,beds,type,minBudget:minB,maxBudget:maxB===999999999?'No limit':maxB,status:stat,payment:pay,source:'website',date:new Date().toISOString()})}).catch(()=>{});
+  fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'buyer',name,email:document.getElementById('be').value.trim(),phone:cc+ph,beds,type,minBudget:minB,maxBudget:maxB===999999999?'No limit':maxB,status:stat,payment:pay,role:document.getElementById('buy-role').value||'buyer',source:'website',date:new Date().toISOString()})}).catch(()=>{});
   document.getElementById('bs2').style.display='none';document.getElementById('bs3').style.display='block';
   const wa=encodeURIComponent('Hi AmirReza, secondary market search: '+(beds||'any')+' '+(type||'')+' AED '+minB.toLocaleString()+'-'+(maxB===999999999?'open':maxB.toLocaleString())+'. Name: '+name+'.');
   document.getElementById('bwa').href='https://wa.me/971542347774?text='+wa;
@@ -4020,17 +4056,32 @@ function pcUnlockTool(name,email){
   const fn=document.getElementById('lf-name');if(fn&&!fn.value)fn.value=name;
   const fe=document.getElementById('lf-email');if(fe&&!fe.value)fe.value=email;
 }
+function pcSelectRole(role, btn){
+  document.getElementById('pc-reg-role').value = role;
+  // Update button styles
+  btn.parentElement.querySelectorAll('button').forEach(function(b){
+    b.style.background = '#fff'; b.style.color = '#888';
+  });
+  btn.style.background = '#111'; btn.style.color = '#fff';
+  // Update note text
+  const note = document.getElementById('pc-role-note');
+  if(note){
+    note.textContent = role === 'agent'
+      ? '✅ Agent: you\'ll receive access to the Price Checker tool only'
+      : '✅ Buyer/Owner: you\'ll receive new launches, market updates & exclusive deals';
+  }
+}
 function pcRegister(){
   const n=document.getElementById('pc-reg-name').value.trim();
   const e=document.getElementById('pc-reg-email').value.trim();
   const p=document.getElementById('pc-reg-phone').value.trim();
   const cc=document.getElementById('pc-reg-cc').value;
+  const role=document.getElementById('pc-reg-role').value||'buyer';
   if(!n||!e||!p){alert('Please fill in Name, Email and WhatsApp to register.');return;}
   const btn=document.querySelector('#pc-register-tab .pc-reg-btn');
   if(btn){btn.disabled=true;btn.textContent='Registering...';}
   fetch(window.GAS,{method:'POST',mode:'no-cors',
-    body:JSON.stringify({action:'lead',name:n,email:e,phone:cc+p,source:'PRICE_CHECK_REGISTER',
-    budget:'TBD',goal:'Price Check',emailSequence:'full-5-sequence',date:new Date().toISOString()})
+    body:JSON.stringify({action:'pc_register',name:n,email:e,phone:cc+p,role:role,date:new Date().toISOString()})
   }).catch(()=>{});
   pcUnlockTool(n,e);
 }
