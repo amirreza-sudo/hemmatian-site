@@ -1432,7 +1432,7 @@ a[href="#launches"] { color: #f59e0b !important; }
         <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="ay-cd-m" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Min</div></div>
         <span style="font-size:22px;color:#ccc;font-weight:300">:</span>
         <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="ay-cd-s" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Sec</div></div>
-        <div style="margin-left:8px"><div style="font-size:9px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase">Launch Date</div><div style="font-size:16px;font-weight:700;color:#1a7a4a">June 16, 2026</div></div>
+        <div style="margin-left:8px"><div style="font-size:9px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase">Launch Date</div><div style="font-size:16px;font-weight:700;color:#1a7a4a">June 15, 2026</div></div>
       </div>
       <h2 style="font-size:clamp(26px,2.5vw,38px);font-weight:800;color:#111;line-height:1.1;margin-bottom:8px;letter-spacing:-0.5px">Invest in Dubai's<br>New Green District.</h2>
       <p style="font-size:13px;color:#777;margin-bottom:28px;max-width:380px;line-height:1.6">From AED 1M · 2BR+ qualifies for Golden Visa · EOI fully refundable · 40/60 payment plan</p>
@@ -1569,7 +1569,7 @@ a[href="#launches"] { color: #f59e0b !important; }
 <script>
 // Arancia countdown
 (function(){
-  var t=new Date('2026-06-16T10:00:00+04:00').getTime();
+  var t=new Date('2026-06-15T10:00:00+04:00').getTime();
   function u(){
     var d=t-Date.now();
     if(d<=0){['ay-cd-d','ay-cd-h','ay-cd-m','ay-cd-s'].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent='00';});return;}
@@ -2832,7 +2832,7 @@ document.addEventListener('keydown',e=>{
   <!-- Dark overlay -->
   <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.55) 60%,rgba(0,0,0,.4) 100%)"></div>
 
-  <div style="position:relative;z-index:2;max-width:1160px;margin:0 auto;width:100%;padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+  <div style="position:relative;z-index:2;max-width:1160px;margin:0 auto;width:100%;padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center" id="calc-grid">
 
     <!-- LEFT: Results display -->
     <div id="calc-results-panel" style="opacity:0.3;transition:opacity .4s">
@@ -4538,6 +4538,24 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
   .mob{display:none!important}
   body{padding-bottom:62px!important}
 }
+/* ── MOBILE LAUNCH SECTIONS ── */
+@media(max-width:960px){
+  /* Stack photo + content vertically */
+  #launches,#arancia{flex-direction:column;min-height:auto}
+  #lnch-photo-panel{flex:none!important;width:100%!important;height:52vw;min-height:220px}
+  #ay-photo-panel{flex:none!important;width:100%!important;height:52vw;min-height:220px;order:-1}
+  #launches>div:last-child,#arancia>div:first-child{flex:none;width:100%;padding:32px 20px!important}
+  /* Unit cards — one per row */
+  #ay-unit-cards,#lnch-unit-cards{flex-direction:column!important}
+  #ay-unit-cards .lnch-uc,#lnch-unit-cards .lnch-uc{width:100%!important;flex:none!important;display:flex!important;flex-direction:row!important;align-items:stretch}
+  #ay-unit-cards .lnch-uc img,#lnch-unit-cards .lnch-uc img{width:90px!important;height:90px!important;object-fit:cover!important;flex-shrink:0}
+  #ay-unit-cards .lnch-uc>div:last-child,#lnch-unit-cards .lnch-uc>div:last-child{flex:1;padding:12px 14px!important}
+  /* Calculator — input first, results below */
+  #calc-grid{grid-template-columns:1fr!important;gap:24px!important;padding:36px 20px!important}
+  #calc-results-panel{order:2}
+  #calc-grid>div:not(#calc-results-panel){order:1;max-width:none!important;margin-left:0!important;width:100%!important}
+}
+
 </style>
 
 <script>
