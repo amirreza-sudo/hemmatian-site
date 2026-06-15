@@ -2900,7 +2900,7 @@ document.addEventListener('keydown',e=>{
       <div id="cout" style="display:none;margin-top:16px">
         <div style="display:none" id="cl6">All Plans — Full Breakdown</div>
         <div class="pg" id="pg" style="display:none"></div>
-        <p class="cnote" id="cnote" style="font-size:10px;color:rgba(255,255,255,.3);line-height:1.6;margin-top:12px">* 1 AED = 0.2740 USD (fixed peg) · 1 AED ≈ 49,000 Toman (bonbast.com). DLD = exactly 4% of property price. AED 4,200 admin fee at Trustee office.</p>
+        <p class="cnote" id="cnote" style="font-size:10px;color:rgba(255,255,255,.3);line-height:1.6;margin-top:12px">* 1 AED = 0.2740 USD (fixed peg) · 1 AED ≈ 47,900 Toman (bonbast.com — updated 2026-06-15). DLD = exactly 4% of property price. AED 4,200 admin fee at Trustee office.</p>
       </div>
     </div>
 
@@ -3352,12 +3352,82 @@ function setLang(l){
       const href=a.getAttribute('href');
       if(navLabels[l]&&navLabels[l][href])a.textContent=navLabels[l][href];
     });
+    // Mobile bottom tab translations (find non-whitespace text node)
+    const mobTabLabels={
+      fa:{'home':'خانه','launch':'لانچ','calc':'حساب‌گر','price':'قیمت','buysell':'خرید/فروش'},
+      ar:{'home':'الرئيسية','launch':'الإطلاق','calc':'الحاسبة','price':'السعر','buysell':'شراء/بيع'}
+    };
+    if(mobTabLabels[l]){
+      Object.entries(mobTabLabels[l]).forEach(([id,val])=>{
+        const btn=document.getElementById('mtab-'+id);
+        if(btn){
+          const tn=[...btn.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());
+          if(tn)tn.textContent=val;
+        }
+      });
+    }
+    // Extended translations — visa cards, form options, buttons
+    const EXT={
+      fa:{
+        'v-sub':'دبی دو ویزای اقامتی برای سرمایه‌گذاران دارد — هر دو شامل خانواده، بدون نیاز به کفیل، و تا زمانی که ملک در اختیار دارید قابل تمدید.',
+        'vs1t':'بیش از ۲٬۰۰۰٬۰۰۰ درهم<br><span style="font-size:14px;font-weight:400;color:#888">ارزش ملک</span>',
+        'vs1d':'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> شما + همسر + فرزندان (بدون محدودیت سنی)</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> والدین هم شامل می‌شوند</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> نیازی به کفیل نیست</div><div style="display:flex;align-items:flex-start;gap:8px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> به‌صورت نامحدود قابل تمدید</div>',
+        'v-btn1':'درباره ویزای طلایی بپرسید ←',
+        'vs2t':'بیش از ۴۰۰٬۰۰۰ درهم<br><span style="font-size:14px;font-weight:400;color:#888">ارزش ملک</span>',
+        'vs2d':'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> شما + همسر + دختران</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> پسران تا ۲۱ سال</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> نیازی به کفیل نیست</div><div style="display:flex;align-items:flex-start;gap:8px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> هر ۲ سال یک‌بار تمدید</div>',
+        'v-btn2':'درباره ویزای ۲ ساله بپرسید ←',
+        'vs3t':'فرایند ساده<br><span style="font-size:14px;font-weight:400;color:#888">من همه چیز را انجام می‌دهم</span>',
+        'vs3d':'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">۱</span> خرید ملک (سند یا عقود)</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">۲</span> ثبت‌نام از طریق پورتال ICP</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">۳</span> آزمایش پزشکی + بیومتریک</div><div style="display:flex;align-items:flex-start;gap:8px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">۴</span> صدور کارت شناسایی امارات</div>',
+        'v-btn3':'شروع درخواست ←',
+        'v-wb':'راهنمای کامل اقامت را دریافت کن',
+        'lf-b0':'محدوده بودجه را انتخاب کنید','lf-b1':'زیر ۲۲۰٬۰۰۰ دلار','lf-b2':'۲۲۰٬۰۰۰ تا ۵۵۰٬۰۰۰ دلار',
+        'lf-b3':'۵۵۰٬۰۰۰ تا ۱٬۰۰۰٬۰۰۰ دلار','lf-b4':'۱٬۰۰۰٬۰۰۰ تا ۲٬۰۰۰٬۰۰۰ دلار','lf-b5':'بیش از ۲٬۰۰۰٬۰۰۰ دلار',
+        'lf-g0':'هدف را انتخاب کنید','lf-g1':'درآمد اجاره','lf-g2':'رشد سرمایه',
+        'lf-g3':'ویزای طلایی / اقامت','lf-g4':'استفاده شخصی','lf-g5':'همه موارد',
+        'lf-ok-h':'دریافت شد ✓','lf-ok-p':'ظرف ۲۴ ساعت از طریق واتساپ تماس می‌گیرم.'
+      },
+      ar:{
+        'v-sub':'يوفر دبي تأشيرتين للمقيمين للمستثمرين — كلاهما يشمل الأسرة، بدون كفيل، وقابلتان للتجديد طالما تملك العقار.',
+        'vs1t':'+٢,٠٠٠,٠٠٠ درهم<br><span style="font-size:14px;font-weight:400;color:#888">قيمة العقار</span>',
+        'vs1d':'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> أنت + الزوج/الزوجة + الأبناء (بلا حد عمري)</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> الوالدان مشمولان</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> لا يلزم كفيل</div><div style="display:flex;align-items:flex-start;gap:8px"><span style="color:#d97706;font-size:14px;flex-shrink:0">✓</span> قابلة للتجديد إلى الأبد</div>',
+        'v-btn1':'اسأل عن التأشيرة الذهبية →',
+        'vs2t':'+٤٠٠,٠٠٠ درهم<br><span style="font-size:14px;font-weight:400;color:#888">قيمة العقار</span>',
+        'vs2d':'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> أنت + الزوج/الزوجة + البنات</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> الأبناء حتى ٢١ سنة</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> لا يلزم كفيل</div><div style="display:flex;align-items:flex-start;gap:8px"><span style="color:#1a7a4a;font-size:14px;flex-shrink:0">✓</span> تُجدَّد كل سنتين</div>',
+        'v-btn2':'اسأل عن تأشيرة السنتين →',
+        'vs3t':'عملية بسيطة<br><span style="font-size:14px;font-weight:400;color:#888">أتولى كل شيء</span>',
+        'vs3d':'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">١</span> شراء العقار (سند ملكية أو عقد)</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">٢</span> التسجيل عبر بوابة ICP</div><div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">٣</span> فحص طبي + بيومتريك</div><div style="display:flex;align-items:flex-start;gap:8px"><span style="background:#111;color:#fff;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px">٤</span> إصدار الهوية الإماراتية</div>',
+        'v-btn3':'ابدأ طلبي →',
+        'v-wb':'احصل على دليل الإقامة الكامل',
+        'lf-b0':'اختر النطاق','lf-b1':'أقل من $220,000','lf-b2':'$220,000 – $550,000',
+        'lf-b3':'$550,000 – $1,000,000','lf-b4':'$1,000,000 – $2,000,000','lf-b5':'أكثر من $2,000,000',
+        'lf-g0':'اختر الهدف','lf-g1':'دخل الإيجار','lf-g2':'نمو رأس المال',
+        'lf-g3':'تأشيرة ذهبية / إقامة','lf-g4':'الاستخدام الشخصي','lf-g5':'كل ما سبق',
+        'lf-ok-h':'تم الاستلام ✓','lf-ok-p':'سأتواصل معك على واتساب خلال 24 ساعة.'
+      }
+    };
+    if(EXT[l]){
+      Object.entries(EXT[l]).forEach(([id,val])=>{
+        const el=document.getElementById(id);
+        if(el)el.innerHTML=val;
+      });
+    }
+    // Input placeholder translations
+    const PH={
+      fa:{'lf-name':'نام شما','lf-email':'ایمیل شما'},
+      ar:{'lf-name':'اسمك','lf-email':'بريدك الإلكتروني'}
+    };
+    if(PH[l]){
+      Object.entries(PH[l]).forEach(([id,val])=>{
+        const el=document.getElementById(id);
+        if(el)el.placeholder=val;
+      });
+    }
   }
 }
 function tog(id,btn){document.getElementById(id).classList.toggle('open');btn.classList.toggle('open')}
 
 // CALCULATOR — AED/USD: 3.65 fixed peg (20yr stable)
-const AED_USD=1/3.65, AED_TMN=49000;
+const AED_USD=1/3.65, AED_TMN=47900; // open market, bonbast.com — updated 2026-06-15
 const PLANS=[
   {k:'80_20',l:'80/20',c:60,h:20},{k:'75_25',l:'75/25',c:55,h:25},
   {k:'70_30',l:'70/30',c:50,h:30},{k:'65_35',l:'65/35',c:45,h:35},
@@ -4529,10 +4599,11 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 
 <style>
 /* MOBILE TAB APP v4 */
-#mob-tabs{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#fff;border-top:1px solid rgba(0,0,0,.1);height:62px;flex-direction:row;align-items:stretch;box-shadow:0 -2px 16px rgba(0,0,0,.1)}
+#mob-tabs{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#fff;border-top:1px solid rgba(0,0,0,.1);height:62px;flex-direction:row;align-items:stretch;box-shadow:0 -2px 16px rgba(0,0,0,.1);direction:ltr}
 #mob-tabs .mtab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:transparent;cursor:pointer;font-family:Inter,sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#aaa;padding:8px 2px;border-top:2.5px solid transparent;transition:color .2s,border-color .2s}
 #mob-tabs .mtab.active{color:#111;border-top-color:#d97706}
 #mob-tabs .mtab .mti{font-size:20px;line-height:1;display:block;margin-bottom:2px}
+body.fa #mob-tabs .mtab,body.ar #mob-tabs .mtab{font-family:'Vazirmatn',sans-serif;letter-spacing:0;text-transform:none;font-size:9px}
 @media(max-width:960px){
   #mob-tabs{display:flex!important}
   .mob{display:none!important}
