@@ -1111,23 +1111,7 @@ a[href="#launches"] { color: #f59e0b !important; }
       </div>
     </div>
   </div>
-  <!-- Hamburger — mobile only -->
-  <button class="ham-btn" id="ham-btn" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-
-<!-- Mobile nav overlay -->
-<div class="mob-nav" id="mob-nav">
-  <a href="#launches" onclick=""><span class="mob-nav-icon">🔥</span>New Launches</a>
-  <a href="#contact"><span class="mob-nav-icon">📋</span>Free Consultation</a>
-  <a href="#residency"><span class="mob-nav-icon">🏅</span>Residency Visa</a>
-  <a href="#markets"><span class="mob-nav-icon">🌍</span>Global Markets</a>
-  <a href="#areas"><span class="mob-nav-icon">🏙️</span>Dubai Areas</a>
-  <a href="#calc"><span class="mob-nav-icon">🧮</span>Calculator</a>
-  <a href="#pricechecker"><span class="mob-nav-icon">🔍</span>Price Check</a>
-  <a href="#secondary-market"><span class="mob-nav-icon">🔄</span>Buy / Sell</a>
-</div>
 
 <!-- HERO -->
 <div class="hero" id="contact">
@@ -1448,7 +1432,7 @@ a[href="#launches"] { color: #f59e0b !important; }
         <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="ay-cd-m" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Min</div></div>
         <span style="font-size:22px;color:#ccc;font-weight:300">:</span>
         <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="ay-cd-s" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Sec</div></div>
-        <div style="margin-left:8px"><div style="font-size:9px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase">Launch Date</div><div style="font-size:16px;font-weight:700;color:#1a7a4a">June 16, 2026</div></div>
+        <div style="margin-left:8px"><div style="font-size:9px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase">Launch Date</div><div style="font-size:16px;font-weight:700;color:#1a7a4a">June 15, 2026</div></div>
       </div>
       <h2 style="font-size:clamp(26px,2.5vw,38px);font-weight:800;color:#111;line-height:1.1;margin-bottom:8px;letter-spacing:-0.5px">Invest in Dubai's<br>New Green District.</h2>
       <p style="font-size:13px;color:#777;margin-bottom:28px;max-width:380px;line-height:1.6">From AED 1M · 2BR+ qualifies for Golden Visa · EOI fully refundable · 40/60 payment plan</p>
@@ -1585,7 +1569,7 @@ a[href="#launches"] { color: #f59e0b !important; }
 <script>
 // Arancia countdown
 (function(){
-  var t=new Date('2026-06-16T10:00:00+04:00').getTime();
+  var t=new Date('2026-06-15T10:00:00+04:00').getTime();
   function u(){
     var d=t-Date.now();
     if(d<=0){['ay-cd-d','ay-cd-h','ay-cd-m','ay-cd-s'].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent='00';});return;}
@@ -4535,71 +4519,75 @@ document.addEventListener('DOMContentLoaded', showiOSHint);
 
 
 <style>
-/* MOBILE FIXES + HAMBURGER NAV */
-@media(max-width:960px){
-  /* Restore mobile sticky bar */
-  .mob{display:flex!important}
-  body{padding-bottom:65px!important}
-
-  /* Hide desktop nav links */
+/* MOBILE TAB APP v4 — Desktop untouched */
+@media(max-width:768px){
+  .mob{display:none!important}
+  body{padding-bottom:72px!important}
   .n-links{display:none!important}
+  nav{padding:0 16px!important;height:52px!important}
+  .n-logo-sub{display:none!important}
 
-  /* Show hamburger button */
-  .ham-btn{display:flex!important}
-}
+  /* General */
+  .sec{padding:36px 16px!important}
+  .sh2{font-size:26px!important;line-height:1.2!important}
+  .ssub{font-size:13px!important;margin-bottom:20px!important}
 
-/* Hamburger button — hidden on desktop */
-.ham-btn{
-  display:none;
-  flex-direction:column;justify-content:center;align-items:center;
-  gap:5px;width:38px;height:38px;cursor:pointer;
-  background:transparent;border:none;padding:6px;
-}
-.ham-btn span{
-  display:block;width:20px;height:1.5px;
-  background:rgba(17,17,17,.7);transition:all .25s;
-}
-.ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.ham-btn.open span:nth-child(2){opacity:0}
-.ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  /* Hero */
+  .hero{grid-template-columns:1fr!important}
+  .h-left{padding:28px 16px!important}
+  .h-right{height:55vw!important;min-height:190px}
+  .stats{grid-template-columns:1fr 1fr 1fr!important}
+  .stat{padding:14px 6px!important;text-align:center}
+  .stat-n{font-size:20px!important}
+  .stat-l{font-size:7px!important}
+  .lrow{grid-template-columns:1fr!important}
+  .lphone{grid-template-columns:1fr!important}
+  .lbtns{flex-direction:column!important}
+  .btn{width:100%!important;justify-content:center!important}
 
-/* Mobile nav overlay */
-.mob-nav{
-  display:none;position:fixed;top:52px;left:0;right:0;bottom:0;
-  z-index:450;background:rgba(249,249,247,.98);
-  backdrop-filter:blur(10px);
-  flex-direction:column;padding:20px 24px;gap:4px;
-  border-top:1px solid rgba(0,0,0,.08);
-}
-.mob-nav.open{display:flex}
-.mob-nav a{
-  font-size:14px;font-weight:500;color:#333;text-decoration:none;
-  padding:14px 12px;border-bottom:1px solid rgba(0,0,0,.06);
-  display:flex;align-items:center;gap:12px;
-}
-.mob-nav a:last-child{border-bottom:none}
-.mob-nav a:hover{color:#1a7a4a}
-.mob-nav-icon{font-size:18px;width:26px;text-align:center}
-</style>
+  /* Visa */
+  .vg{grid-template-columns:1fr!important}
 
-<script>
-// Hamburger menu toggle
-(function(){
-  var btn = document.getElementById('ham-btn');
-  var nav = document.getElementById('mob-nav');
-  if(!btn || !nav) return;
-  btn.addEventListener('click', function(){
-    btn.classList.toggle('open');
-    nav.classList.toggle('open');
-  });
-  nav.addEventListener('click', function(e){
-    if(e.target.tagName === 'A'){
-      btn.classList.remove('open');
-      nav.classList.remove('open');
-    }
-  });
-})();
-</script>
+  /* Areas */
+  .aslider-wrap{padding:0 28px!important}
+  .aslide{flex:0 0 82%!important}
 
-</body>
-</html>
+  /* Launches */
+  #launches{flex-direction:column!important}
+  #launches>div:last-child{min-height:260px!important}
+  .launch-content{padding:24px 16px!important}
+  .unit-grid{grid-template-columns:1fr!important;gap:8px!important}
+
+  /* Arancia — stack on mobile, photo FIRST */
+  #arancia{flex-direction:column!important;min-height:unset!important;border-top:6px solid #1a7a4a!important}
+  #arancia>div:first-child{padding:24px 16px!important;overflow-y:visible!important;border-right:none!important}
+  #ay-photo-panel{min-height:260px!important;flex:none!important;width:100%!important}
+  /* Unit cards: stack vertically, full width */
+  #ay-unit-cards{flex-direction:column!important;gap:8px!important}
+  #ay-unit-cards .lnch-uc{flex:none!important;width:100%!important;display:flex!important;flex-direction:row!important;align-items:center!important}
+  #ay-unit-cards .lnch-uc img{width:88px!important;height:88px!important;object-fit:cover!important;flex-shrink:0!important;border-radius:0!important}
+  #ay-unit-cards .lnch-uc>div{flex:1!important;padding:12px 14px!important}
+  /* Countdown row wrap */
+  #arancia [style*="display:flex;gap:8px;align-items:center"]{flex-wrap:wrap!important;gap:6px!important}
+
+  /* Calculator — stack vertically, INPUT on top, results below */
+  #calc{min-height:unset!important}
+  #calc [style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr!important;
+    gap:16px!important;
+    padding:24px 16px!important;
+  }
+  /* Swap order: input card first, results panel second */
+  #calc-results-panel{order:2!important}
+  #calc [style*="z-index:2"] > div:last-child{order:1!important;max-width:none!important;margin:0!important}
+  #calc .cw{padding:20px 14px!important;margin-bottom:12px!important}
+  #calc .crow{grid-template-columns:1fr!important;gap:10px!important}
+  #calc .rg{grid-template-columns:1fr 1fr 1fr!important}
+  #calc .ri{padding:10px 6px!important}
+  #calc .rc{font-size:7px!important}
+  #calc .rv{font-size:15px!important}
+  #calc .pg{grid-template-columns:1fr!important;gap:8px!important}
+
+  /* Price Checker */
+  #pricechecker{flex-direction:column!important}
+  #pricechecker>div:first-child{paddin
