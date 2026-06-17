@@ -1326,6 +1326,24 @@ a[href="#launches"] { color: #f59e0b !important; }
     <div style="font-size:18px;font-weight:800;color:#d97706;line-height:1;margin-bottom:4px">AED 7,500,000</div>
     <div style="font-size:9px;color:#888;line-height:1.5">Plan B — 60/40<br>EOI: AED 100,000</div>
   </div>
+</div><div class="lnch-uc" id="luc-4BR" onclick="lnchSelect('4BR','4 Bedroom','12,400,000','100,000','Plan B — 60/40')" style="background:#fff;border:1.5px solid rgba(0,0,0,.1);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .25s;flex:1;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+  <div style="height:90px;min-width:90px;flex-shrink:0;background:linear-gradient(135deg,#0d1117 0%,#1c2536 60%,#92400e 100%);display:flex;align-items:center;justify-content:center">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+  </div>
+  <div style="padding:14px">
+    <div style="font-size:11px;font-weight:700;color:#111;margin-bottom:4px">4 Bedroom</div>
+    <div style="font-size:18px;font-weight:800;color:#d97706;line-height:1;margin-bottom:4px">AED 12,400,000</div>
+    <div style="font-size:9px;color:#888;line-height:1.5">Plan B — 60/40<br>EOI: AED 100,000</div>
+  </div>
+</div><div class="lnch-uc" id="luc-TH" onclick="lnchSelect('TH','Townhouse','14,900,000','100,000','Plan B — 60/40')" style="background:#fff;border:1.5px solid rgba(0,0,0,.1);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .25s;flex:1;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+  <div style="height:90px;min-width:90px;flex-shrink:0;background:linear-gradient(135deg,#0d1117 0%,#162032 60%,#b45309 100%);display:flex;align-items:center;justify-content:center">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/><line x1="12" y1="2" x2="12" y2="6"/></svg>
+  </div>
+  <div style="padding:14px">
+    <div style="font-size:11px;font-weight:700;color:#111;margin-bottom:4px">Townhouse</div>
+    <div style="font-size:18px;font-weight:800;color:#d97706;line-height:1;margin-bottom:4px">AED 14,900,000</div>
+    <div style="font-size:9px;color:#888;line-height:1.5">Plan B — 60/40<br>EOI: AED 100,000</div>
+  </div>
 </div>
       </div>
       <p style="font-size:10px;color:#bbb;margin-top:8px">* All prices AED · +4% DLD at booking</p>
@@ -4524,10 +4542,4 @@ function mktTab(tab, btn) {
   window.addEventListener('resize',function(){
     if(window.innerWidth>960){
       ALL.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='';});
-      var ft=document.querySelector('footer');if(ft)ft.style.display='';
-    }
-  });
-})();
-</script>
-</body>
-</html>
+      var ft
