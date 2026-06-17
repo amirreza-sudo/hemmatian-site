@@ -4461,4 +4461,73 @@ function mktTab(tab, btn) {
   const pane = document.getElementById('pane-' + tab);
   if (pane) pane.classList.add('on');
   const tabBtn = document.getElementById('mt-' + tab);
-  if (tabBtn) tabBtn.classList.add('on'
+  if (tabBtn) tabBtn.classList.add('on');
+}
+</script>
+
+<!-- MOBILE TAB BAR v4 -->
+<div id="mob-tabs">
+  <button class="mtab active" id="mtab-home" onclick="mobTab('home')"><span class="mti">🏠</span>HOME</button>
+  <button class="mtab" id="mtab-launch" onclick="mobTab('launch')"><span class="mti">🚀</span>LAUNCH</button>
+  <button class="mtab" id="mtab-calc" onclick="mobTab('calc')"><span class="mti">🧮</span>CALC</button>
+  <button class="mtab" id="mtab-price" onclick="mobTab('price')"><span class="mti">🔍</span>PRICE</button>
+  <button class="mtab" id="mtab-buysell" onclick="mobTab('buysell')"><span class="mti">🔄</span>BUY/SELL</button>
+</div>
+<style>
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#mob-tabs{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#fff;border-top:1px solid rgba(0,0,0,.1);height:62px;flex-direction:row;align-items:stretch;box-shadow:0 -2px 16px rgba(0,0,0,.1)}
+#mob-tabs .mtab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:transparent;cursor:pointer;font-family:Inter,sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#aaa;padding:8px 2px;border-top:2.5px solid transparent;transition:color .2s,border-color .2s}
+#mob-tabs .mtab.active{color:#111;border-top-color:#d97706}
+#mob-tabs .mtab .mti{font-size:20px;line-height:1;display:block;margin-bottom:2px}
+@media(max-width:960px){
+  #mob-tabs{display:flex!important}
+  .mob{display:none!important}
+  body{padding-bottom:62px!important}
+  #launches,#arancia{flex-direction:column;min-height:auto}
+  #lnch-photo-panel{flex:none!important;width:100%!important;height:52vw;min-height:220px}
+  #ay-photo-panel{flex:none!important;width:100%!important;height:52vw;min-height:220px;order:-1}
+  #launches>div:last-child,#arancia>div:first-child{flex:none;width:100%;padding:32px 20px!important}
+  #ay-unit-cards,#lnch-unit-cards{flex-direction:column!important}
+  #ay-unit-cards .lnch-uc,#lnch-unit-cards .lnch-uc{width:100%!important;flex:none!important;display:flex!important;flex-direction:row!important;align-items:stretch}
+  #ay-unit-cards .lnch-uc img,#lnch-unit-cards .lnch-uc img{width:90px!important;height:90px!important;object-fit:cover!important;flex-shrink:0}
+  #ay-unit-cards .lnch-uc>div:last-child,#lnch-unit-cards .lnch-uc>div:last-child{flex:1;padding:12px 14px!important}
+  #calc-grid{grid-template-columns:1fr!important;gap:24px!important;padding:36px 20px!important}
+  #calc-results-panel{order:2}
+  #calc-grid>div:not(#calc-results-panel){order:1;max-width:none!important;margin-left:0!important;width:100%!important}
+}
+</style>
+<script>
+(function(){
+  var ALL=['contact','launches','arancia','visa','roi','areas','guide','calc','pricechecker','market'];
+  var TABS={
+    home:['contact','visa','roi','areas','guide'],
+    launch:['launches','arancia'],
+    calc:['calc'],
+    price:['pricechecker'],
+    buysell:['market']
+  };
+  window.mobTab=function(name){
+    if(window.innerWidth>960)return;
+    var show=TABS[name]||TABS.home;
+    var ft=document.querySelector('footer');
+    ALL.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+    if(ft)ft.style.display='none';
+    show.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='';});
+    if(name==='home'&&ft)ft.style.display='';
+    document.querySelectorAll('.mtab').forEach(function(b){b.classList.remove('active');});
+    var ab=document.getElementById('mtab-'+name);
+    if(ab)ab.classList.add('active');
+    window.scrollTo(0,0);
+  };
+  function init(){if(window.innerWidth<=960)mobTab('home');}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>960){
+      ALL.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='';});
+      var ft=document.querySelector('footer');if(ft)ft.style.display='';
+    }
+  });
+})();
+</script>
+</body>
+</html>
