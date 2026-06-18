@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<!-- DXB-v18JUN-5CARDS -->
+<!-- DXB-v18JUN-GRID-FIX -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AmirReza Hemmatian | Dubai Real Estate Expert</title>
@@ -880,8 +880,8 @@ a[href="#launches"] { color: #f59e0b !important; }
 </style>
 <style>
 @media(max-width:800px){
-  #launches{flex-direction:column!important}
-  #launches>div:first-child{min-height:50vh;flex:none!important}
+  #launches{grid-template-columns:1fr!important}
+  #launches>div:first-child{position:relative!important;height:52vw!important;min-height:220px!important}
   #launches>div:last-child{padding:36px 24px!important}
   #lnch-unit-cards{grid-template-columns:1fr!important;display:grid!important}
 }
@@ -1230,10 +1230,10 @@ a[href="#launches"] { color: #f59e0b !important; }
 
 
 <!-- LAUNCHES -->
-<section id="launches" style="display:flex;min-height:100vh">
+<section id="launches" style="display:grid;grid-template-columns:52% 1fr;min-height:100vh">
 
   <!-- LEFT: large project photo with fade edges -->
-  <div style="flex:0 0 52%;position:relative;overflow:hidden;background:#f9f9f7" id="lnch-photo-panel">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;background:#f9f9f7" id="lnch-photo-panel">
 
     <!-- Main rotating image -->
     <div id="lnch-img-wrap" style="position:absolute;inset:0;overflow:hidden">
@@ -1284,7 +1284,7 @@ a[href="#launches"] { color: #f59e0b !important; }
   </div>
 
   <!-- RIGHT: white panel with content -->
-  <div style="flex:1;align-self:flex-start;min-height:100vh;background:#f9f9f7;padding:48px 48px;border-left:1px solid rgba(0,0,0,.08)">
+  <div style="background:#f9f9f7;padding:48px 48px;border-left:1px solid rgba(0,0,0,.08)">
 
     <!-- Phase 1: Selection -->
     <div id="lnch-phase1">
@@ -4498,8 +4498,9 @@ function mktTab(tab, btn) {
   #mob-tabs{display:flex!important}
   .mob{display:none!important}
   body{padding-bottom:62px!important}
-  #launches,#arancia{flex-direction:column;min-height:auto}
-  #lnch-photo-panel{flex:none!important;width:100%!important;height:52vw;min-height:220px}
+  #launches{grid-template-columns:1fr!important;min-height:auto}
+  #arancia{flex-direction:column;min-height:auto}
+  #lnch-photo-panel{position:relative!important;width:100%!important;height:52vw!important;min-height:220px!important}
   #ay-photo-panel{flex:none!important;width:100%!important;height:52vw;min-height:220px;order:-1}
   #launches>div:last-child,#arancia>div:first-child{flex:none;width:100%;padding:32px 20px!important}
   #ay-unit-cards,#lnch-unit-cards{grid-template-columns:1fr!important;display:grid!important}
