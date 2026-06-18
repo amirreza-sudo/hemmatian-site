@@ -3,7 +3,7 @@
    AmirReza Hemmatian | dxbpropertyexpert.com
    ============================================================ */
 
-const CACHE_NAME = 'dxb-property-v2';
+const CACHE_NAME = 'dxb-property-v5';
 const OFFLINE_URL = '/';
 
 // Files to cache on install
