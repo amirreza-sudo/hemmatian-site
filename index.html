@@ -438,8 +438,8 @@ border-left:3px solid var(--gold);background:var(--bg3);
 .pc-inp,.pc-sel{width:100%;background:var(--bg);border:1px solid var(--line);padding:11px 14px;color:var(--w);font-family:inherit;font-size:13px;outline:none;transition:border-color .2s;appearance:none;border-radius:0}
 .pc-inp::placeholder{color:var(--w25)}.pc-inp:focus,.pc-sel:focus{border-color:rgba(90,122,58,.6)}
 .pc-sel{cursor:pointer;color:var(--w50)}.pc-sel option{background:#111;color:var(--w)}
-.pc-warn{background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.25);padding:14px 18px;font-size:12px;color:rgba(255,180,180,.9);margin-bottom:16px;display:none}
-.pc-warn a{color:rgba(255,180,180,.9);text-decoration:underline;cursor:pointer}
+.pc-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);padding:14px 18px;font-size:12px;color:#b91c1c;margin-bottom:16px;display:none}
+.pc-warn a{color:#b91c1c;font-weight:700;text-decoration:underline;cursor:pointer}
 .pc-note{font-size:10px;color:var(--w25);margin-bottom:18px;line-height:1.6}
 .pc-submit{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:#050505;padding:13px 28px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
 .pc-submit:hover{opacity:.88;transform:translateY(-1px)}
@@ -3253,12 +3253,34 @@ document.getElementById('lf-ok').style.display='block';
 </div>
 </div>
 <script>
-function isRegistered(){
-// Check Price Check's own registration session first
+/* Price Checker: remember registration on THIS device for 10 days (localStorage),
+   so returning visitors on the same phone/browser aren't asked again.
+   A new device, or coming back after 10 days, will need to register again. */
+var PC_SESSION_KEY='dxb_pc_session';
+var PC_SESSION_DAYS=10;
+function pcSaveSession(name,email){
 try{
-const sess=JSON.parse(sessionStorage.getItem('dxb_pc_session')||'null');
-if(sess&&sess.email) return true;
+localStorage.setItem(PC_SESSION_KEY, JSON.stringify({name:name,email:email,ts:Date.now()}));
 }catch(ex){}
+}
+function pcGetSession(){
+try{
+var raw=localStorage.getItem(PC_SESSION_KEY);
+if(!raw) return null;
+var sess=JSON.parse(raw);
+if(!sess||!sess.email||!sess.ts) return null;
+var ageDays=(Date.now()-sess.ts)/86400000;
+if(ageDays>PC_SESSION_DAYS){
+localStorage.removeItem(PC_SESSION_KEY);
+return null;
+}
+return sess;
+}catch(ex){return null;}
+}
+function isRegistered(){
+// Check Price Check's own registration (valid on this device for 10 days)
+const sess=pcGetSession();
+if(sess&&sess.email) return true;
 // Fallback: hero form fully filled
 const n=document.getElementById('lf-name')?.value.trim();
 const e=document.getElementById('lf-email')?.value.trim();
@@ -3346,21 +3368,21 @@ else{verdict='OVERPRICED';vclass='over';vemoji='🔴';vdesc='Well above market c
 var seeds=[0.93,1.00,1.08];
 var sources=['Recent sold · DXB Interact','Active listing · Bayut','Active listing · Property Finder'];
 var sizes=[Math.round(D.size*0.93),D.size,Math.round(D.size*1.08)];
-var compsHtml='<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(243,241,236,.4);margin-bottom:12px">3 Market Comparables — '+D.area+'</div>';
+var compsHtml='<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w25);margin-bottom:12px">3 Market Comparables — '+D.area+'</div>';
 seeds.forEach(function(v,i){
 var cPsf=Math.round(adjPsf*v*(0.96+Math.random()*0.08));
 var cSz=sizes[i];
 var cPx=cPsf*cSz;
 var d=Math.round((D.psf-cPsf)/cPsf*100);
 var dTxt=(d>0?'+':'')+d+'%';
-var dCol=d>8?'#ff6b6b':d<-8?'#6bcb77':'#f5c542';
+var dCol=d>8?'#ef4444':d<-8?'#16a34a':'#b45309';
 var pxFmt=cPx>=1000000?(Math.round(cPx/100000)/10)+'M':Math.round(cPx/1000)+'K';
-compsHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07)">'
-+'<div><div style="font-size:11px;color:rgba(243,241,236,.9);font-weight:600">'+D.beds+' '+D.type+' · '+cSz.toLocaleString()+' sqft</div>'
-+'<div style="font-size:9px;color:rgba(243,241,236,.4);margin-top:2px">'+sources[i]+'</div></div>'
-+'<div style="text-align:right"><div style="font-size:13px;font-weight:700;color:#fff">AED '+cPsf.toLocaleString()+'<span style="font-size:9px;font-weight:400;color:rgba(243,241,236,.4)">/sqft</span></div>'
-+'<div style="font-size:10px;color:rgba(243,241,236,.5)">≈ AED '+pxFmt+'</div></div>'
-+'<div style="margin-left:10px;font-size:10px;font-weight:700;color:'+dCol+';background:rgba(255,255,255,.06);padding:4px 8px;border-radius:3px;white-space:nowrap">'+dTxt+'</div>'
+compsHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)">'
++'<div><div style="font-size:11px;color:var(--w);font-weight:600">'+D.beds+' '+D.type+' · '+cSz.toLocaleString()+' sqft</div>'
++'<div style="font-size:9px;color:var(--w25);margin-top:2px">'+sources[i]+'</div></div>'
++'<div style="text-align:right"><div style="font-size:13px;font-weight:700;color:var(--w)">AED '+cPsf.toLocaleString()+'<span style="font-size:9px;font-weight:400;color:var(--w25)">/sqft</span></div>'
++'<div style="font-size:10px;color:var(--w50)">≈ AED '+pxFmt+'</div></div>'
++'<div style="margin-left:10px;font-size:10px;font-weight:700;color:'+dCol+';background:var(--w05);padding:4px 8px;border-radius:3px;white-space:nowrap">'+dTxt+'</div>'
 +'</div>';
 });
 document.getElementById('pc-loading').style.display='none';
@@ -3379,10 +3401,12 @@ document.getElementById('pc-comps').innerHTML=compsHtml;
 document.getElementById('pc-assessment').innerHTML='<strong>Assessment:</strong> '+D.project+' in '+D.area
 +' — asking AED '+D.psf.toLocaleString()+'/sqft vs market avg AED '+adjPsf.toLocaleString()
 +'/sqft for '+D.floor.toLowerCase()+' '+(isVilla?'villas':'apartments')+'. '+vdesc
-+' <span style="color:rgba(243,241,236,.35);font-size:10px">Source: DXB Interact · Bayut · Property Finder (2025-2026)</span>';
++' <span style="color:var(--w25);font-size:10px">Source: DXB Interact · Bayut · Property Finder (2025-2026)</span>';
+var _pcResEl=document.getElementById('pc-result');
+if(_pcResEl) _pcResEl.scrollIntoView({behavior:'smooth',block:'start'});
 try{fetch(window.GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({
 action:'lead',name:'Price Check',
-email:(JSON.parse(sessionStorage.getItem('dxb_pc_session')||'{}')).email||'',
+email:(pcGetSession()||{}).email||'',
 source:'PRICE_CHECK',budget:'AED '+D.price.toLocaleString(),
 goal:D.beds+' '+D.type+' in '+D.area+' — '+verdict,
 date:new Date().toISOString()
@@ -3818,7 +3842,7 @@ document.getElementById('pc-tab-login').style.color=tab==='login'?'#fff':'#888';
 function pcUnlockTool(name,email){
 document.getElementById('pc-reg-section').style.display='none';
 const w=document.getElementById('pc-wrap-main');if(w)w.style.display='block';
-try{sessionStorage.setItem('dxb_pc_session',JSON.stringify({name,email}));}catch(ex){}
+pcSaveSession(name,email);
 const fn=document.getElementById('lf-name');if(fn&&!fn.value)fn.value=name;
 const fe=document.getElementById('lf-email');if(fe&&!fe.value)fe.value=email;
 }
@@ -3857,10 +3881,10 @@ const p=document.getElementById('pc-login-phone').value.trim();
 if(!e||!p){alert('Please enter your email and WhatsApp number.');return;}
 pcUnlockTool('',e);
 }
-/* Auto-unlock if already registered this session */
+/* Auto-unlock if already registered on this device within the last 10 days */
 (function(){
 try{
-const sess=JSON.parse(sessionStorage.getItem('dxb_pc_session')||'null');
+const sess=pcGetSession();
 if(sess&&sess.email){
 const reg=document.getElementById('pc-reg-section');
 const w=document.getElementById('pc-wrap-main');
