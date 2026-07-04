@@ -1184,7 +1184,7 @@ padding-right:36px!important;
 <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="cd-m" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Min</div></div>
 <span style="font-size:22px;color:#ccc;font-weight:300">:</span>
 <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="cd-s" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Sec</div></div>
-<div style="margin-left:8px"><div style="font-size:9px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase">Launch Date</div><div style="font-size:16px;font-weight:700;color:#d97706">July 13, 2026</div></div>
+<div style="margin-left:8px"><div style="font-size:9px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase">Launch Date</div><div style="font-size:16px;font-weight:700;color:#d97706">July 14, 2026</div></div>
 </div>
 <h2 style="font-size:clamp(26px,2.5vw,38px);font-weight:800;color:#111;line-height:1.1;margin-bottom:8px;letter-spacing:-0.5px">Reserve Before<br>Launch Day.</h2>
 <p style="font-size:13px;color:#777;margin-bottom:28px;max-width:380px;line-height:1.6">From AED 666K · Residential, Office &amp; Retail · Handover Q2 2029 · EOI fully refundable</p>
@@ -1262,7 +1262,7 @@ padding-right:36px!important;
 <div id="lnch-phase5" style="display:none;text-align:center;padding:32px 0">
 <div style="font-size:52px;margin-bottom:16px">🎉</div>
 <div style="font-size:22px;font-weight:700;color:#111;margin-bottom:10px">EOI Registered!</div>
-<p style="color:#888;font-size:13px;margin-bottom:24px;line-height:1.6">AmirReza will confirm your cash handover appointment on WhatsApp and secure your unit before launch on July 13, 2026.</p>
+<p style="color:#888;font-size:13px;margin-bottom:24px;line-height:1.6">AmirReza will confirm your cash handover appointment on WhatsApp and secure your unit before launch on July 14, 2026.</p>
 <a id="lnch-wa-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:14px 28px;border-radius:3px;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:Inter,sans-serif"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg> Confirm with AmirReza</a>
 </div>
 </div>
@@ -3380,7 +3380,7 @@ const _F = {};
 let _selUnit = null;
 /* COUNTDOWN */
 (function(){
-const target = new Date('2026-07-13T10:00:00+04:00').getTime();
+const target = new Date('2026-07-14T10:00:00+04:00').getTime();
 function tick(){
 const now = Date.now();
 const diff = target - now;
@@ -3596,123 +3596,14 @@ body.fa *,body.ar *{font-family:'Vazirmatn',sans-serif!important}
 @media(max-width:700px){#unit-grid{grid-template-columns:1fr 1fr!important}}
 @media(max-width:450px){#unit-grid{grid-template-columns:1fr!important}}
 </style>
-<script>
-// GAS defined globally above
-const _WF={};
-let _sel=null;
-/* COUNTDOWN */
-(function(){
-const T=new Date('2026-07-01T10:00:00+04:00').getTime();
-function tick(){
-const d=T-Date.now();
-if(d<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='00';});return;}
-const v=[Math.floor(d/86400000),Math.floor((d%86400000)/3600000),Math.floor((d%3600000)/60000),Math.floor((d%60000)/1000)];
-['cd-d','cd-h','cd-m','cd-s'].forEach((id,i)=>{const e=document.getElementById(id);if(e)e.textContent=String(v[i]).padStart(2,'0');});
-}
-tick();setInterval(tick,1000);
-})();
-/* WIZARD */
-const PA='<table class=\"sched-table\"><tr><th>Instalment</th><th>Date</th><th>%</th><th>Note</th></tr><tr class=\"hl\"><td>Down Payment</td><td>On Booking</td><td>20%</td><td>+ 4% DLD fee</td></tr><tr class=\"\"><td>2nd</td><td>Nov 2026</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>3rd</td><td>Apr 2027</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>4th</td><td>Sep 2027</td><td>10%</td><td>—</td></tr><tr class=\"\"><td>5th</td><td>Feb 2028</td><td>10%</td><td>—</td></tr><tr class=\"\"><td>6th</td><td>Jul 2028</td><td>10%</td><td>—</td></tr><tr class=\"\"><td>7th</td><td>Nov 2028</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>8th</td><td>Mar 2029</td><td>5%</td><td>—</td></tr><tr class=\"hl\"><td>On Handover</td><td>Sep 2030</td><td>30%</td><td>Keys</td></tr></table>';
-const PB='<table class=\"sched-table\"><tr><th>Instalment</th><th>Date</th><th>%</th><th>Note</th></tr><tr class=\"hl\"><td>Down Payment</td><td>On Booking</td><td>20%</td><td>+ 4% DLD fee</td></tr><tr class=\"\"><td>2nd</td><td>Nov 2026</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>3rd</td><td>Apr 2027</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>4th</td><td>Sep 2027</td><td>10%</td><td>—</td></tr><tr class=\"\"><td>5th</td><td>Feb 2028</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>6th</td><td>Jul 2028</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>7th</td><td>Nov 2028</td><td>5%</td><td>—</td></tr><tr class=\"\"><td>8th</td><td>Mar 2029</td><td>5%</td><td>—</td></tr><tr class=\"hl\"><td>On Handover</td><td>Sep 2030</td><td>40%</td><td>Keys</td></tr></table>';
-function startWizard(){document.getElementById('lnch-hdr').style.display='none';document.getElementById('lnch-wiz').style.display='block';wizGo(1);}
-function closeWizard(){document.getElementById('lnch-wiz').style.display='none';document.getElementById('lnch-hdr').style.display='block';}
-function wizGo(n){
-for(let i=1;i<=7;i++){
-const s=document.getElementById('ws'+i);if(s)s.style.display=i===n?'block':'none';
-const p=document.getElementById('wp'+i);if(p)p.style.background=i<=n?'#f59e0b':'rgba(255,255,255,.12)';
-}
-if(n===2&&_sel){
-document.getElementById('ws2-unit').textContent=_sel.name+' — AED '+_sel.price;
-document.getElementById('ws2-plan').textContent=_sel.plan;
-document.getElementById('ws2-tbl').innerHTML=_sel.plan.includes('70')?PA:PB;
-document.getElementById('w-bank-amt').textContent='AED '+_sel.eoi;
-}
-if(n===4&&_sel){
-const nm=document.getElementById('w-name').value;
-const ref='PALM-CENTRAL-'+nm.toUpperCase().replace(/\s+/g,'-');
-document.getElementById('w-bank-ref').textContent=ref;
-document.getElementById('ws4-sum').innerHTML=
-'<div class="sum-row"><span class="sk">Unit</span><span class="sv2">'+_sel.name+'</span></div>'+
-'<div class="sum-row"><span class="sk">Starting From</span><span class="sv2">AED '+_sel.price+'</span></div>'+
-'<div class="sum-row"><span class="sk">Payment Plan</span><span class="sv2">'+_sel.plan+'</span></div>'+
-'<div class="sum-row"><span class="sk">EOI Deposit</span><span class="sv2" style="color:#fbbf24">AED '+_sel.eoi+'</span></div>'+
-'<div class="sum-row"><span class="sk">Name</span><span class="sv2">'+nm+'</span></div>'+
-'<div class="sum-row"><span class="sk">Email</span><span class="sv2">'+document.getElementById('w-email').value+'</span></div>';
-}
-window.scrollTo({top:document.getElementById('launches').offsetTop-60,behavior:'smooth'});
-}
-function selectUnit(id,name,price,eoi,plan){
-_sel={id,name,price,eoi,plan};
-document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));
-document.getElementById('uc-'+id).classList.add('selected');
-const b=document.getElementById('ws1-next');if(b){b.disabled=false;b.style.opacity='1';}
-}
-function wizStep3Next(){
-const n=document.getElementById('w-name').value.trim(),e=document.getElementById('w-email').value.trim(),p=document.getElementById('w-phone').value.trim();
-if(!n||!e||!p){alert('Please fill in all required fields.');return;}
-wizGo(4);
-}
-function wizStep5Next(){if(!_WF.wid){alert('Please upload your passport or Emirates ID.');return;}wizGo(6);}
-function wizSubmit(){
-if(!_WF.wrcpt){alert('Please upload your payment receipt.');return;}
-const btn=document.getElementById('w-sub-btn');btn.disabled=true;btn.textContent='Submitting...';
-const n=document.getElementById('w-name').value.trim(),cc=document.getElementById('w-cc').value,ph=document.getElementById('w-phone').value.trim();
-const amt=_sel?_sel.eoi:'100000';
-const wa=encodeURIComponent('Hi AmirReza, EOI submitted for Palm Central ('+(_sel?_sel.name:'')+') on dxbpropertyexpert.com. Name: '+n+'. EOI: AED '+amt+'. Please confirm.');
-document.getElementById('w-wa-link').href='https://wa.me/971542347774?text='+wa;
-fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'eoi',name:n,email:document.getElementById('w-email').value.trim(),phone:cc+ph,unit:_sel?_sel.name:'',plan:_sel?_sel.plan:'',eoiAmount:'AED '+amt,idFile:_WF.wid||'',receiptFile:_WF.wrcpt||'',source:'website-wizard',date:new Date().toISOString()})}).catch(()=>{});
-wizGo(7);
-}
-function wFile(key,input,okId){
-const file=input.files[0];if(!file)return;
-if(file.size>5242880){alert('Max 5MB.');return;}
-const ok=document.getElementById(okId);if(ok){ok.textContent='Reading...';ok.style.display='block';}
-const r=new FileReader();r.onload=e=>{_WF[key]=e.target.result;if(ok)ok.textContent='✓ '+file.name;};r.readAsDataURL(file);
-}
-/* MARKET TABS */
-function mktTab(tab,btn){
-document.querySelectorAll('.mkt-pane').forEach(p=>p.classList.remove('on'));
-document.querySelectorAll('.mkt-tab').forEach(b=>b.classList.remove('on'));
-document.getElementById('pane-'+tab).classList.add('on');btn.classList.add('on');
-}
-/* BUY */
-function buyN1(){const n=document.getElementById('bn').value.trim(),e=document.getElementById('be').value.trim(),p=document.getElementById('bp').value.trim();if(!n||!e||!p){alert('Please fill in name, email and WhatsApp.');return;}document.getElementById('bs1').style.display='none';document.getElementById('bs2').style.display='block';}
-function buyBack(){document.getElementById('bs2').style.display='none';document.getElementById('bs1').style.display='block';}
-function buySearch(){
-const name=document.getElementById('bn').value.trim(),beds=document.getElementById('bbeds').value,type=document.getElementById('btype').value,minB=parseInt(document.getElementById('bmin').value)||0,maxB=parseInt(document.getElementById('bmax').value)||999999999,stat=document.getElementById('bstat').value,pay=document.getElementById('bpay').value,cc=document.getElementById('bcc').value,ph=document.getElementById('bp').value.trim();
-fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'buyer',name,email:document.getElementById('be').value.trim(),phone:cc+ph,beds,type,minBudget:minB,maxBudget:maxB===999999999?'No limit':maxB,status:stat,payment:pay,role:document.getElementById('buy-role').value||'buyer',source:'website',date:new Date().toISOString()})}).catch(()=>{});
-document.getElementById('bs2').style.display='none';document.getElementById('bs3').style.display='block';
-const wa=encodeURIComponent('Hi AmirReza, secondary market search: '+(beds||'any')+' '+(type||'')+' AED '+minB.toLocaleString()+'-'+(maxB===999999999?'open':maxB.toLocaleString())+'. Name: '+name+'.');
-document.getElementById('bwa').href='https://wa.me/971542347774?text='+wa;
-document.getElementById('bgrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#888">Searching...</div>';
-fetch(GAS+'?action=listings').then(r=>r.json()).then(d=>renderM(d.listings||[],{beds,type,minB,maxB,stat,pay,name})).catch(()=>renderM([],{beds,type,minB,maxB,stat,pay,name}));
-}
-function renderM(list,q){
-const fl=list.filter(l=>{const pr=parseInt(String(l.price||0).replace(/[^0-9]/g,''))||0;return(!q.beds||!l.beds||l.beds===q.beds)&&(!q.type||!l.type||l.type===q.type)&&(pr===0||pr>=q.minB)&&(pr===0||pr<=q.maxB)&&(!q.stat||!l.status||l.status===q.stat)&&(!q.pay||!l.payment||l.payment===q.pay);});
-document.getElementById('brt').textContent=fl.length?fl.length+' Match'+(fl.length>1?'es':'')+' Found':'No Matches Yet';
-document.getElementById('brs').textContent=fl.length?'Verified listings:':'AmirReza will personally source options for you.';
-const grid=document.getElementById('bgrid');
-if(!fl.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:48px;color:#888">Requirements saved. New properties added regularly.</div>';return;}
-grid.innerHTML=fl.map(l=>{const pr=parseInt(String(l.price||0).replace(/[^0-9]/g,''))||0;const wa=encodeURIComponent('Hi AmirReza, interested in: '+(l.name||l.area||'Property')+' '+(l.beds||'')+' in '+(l.area||'Dubai')+' AED '+pr.toLocaleString()+'. Name: '+q.name+'.');return `<div class="res-card"><div class="rc-body"><div class="rc-type">${l.beds||''} · ${l.type||''}</div><div class="rc-name">${l.name||l.area||'Dubai Property'}</div><div class="rc-price">AED ${pr.toLocaleString()}</div><a class="rc-wa" href="https://wa.me/971542347774?text=${wa}" target="_blank">Book a Viewing</a></div></div>`;}).join('');
-}
-/* SELL */
-function sellN1(){const n=document.getElementById('sn').value.trim(),e=document.getElementById('se').value.trim(),p=document.getElementById('sp').value.trim();if(!n||!e||!p){alert('Fill in name, email and WhatsApp.');return;}if(!_WF.sid){alert('Please upload your ID.');return;}document.getElementById('ss1').style.display='none';document.getElementById('ss2').style.display='block';}
-function sellBack(){document.getElementById('ss2').style.display='none';document.getElementById('ss1').style.display='block';}
-function sellSub(){
-const pt=document.getElementById('spt').value,bd=document.getElementById('sbd').value,ar=document.getElementById('sar').value.trim(),pr=document.getElementById('spr').value.trim(),st=document.getElementById('sst').value;
-if(!pt||!bd||!ar||!pr||!st){alert('Fill in all required property fields.');return;}
-if(!_WF.sdoc){alert('Upload your Title Deed or Oqood.');return;}
-const btn=document.getElementById('sell-btn');btn.disabled=true;btn.textContent='Submitting...';
-const n=document.getElementById('sn').value.trim(),cc=document.getElementById('scc').value,ph=document.getElementById('sp').value.trim(),prN=parseInt(pr)||0;
-const wa=encodeURIComponent('Hi AmirReza, property submitted: '+pt+' '+bd+' in '+ar+' AED '+prN.toLocaleString()+'. Name: '+n+'.');
-document.getElementById('sell-wa').href='https://wa.me/971542347774?text='+wa;
-fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'seller',name:n,email:document.getElementById('se').value.trim(),phone:cc+ph,propType:pt,beds:bd,area:ar,price:'AED '+prN.toLocaleString(),size:document.getElementById('ssz').value||'',propStatus:st,payment:document.getElementById('spay').value,notes:document.getElementById('snotes').value,idFile:_WF.sid||'',docFile:_WF.sdoc||'',role:document.getElementById('sell-role')?document.getElementById('sell-role').value||'seller':'seller',source:'website',date:new Date().toISOString()})}).catch(()=>{});
-document.getElementById('ss2').style.display='none';document.getElementById('ss3').style.display='block';
-}
-function xF(key,input){const file=input.files[0];if(!file)return;if(file.size>5242880){alert('Max 5MB.');return;}const ok=document.getElementById('ok-'+key);if(ok){ok.textContent='Reading...';ok.style.display='block';}const pn=document.getElementById('pn-'+key);const pv=document.getElementById('pv-'+key);const r=new FileReader();r.onload=e=>{_WF[key]=e.target.result;if(ok)ok.textContent='✓ '+file.name;if(pn)pn.textContent=file.name;if(pv)pv.style.display='flex';};r.readAsDataURL(file);}
-function xM(key,input){const n=input.files.length;if(!n)return;_WF[key]='['+n+' files]';const ok=document.getElementById('ok-'+key);if(ok){ok.textContent='✓ '+n+' file(s)';ok.style.display='block';}}
-function rmF(key){_WF[key]=null;const i=document.getElementById('f-'+key);if(i)i.value='';const pv=document.getElementById('pv-'+key);if(pv)pv.style.display='none';const ok=document.getElementById('ok-'+key);if(ok){ok.textContent='';ok.style.display='none';}}
-</script>
+<!-- Legacy duplicate script block removed (2026-07-04): this was an old "Palm Central" draft
+     of the exact same wizard/buy/sell/countdown logic, left in the page after the site was
+     rebuilt for Raw District II. Because function declarations at global scope get silently
+     overwritten by whichever <script> runs last, this leftover block was overriding the
+     correct implementation above with stale references (a July 1, 2026 countdown target,
+     and 'lnch-hdr'/'lnch-wiz' element ids that no longer exist) -- causing the countdown to
+     show 00:00:00:00. The real, current implementation lives in the script block just above
+     this comment (correct ids: lnch-header/lnch-wizard, correct countdown target). -->
 <style>
 /* ── Buying guide: fix step numbers ─────────────────── */
 .gsn{
