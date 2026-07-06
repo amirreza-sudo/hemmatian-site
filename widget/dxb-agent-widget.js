@@ -16,13 +16,27 @@
   // ── Styles ──────────────────────────────────────────────
   const style = document.createElement('style');
   style.textContent = `
-    #dxb-agent-btn{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;
-      background:#111;border:2px solid #d97706;color:#d97706;font-size:26px;cursor:pointer;z-index:9998;
-      display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .2s}
+    #dxb-agent-btn{position:fixed;bottom:90px;right:18px;width:64px;height:64px;border-radius:50%;
+      background:#d97706;border:none;color:#111;font-size:28px;cursor:pointer;z-index:9998;
+      display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(217,119,6,.5);
+      transition:transform .2s;animation:dxb-pulse 2.5s infinite}
     #dxb-agent-btn:hover{transform:scale(1.08)}
-    #dxb-agent-panel{position:fixed;bottom:96px;right:24px;width:360px;max-width:92vw;height:520px;max-height:80vh;
+    @keyframes dxb-pulse{
+      0%{box-shadow:0 4px 24px rgba(217,119,6,.5),0 0 0 0 rgba(217,119,6,.5)}
+      70%{box-shadow:0 4px 24px rgba(217,119,6,.5),0 0 0 14px rgba(217,119,6,0)}
+      100%{box-shadow:0 4px 24px rgba(217,119,6,.5),0 0 0 0 rgba(217,119,6,0)}
+    }
+    #dxb-agent-badge{position:fixed;bottom:148px;right:16px;background:#111;color:#fff;font-size:11px;
+      padding:5px 10px;border-radius:14px;z-index:9998;font-family:Inter,sans-serif;white-space:nowrap;
+      border:1px solid rgba(217,119,6,.4)}
+    @media (min-width:768px){
+      #dxb-agent-btn{bottom:24px;right:24px}
+      #dxb-agent-badge{bottom:82px;right:22px}
+    }
+    #dxb-agent-panel{position:fixed;bottom:166px;right:18px;width:360px;max-width:92vw;height:520px;max-height:70vh;
       background:#181818;border:1px solid rgba(217,119,6,.3);border-radius:12px;display:none;flex-direction:column;
       z-index:9999;font-family:Inter,sans-serif;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+    @media (min-width:768px){ #dxb-agent-panel{bottom:96px;right:24px} }
     #dxb-agent-panel.open{display:flex}
     #dxb-agent-head{padding:14px 16px;background:#111;display:flex;justify-content:space-between;align-items:center;
       border-bottom:1px solid rgba(217,119,6,.2)}
@@ -47,6 +61,11 @@
   btn.id = 'dxb-agent-btn';
   btn.innerHTML = '💬';
   document.body.appendChild(btn);
+
+  const badge = document.createElement('div');
+  badge.id = 'dxb-agent-badge';
+  badge.textContent = 'Ask me anything →';
+  document.body.appendChild(badge);
 
   const panel = document.createElement('div');
   panel.id = 'dxb-agent-panel';
@@ -76,6 +95,8 @@
 
   btn.addEventListener('click', () => {
     panel.classList.toggle('open');
+    badge.style.display = 'none';
+    btn.style.animation = 'none';
     if (panel.classList.contains('open') && msgsEl.children.length === 0) {
       addMsg('bot', currentLang === 'fa'
         ? 'سلام! من دستیار امیررضا هستم. چطور می‌تونم کمکتون کنم؟'
@@ -148,17 +169,41 @@
       sendMessage(transcript);
     };
     recognizer.onend = () => { recognizing = false; micBtn.classList.remove('rec'); };
-    recognizer.onerror = () => { recognizing = false; micBtn.classList.remove('rec'); };
+    recognizer.onerror = (e) => {
+      recognizing = false;
+      micBtn.classList.remove('rec');
+      let msg = currentLang === 'fa'
+        ? 'میکروفون کار نکرد. لطفا اجازه دسترسی به میکروفون رو بدید یا پیامتون رو تایپ کنید.'
+        : currentLang === 'ar'
+        ? 'لم يعمل الميكروفون. يرجى السماح بالوصول أو كتابة رسالتك.'
+        : "Voice didn't work — please allow microphone access, or just type your message.";
+      if (e.error === 'not-allowed' || e.error === 'permission-denied') {
+        msg = currentLang === 'fa'
+          ? 'دسترسی میکروفون رد شد. در تنظیمات مرورگر اجازه بدید یا تایپ کنید.'
+          : currentLang === 'ar'
+          ? 'تم رفض إذن الميكروفون. يرجى تمكينه من إعدادات المتصفح أو الكتابة.'
+          : 'Microphone permission was denied — enable it in your browser settings, or just type instead.';
+      }
+      addMsg('bot', msg);
+    };
 
     micBtn.addEventListener('click', () => {
       if (recognizing) { recognizer.stop(); return; }
       recognizer.lang = LANGS[currentLang].code;
-      recognizer.start();
-      recognizing = true;
-      micBtn.classList.add('rec');
+      try {
+        recognizer.start();
+        recognizing = true;
+        micBtn.classList.add('rec');
+      } catch (err) {
+        addMsg('bot', currentLang === 'fa' ? 'میکروفون در دسترس نیست.' : 'Microphone not available right now.');
+      }
     });
   } else {
-    micBtn.style.display = 'none'; // Voice input not supported in this browser
+    micBtn.addEventListener('click', () => {
+      addMsg('bot', currentLang === 'fa'
+        ? 'این دکمه در این مرورگر کار نمی‌کنه. روی کادر متن ضربه بزنید و از میکروفون خود صفحه‌کلید آیفون استفاده کنید.'
+        : "Voice input isn't supported in this browser. Tap the text box and use your keyboard's own dictation mic instead.");
+    });
   }
 
   // ── Voice output (TTS) ──────────────────────────────────
