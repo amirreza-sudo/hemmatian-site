@@ -73,17 +73,12 @@ async function fetchLiveData() {
   const aedToUsdDivisor = fxMatch ? parseFloat(fxMatch[1]) : 3.65;
   const aedToTomanRate = fxMatch ? parseInt(fxMatch[2], 10) : null;
 
-  // Current live launch slug: source:'LAUNCH_RAW-DISTRICT-II'
-  const launchSlugMatch = html.match(/source:'LAUNCH_([^']+)'/);
-  const launchSlug = launchSlugMatch ? launchSlugMatch[1].replace(/-/g, ' ') : null;
-
-  // Launch units: lnchSelect('STU','Studio','666,000','50,000','60/40 Plan')
-  const unitRegex = /lnchSelect\('(\w+)','([^']+)','([\d,]+)','([\d,]+)','([^']+)'\)/g;
-  const units = [];
+  // Launch 1: Raw District II by Imtiaz — lnchSelect(...) — 60/40 plan
+  const rawDistrictUnits = [];
+  const lnchRegex = /lnchSelect\('(\w+)','([^']+)','([\d,]+)','([\d,]+)','([^']+)'\)/g;
   let m;
-  while ((m = unitRegex.exec(html)) !== null) {
-    units.push({
-      code: m[1],
+  while ((m = lnchRegex.exec(html)) !== null) {
+    rawDistrictUnits.push({
       type: m[2],
       priceAED: parseInt(m[3].replace(/,/g, ''), 10),
       eoiAED: parseInt(m[4].replace(/,/g, ''), 10),
@@ -91,22 +86,64 @@ async function fetchLiveData() {
     });
   }
 
-  return { aedToUsdDivisor, aedToTomanRate, launchSlug, units, fetchedAt: new Date().toISOString() };
+  // Launch 2: Arancia Yards (City of Arabia) — aySelect(...) — separate project, separate plan
+  const aranciaUnits = [];
+  const ayRegex = /aySelect\('(\w+)','([^']+)','([\d,]+)','([\d,]+)','([^']+)'\)/g;
+  while ((m = ayRegex.exec(html)) !== null) {
+    aranciaUnits.push({
+      type: m[2],
+      priceAED: parseInt(m[3].replace(/,/g, ''), 10),
+      eoiAED: parseInt(m[4].replace(/,/g, ''), 10),
+      plan: m[5]
+    });
+  }
+
+  return {
+    aedToUsdDivisor, aedToTomanRate,
+    launches: [
+      { name: 'Raw District II (Imtiaz Developments)', units: rawDistrictUnits },
+      { name: 'Arancia Yards (City of Arabia) — Phase 2', units: aranciaUnits }
+    ],
+    fetchedAt: new Date().toISOString()
+  };
 }
 
 function buildSystemPrompt(liveData) {
+  const launchBlock = liveData.launches.map(l => {
+    if (!l.units.length) return `${l.name}: no live units found — direct visitor to check the Launch page directly.`;
+    const lines = l.units.map(u => `  - ${u.type}: AED ${u.priceAED.toLocaleString()} | EOI: AED ${u.eoiAED.toLocaleString()} cash | ${u.plan}`).join('\n');
+    return `${l.name}:\n${lines}`;
+  }).join('\n\n');
+
   const liveBlock = `
 ## LIVE DATA (fetched just now from dxbpropertyexpert.com — use these, don't guess)
 
-Current launch: ${liveData.launchSlug || 'unknown — check site'}
-FX: 1 AED = ${liveData.aedToUsdDivisor ? (1 / liveData.aedToUsdDivisor).toFixed(4) : '0.2740'} USD (divide AED by ${liveData.aedToUsdDivisor || 3.65}) · 1 AED ≈ ${liveData.aedToTomanRate || 'N/A'} Toman
-Available units:
-${liveData.units.map(u => `- ${u.type}: AED ${u.priceAED.toLocaleString()} | EOI: AED ${u.eoiAED.toLocaleString()} cash | ${u.plan}`).join('\n') || 'none found — direct visitor to check the Launch page directly'}
+There are currently TWO separate active launches. Do not mix their names, prices, or plans together — they are different projects with different developers and different payment plans.
 
-Use these numbers directly in your calculations. Do not mention 50/50 or any plan not listed above.
+${launchBlock}
+
+FX: 1 AED = ${liveData.aedToUsdDivisor ? (1 / liveData.aedToUsdDivisor).toFixed(4) : '0.2740'} USD (divide AED by ${liveData.aedToUsdDivisor || 3.65}) · 1 AED ≈ ${liveData.aedToTomanRate || 'N/A'} Toman
+
+## RESPONSE FORMAT — STRICT
+
+This reply is displayed in a small chat bubble and may be read aloud by TTS. Every response MUST:
+- Be plain conversational sentences only — NO markdown of any kind: no **, no ##, no bullet points, no tables, no pipes.
+- Be 2-3 short sentences MAX unless the visitor explicitly asks for a detailed breakdown of every unit.
+- Answer only the specific question asked — don't append extra unit types, extra sections, or unrelated info "just in case."
+- When a visitor asks about ONE unit type, give ONLY that unit's numbers — not the full price list.
 `;
 
   return SKILL_CONTENT + '\n\n' + liveBlock;
+}
+
+// Strip any markdown that slips through, as a safety net for the chat-bubble UI
+function stripMarkdown(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/^#{1,6}\s*/gm, '')
+    .replace(/^\s*[-•]\s+/gm, '')
+    .replace(/\|/g, ' ')
+    .trim();
 }
 
 // ── Agent turn — handles Claude's tool use loop for lead submission ──
@@ -140,7 +177,7 @@ async function runAgentTurn(systemPrompt, messages) {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 1024,
+        max_tokens: 300,
         system: systemPrompt,
         messages: currentMessages,
         tools
@@ -154,7 +191,7 @@ async function runAgentTurn(systemPrompt, messages) {
     const textBlocks = result.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
 
     if (!toolUse) {
-      return textBlocks;
+      return stripMarkdown(textBlocks);
     }
 
     // Execute the tool call (submit lead into existing CRM pipeline)
