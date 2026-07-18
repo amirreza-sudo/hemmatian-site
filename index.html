@@ -3270,6 +3270,12 @@ D.psf=Math.round(D.price/D.size);
 // Show loading
 document.getElementById('pc-form').style.display='none';
 document.getElementById('pc-loading').style.display='block';
+// ── Live per-visitor cross-check against Property Finder (public, no login) ──
+// Runs in parallel with the loading animation; if it succeeds for this area we use
+// the real live figure, otherwise we fall back to the static MKT table below.
+var _liveFetch=fetch('/.netlify/functions/live-comps?area='+encodeURIComponent(D.area)+'&beds='+encodeURIComponent(D.beds)+'&type='+encodeURIComponent(D.type))
+.then(function(r){return r.json();})
+.catch(function(){return {ok:false,reason:'client-fetch-error'};});
 // ── Dubai Market PSF Database (AED/sqft, 2025-2026) ──
 var MKT={
 'Business Bay':         {apt:[1600,2200],vil:[2400,3200],low:-5,mid:0,high:8,sky:16,op:-8,real:{psf:1881,src:'Property Monitor — Communities Price Index',asOf:'2026-06'}},
@@ -3305,8 +3311,15 @@ var CITY_BENCH=[
 {label:'Dubai citywide avg — Bayut (TruView / DLD-sourced, last 12mo)',psf:1929,asOf:'2026-07-17'},
 {label:'Dubai citywide avg — Property Finder (last 12mo)',psf:1865,asOf:'2026-07-17'}
 ];
-setTimeout(function(){
+var _minDelay=new Promise(function(res){setTimeout(res,1800);});
+Promise.all([_liveFetch,_minDelay]).then(function(_r){
+var live=_r[0];
 var mkt=MKT[D.area]||DEF;
+// Live Property Finder figure takes priority over the static snapshot when available
+var realData=mkt.real;
+if(live&&live.ok&&live.sampleAvgPsf){
+realData={psf:live.sampleAvgPsf,src:live.source+' — '+live.sampleCount+' recent sale'+(live.sampleCount===1?'':'s')+(live.roiPct?', '+live.roiPct+'% avg ROI':''),asOf:live.asOf,live:true};
+}
 var isVilla=(D.type==='Villa'||D.type==='Townhouse');
 var rng=isVilla?mkt.vil:mkt.apt;
 var mktAvg=Math.round((rng[0]+rng[1])/2);
@@ -3326,10 +3339,10 @@ else if(diffPct<=18){verdict='SLIGHTLY HIGH';vclass='over';vemoji='🟠';vdesc='
 else{verdict='OVERPRICED';vclass='over';vemoji='🔴';vdesc='Well above market comparables. Strong room to negotiate.';}
 // ── Build honest cross-source benchmark rows (real, dated figures — no randomised fake comparables) ──
 var compRows=[];
-if(mkt.real){
-var rPsf=mkt.real.psf;
+if(realData){
+var rPsf=realData.psf;
 var rDiff=Math.round((D.psf-rPsf)/rPsf*100);
-compRows.push({label:D.area+' — verified area median',src:mkt.real.src+' · as of '+mkt.real.asOf,psf:rPsf,diff:rDiff});
+compRows.push({label:D.area+(realData.live?' — live verified check':' — verified area median'),src:realData.src+' · as of '+realData.asOf,psf:rPsf,diff:rDiff});
 }
 CITY_BENCH.forEach(function(b){
 var d=Math.round((D.psf-b.psf)/b.psf*100);
@@ -3346,7 +3359,7 @@ compsHtml+='<div style="display:flex;justify-content:space-between;align-items:c
 +'<div style="margin-left:10px;font-size:10px;font-weight:700;color:'+dCol+';background:var(--w05);padding:4px 8px;border-radius:3px;white-space:nowrap">'+dTxt+'</div>'
 +'</div>';
 });
-if(!mkt.real){
+if(!realData){
 compsHtml+='<div style="font-size:10px;color:var(--w25);margin-top:10px;line-height:1.5">No independently verified live figure for '+D.area+' yet this cycle — showing citywide benchmarks above plus the baseline PSF range below. Ask AmirReza to confirm the latest comparable sales for this specific project before relying on the exact verdict.</div>';
 }
 document.getElementById('pc-loading').style.display='none';
@@ -3362,8 +3375,8 @@ document.getElementById('pc-stats').innerHTML=
 +'<div class="pc-stat"><span class="pc-stat-v" style="font-size:14px">AED '+D.price.toLocaleString()+'</span><span class="pc-stat-l">Asking price</span></div>'
 +'<div class="pc-stat"><span class="pc-stat-v">'+rng[0].toLocaleString()+'-'+rng[1].toLocaleString()+'</span><span class="pc-stat-l">Area PSF range</span></div>';
 document.getElementById('pc-comps').innerHTML=compsHtml;
-var sourceNote=mkt.real
-? ('Sources: '+mkt.real.src+' (area-verified '+mkt.real.asOf+') · Bayut &amp; Property Finder city benchmarks (2026-07-17)')
+var sourceNote=realData
+? ('Sources: '+realData.src+(realData.live?' (live)':' (area-verified '+realData.asOf+')')+' · Bayut &amp; Property Finder city benchmarks (2026-07-17)')
 : ('Sources: Bayut &amp; Property Finder city benchmarks (2026-07-17) · area-specific figure pending verification — confirm with AmirReza before relying on this for negotiation');
 document.getElementById('pc-assessment').innerHTML='<strong>Assessment:</strong> '+D.project+' in '+D.area
 +' — asking AED '+D.psf.toLocaleString()+'/sqft vs market avg AED '+adjPsf.toLocaleString()
@@ -3378,7 +3391,7 @@ source:'PRICE_CHECK',budget:'AED '+D.price.toLocaleString(),
 goal:D.beds+' '+D.type+' in '+D.area+' — '+verdict,
 date:new Date().toISOString()
 })});}catch(ex){}
-},1800);
+});
 }
 function resetPC(){
 document.getElementById('pc-result').style.display='none';
