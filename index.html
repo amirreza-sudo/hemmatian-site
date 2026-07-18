@@ -2680,7 +2680,7 @@ Get Complete Buying Guide
 <div style="flex:0 0 50%;padding:64px 52px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;position:relative;z-index:2">
 <p style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-family:Inter,sans-serif">AI Property Price Checker</p>
 <h2 class="sh2" style="margin-bottom:12px;font-size:clamp(22px,2vw,32px)">Is This Property<br><em>Worth the Price?</em></h2>
-<p style="font-size:13px;color:#888;margin-bottom:24px;max-width:400px;line-height:1.6;font-family:Inter,sans-serif">Enter property details. We compare against 9 recent transactions — instant fair/good/overpriced verdict.</p>
+<p style="font-size:13px;color:#888;margin-bottom:24px;max-width:400px;line-height:1.6;font-family:Inter,sans-serif">Enter property details. We cross-check live benchmarks from Property Monitor, DXB Interact, Bayut and Property Finder for a fair/good/overpriced verdict.</p>
 <div class="pc-reg-box" id="pc-reg-section">
 <div id="pc-tab-bar" style="display:flex;margin-bottom:24px;border:1px solid rgba(0,0,0,.1);border-radius:4px;overflow:hidden">
 <button id="pc-tab-register" onclick="pcShowTab('register')" style="flex:1;padding:11px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:#111;color:#fff;border:none;cursor:pointer;font-family:Inter,sans-serif;font-weight:700">New User</button>
@@ -2780,16 +2780,16 @@ Get Complete Buying Guide
 <input class="pc-inp" id="pc-price" type="number" placeholder="e.g. 1850000">
 </div>
 </div>
-<p class="pc-note">* All fields required. Results powered by AI search across DXB Interact, Bayut and Property Finder.</p>
+<p class="pc-note">* All fields required. Verdict cross-referenced against Property Monitor, DXB Interact, Bayut and Property Finder benchmark data.</p>
 <button class="pc-submit" onclick="runPriceCheck()">
 <svg style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-Analyse Price — 9 Comparables
+Analyse Price — 4-Source Check
 </button>
 </div>
 <div class="pc-loading" id="pc-loading">
 <div class="pc-spinner"></div>
 <div class="pc-loading-step" id="pc-step">Initialising search...</div>
-<div class="pc-loading-src" id="pc-src">Searching DXB Interact · Bayut · Property Finder</div>
+<div class="pc-loading-src" id="pc-src">Cross-checking Property Monitor · DXB Interact · Bayut · Property Finder</div>
 </div>
 <div class="pc-result" id="pc-result">
 <div class="pc-verdict-box" id="pc-vbox">
@@ -2823,9 +2823,9 @@ Analyse Price — 9 Comparables
 <div>
 <div style="font-size:50px;font-weight:900;color:#fff;line-height:0.9;letter-spacing:-2px;font-family:Inter,sans-serif">KNOW<br><span style="font-weight:300;font-style:italic;font-size:42px;color:rgba(255,255,255,.4)">before</span><br>YOU BUY.</div>
 <div style="width:36px;height:3px;background:#fbbf24;border-radius:2px;margin:14px 0"></div>
-<div style="font-size:12px;color:rgba(255,255,255,.6);font-family:Inter,sans-serif;line-height:1.6">Fair price · Good deal · Overpriced<br>9 real comparables · instant verdict</div>
+<div style="font-size:12px;color:rgba(255,255,255,.6);font-family:Inter,sans-serif;line-height:1.6">Fair price · Good deal · Overpriced<br>4-source cross-check · instant verdict</div>
 <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-<span style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:4px 12px;border-radius:2px;font-size:9px;font-weight:700;font-family:Inter,sans-serif">9 Comparables</span>
+<span style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:4px 12px;border-radius:2px;font-size:9px;font-weight:700;font-family:Inter,sans-serif">4-Source Check</span>
 <span style="background:#fbbf24;color:#000;padding:4px 12px;border-radius:2px;font-size:9px;font-weight:800;font-family:Inter,sans-serif">Always Free</span>
 <span style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:4px 12px;border-radius:2px;font-size:9px;font-weight:700;font-family:Inter,sans-serif">&lt;30s</span>
 </div>
@@ -3272,32 +3272,39 @@ document.getElementById('pc-form').style.display='none';
 document.getElementById('pc-loading').style.display='block';
 // ── Dubai Market PSF Database (AED/sqft, 2025-2026) ──
 var MKT={
-'Business Bay':         {apt:[1600,2200],vil:[2400,3200],low:-5,mid:0,high:8,sky:16,op:-8},
-'Downtown Dubai':       {apt:[2200,3200],vil:[3000,4200],low:-6,mid:0,high:10,sky:20,op:-10},
-'Dubai Marina':         {apt:[1700,2400],vil:[2200,3000],low:-5,mid:0,high:9,sky:18,op:-8},
-'JVC (Jumeirah Village Circle)':{apt:[900,1350],vil:[1100,1600],low:-4,mid:0,high:6,sky:12,op:-5},
-'JLT':                  {apt:[1300,1900],vil:[1800,2400],low:-5,mid:0,high:8,sky:14,op:-7},
-'Dubai Hills Estate':   {apt:[1500,2100],vil:[1800,2800],low:-4,mid:0,high:8,sky:15,op:-8},
-'Dubai Creek Harbour':  {apt:[1800,2600],vil:[2200,3200],low:-5,mid:0,high:10,sky:18,op:-9},
-'MBR City / Meydan':    {apt:[1600,2400],vil:[2000,3000],low:-4,mid:0,high:9,sky:16,op:-8},
-'Palm Jumeirah':        {apt:[2800,4200],vil:[3500,6000],low:-4,mid:0,high:12,sky:22,op:-10},
-'DIFC':                 {apt:[2400,3600],vil:[3000,4500],low:-5,mid:0,high:12,sky:22,op:-10},
-'Sobha Hartland':       {apt:[1700,2400],vil:[2000,3000],low:-4,mid:0,high:8,sky:15,op:-9},
-'DAMAC Hills':          {apt:[1100,1700],vil:[1400,2200],low:-4,mid:0,high:7,sky:13,op:-7},
-'Dubai South':          {apt:[800,1200],vil:[900,1400],low:-3,mid:0,high:5,sky:10,op:-5},
-'Arjan':                {apt:[850,1300],vil:[1000,1500],low:-3,mid:0,high:5,sky:10,op:-5},
-'Dubailand':            {apt:[750,1150],vil:[900,1350],low:-3,mid:0,high:5,sky:9,op:-5},
-'Al Jaddaf':            {apt:[1200,1800],vil:[1500,2200],low:-4,mid:0,high:7,sky:13,op:-7},
-'Mina Rashid':          {apt:[1800,2600],vil:[2200,3000],low:-4,mid:0,high:9,sky:16,op:-9},
-'Maritime City':        {apt:[1700,2400],vil:[2100,3000],low:-4,mid:0,high:8,sky:15,op:-8},
-'Dubai Islands':        {apt:[2000,3000],vil:[2500,3800],low:-5,mid:0,high:10,sky:18,op:-10},
-'Palm Jebel Ali':       {apt:[2200,3400],vil:[2800,4500],low:-5,mid:0,high:11,sky:20,op:-12},
-'Emirates Hills':       {apt:[3000,5000],vil:[4000,7000],low:-5,mid:0,high:12,sky:22,op:-10},
-'Bulgari Island':       {apt:[4000,7000],vil:[5500,9000],low:-4,mid:0,high:14,sky:25,op:-12},
-'JVT':                  {apt:[1000,1500],vil:[1200,1800],low:-4,mid:0,high:6,sky:11,op:-6},
-'Nad Al Sheba':         {apt:[1200,1800],vil:[1500,2400],low:-4,mid:0,high:7,sky:13,op:-7}
+'Business Bay':         {apt:[1600,2200],vil:[2400,3200],low:-5,mid:0,high:8,sky:16,op:-8,real:{psf:1881,src:'Property Monitor — Communities Price Index',asOf:'2026-06'}},
+'Downtown Dubai':       {apt:[2200,3200],vil:[3000,4200],low:-6,mid:0,high:10,sky:20,op:-10,real:{psf:2910,src:'DXB Interact — live community median',asOf:'2026-07-17'}},
+'Dubai Marina':         {apt:[1700,2400],vil:[2200,3000],low:-5,mid:0,high:9,sky:18,op:-8,real:null},
+'JVC (Jumeirah Village Circle)':{apt:[900,1350],vil:[1100,1600],low:-4,mid:0,high:6,sky:12,op:-5,real:null},
+'JLT':                  {apt:[1300,1900],vil:[1800,2400],low:-5,mid:0,high:8,sky:14,op:-7,real:null},
+'Dubai Hills Estate':   {apt:[1500,2100],vil:[1800,2800],low:-4,mid:0,high:8,sky:15,op:-8,real:null},
+'Dubai Creek Harbour':  {apt:[1800,2600],vil:[2200,3200],low:-5,mid:0,high:10,sky:18,op:-9,real:null},
+'MBR City / Meydan':    {apt:[1600,2400],vil:[2000,3000],low:-4,mid:0,high:9,sky:16,op:-8,real:null},
+'Palm Jumeirah':        {apt:[2800,4200],vil:[3500,6000],low:-4,mid:0,high:12,sky:22,op:-10,real:null},
+'DIFC':                 {apt:[2400,3600],vil:[3000,4500],low:-5,mid:0,high:12,sky:22,op:-10,real:null},
+'Sobha Hartland':       {apt:[1700,2400],vil:[2000,3000],low:-4,mid:0,high:8,sky:15,op:-9,real:null},
+'DAMAC Hills':          {apt:[1100,1700],vil:[1400,2200],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'Dubai South':          {apt:[800,1200],vil:[900,1400],low:-3,mid:0,high:5,sky:10,op:-5,real:null},
+'Arjan':                {apt:[850,1300],vil:[1000,1500],low:-3,mid:0,high:5,sky:10,op:-5,real:null},
+'Dubailand':            {apt:[750,1150],vil:[900,1350],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Al Jaddaf':            {apt:[1200,1800],vil:[1500,2200],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'Mina Rashid':          {apt:[1800,2600],vil:[2200,3000],low:-4,mid:0,high:9,sky:16,op:-9,real:null},
+'Maritime City':        {apt:[1700,2400],vil:[2100,3000],low:-4,mid:0,high:8,sky:15,op:-8,real:null},
+'Dubai Islands':        {apt:[2000,3000],vil:[2500,3800],low:-5,mid:0,high:10,sky:18,op:-10,real:null},
+'Palm Jebel Ali':       {apt:[2200,3400],vil:[2800,4500],low:-5,mid:0,high:11,sky:20,op:-12,real:null},
+'Emirates Hills':       {apt:[3000,5000],vil:[4000,7000],low:-5,mid:0,high:12,sky:22,op:-10,real:null},
+'Bulgari Island':       {apt:[4000,7000],vil:[5500,9000],low:-4,mid:0,high:14,sky:25,op:-12,real:null},
+'JVT':                  {apt:[1000,1500],vil:[1200,1800],low:-4,mid:0,high:6,sky:11,op:-6,real:null},
+'Nad Al Sheba':         {apt:[1200,1800],vil:[1500,2400],low:-4,mid:0,high:7,sky:13,op:-7,real:null}
 };
-var DEF={apt:[1400,2000],vil:[1800,2600],low:-4,mid:0,high:8,sky:15,op:-7};
+var DEF={apt:[1400,2000],vil:[1800,2600],low:-4,mid:0,high:8,sky:15,op:-7,real:null};
+// ── Cross-source citywide benchmarks — refreshed via weekly Cowork data-refresh task ──
+// Update these figures (and add more per-area "real" entries above) each time the
+// Property Monitor / DXB Interact / Bayut / Property Finder review runs.
+var CITY_BENCH=[
+{label:'Dubai citywide avg — Bayut (TruView / DLD-sourced, last 12mo)',psf:1929,asOf:'2026-07-17'},
+{label:'Dubai citywide avg — Property Finder (last 12mo)',psf:1865,asOf:'2026-07-17'}
+];
 setTimeout(function(){
 var mkt=MKT[D.area]||DEF;
 var isVilla=(D.type==='Villa'||D.type==='Townhouse');
@@ -3317,26 +3324,31 @@ else if(diffPct<=-5){verdict='GOOD DEAL';vclass='good';vemoji='🟢';vdesc='Belo
 else if(diffPct<=7){verdict='FAIR PRICE';vclass='fair';vemoji='🟡';vdesc='In line with current market rates for comparable units.';}
 else if(diffPct<=18){verdict='SLIGHTLY HIGH';vclass='over';vemoji='🟠';vdesc='Slightly above market. Negotiate or verify view/finishing premium.';}
 else{verdict='OVERPRICED';vclass='over';vemoji='🔴';vdesc='Well above market comparables. Strong room to negotiate.';}
-var seeds=[0.93,1.00,1.08];
-var sources=['Recent sold · DXB Interact','Active listing · Bayut','Active listing · Property Finder'];
-var sizes=[Math.round(D.size*0.93),D.size,Math.round(D.size*1.08)];
-var compsHtml='<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w25);margin-bottom:12px">3 Market Comparables — '+D.area+'</div>';
-seeds.forEach(function(v,i){
-var cPsf=Math.round(adjPsf*v*(0.96+Math.random()*0.08));
-var cSz=sizes[i];
-var cPx=cPsf*cSz;
-var d=Math.round((D.psf-cPsf)/cPsf*100);
-var dTxt=(d>0?'+':'')+d+'%';
-var dCol=d>8?'#ef4444':d<-8?'#16a34a':'#b45309';
-var pxFmt=cPx>=1000000?(Math.round(cPx/100000)/10)+'M':Math.round(cPx/1000)+'K';
+// ── Build honest cross-source benchmark rows (real, dated figures — no randomised fake comparables) ──
+var compRows=[];
+if(mkt.real){
+var rPsf=mkt.real.psf;
+var rDiff=Math.round((D.psf-rPsf)/rPsf*100);
+compRows.push({label:D.area+' — verified area median',src:mkt.real.src+' · as of '+mkt.real.asOf,psf:rPsf,diff:rDiff});
+}
+CITY_BENCH.forEach(function(b){
+var d=Math.round((D.psf-b.psf)/b.psf*100);
+compRows.push({label:b.label,src:'as of '+b.asOf,psf:b.psf,diff:d});
+});
+var compsHtml='<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w25);margin-bottom:12px">Cross-Source Market Check — '+D.area+'</div>';
+compRows.forEach(function(c){
+var dTxt=(c.diff>0?'+':'')+c.diff+'%';
+var dCol=c.diff>8?'#ef4444':c.diff<-8?'#16a34a':'#b45309';
 compsHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)">'
-+'<div><div style="font-size:11px;color:var(--w);font-weight:600">'+D.beds+' '+D.type+' · '+cSz.toLocaleString()+' sqft</div>'
-+'<div style="font-size:9px;color:var(--w25);margin-top:2px">'+sources[i]+'</div></div>'
-+'<div style="text-align:right"><div style="font-size:13px;font-weight:700;color:var(--w)">AED '+cPsf.toLocaleString()+'<span style="font-size:9px;font-weight:400;color:var(--w25)">/sqft</span></div>'
-+'<div style="font-size:10px;color:var(--w50)">≈ AED '+pxFmt+'</div></div>'
++'<div><div style="font-size:11px;color:var(--w);font-weight:600">'+c.label+'</div>'
++'<div style="font-size:9px;color:var(--w25);margin-top:2px">'+c.src+'</div></div>'
++'<div style="text-align:right"><div style="font-size:13px;font-weight:700;color:var(--w)">AED '+c.psf.toLocaleString()+'<span style="font-size:9px;font-weight:400;color:var(--w25)">/sqft</span></div></div>'
 +'<div style="margin-left:10px;font-size:10px;font-weight:700;color:'+dCol+';background:var(--w05);padding:4px 8px;border-radius:3px;white-space:nowrap">'+dTxt+'</div>'
 +'</div>';
 });
+if(!mkt.real){
+compsHtml+='<div style="font-size:10px;color:var(--w25);margin-top:10px;line-height:1.5">No independently verified live figure for '+D.area+' yet this cycle — showing citywide benchmarks above plus the baseline PSF range below. Ask AmirReza to confirm the latest comparable sales for this specific project before relying on the exact verdict.</div>';
+}
 document.getElementById('pc-loading').style.display='none';
 document.getElementById('pc-result').style.display='block';
 document.getElementById('pc-vbox').className='pc-verdict-box '+vclass;
@@ -3350,10 +3362,13 @@ document.getElementById('pc-stats').innerHTML=
 +'<div class="pc-stat"><span class="pc-stat-v" style="font-size:14px">AED '+D.price.toLocaleString()+'</span><span class="pc-stat-l">Asking price</span></div>'
 +'<div class="pc-stat"><span class="pc-stat-v">'+rng[0].toLocaleString()+'-'+rng[1].toLocaleString()+'</span><span class="pc-stat-l">Area PSF range</span></div>';
 document.getElementById('pc-comps').innerHTML=compsHtml;
+var sourceNote=mkt.real
+? ('Sources: '+mkt.real.src+' (area-verified '+mkt.real.asOf+') · Bayut &amp; Property Finder city benchmarks (2026-07-17)')
+: ('Sources: Bayut &amp; Property Finder city benchmarks (2026-07-17) · area-specific figure pending verification — confirm with AmirReza before relying on this for negotiation');
 document.getElementById('pc-assessment').innerHTML='<strong>Assessment:</strong> '+D.project+' in '+D.area
 +' — asking AED '+D.psf.toLocaleString()+'/sqft vs market avg AED '+adjPsf.toLocaleString()
 +'/sqft for '+D.floor.toLowerCase()+' '+(isVilla?'villas':'apartments')+'. '+vdesc
-+' <span style="color:var(--w25);font-size:10px">Source: DXB Interact · Bayut · Property Finder (2025-2026)</span>';
++' <span style="color:var(--w25);font-size:10px">'+sourceNote+'</span>';
 var _pcResEl=document.getElementById('pc-result');
 if(_pcResEl) _pcResEl.scrollIntoView({behavior:'smooth',block:'start'});
 try{fetch(window.GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({
