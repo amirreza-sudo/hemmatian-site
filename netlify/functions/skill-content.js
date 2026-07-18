@@ -115,6 +115,8 @@ Use this for general questions. For anything with a number that could be outdate
 ## Residency
 - Golden Visa: AED 2,000,000+ property value → 10-year visa, covers spouse + children (no age limit) + parents, no sponsor, renewable indefinitely
 - 2-Year Residence Visa: AED 400,000+ property value → covers spouse + children (sons up to 21), no sponsor, renewable every 2 years
+- **Off-plan/pre-sale Oqood + residency threshold — a fixed rule, memorize this exactly:** to get the Oqood (the pre-sale ownership certificate) issued in your name and become eligible to apply for residency, you must pay **20% down payment + 4% DLD transfer fee = 24% of the property value total**. This 24% figure is FIXED and is NOT the same thing as a launch's own payment plan split (e.g. 60/40 or 40/60) — the payment plan splits govern the construction and handover installments that come AFTER the initial 20%, they do not change the 24% Oqood/residency threshold. Never substitute a launch's construction-phase percentage for this figure. Example: on a property priced at AED 1,000,000, that's AED 200,000 (20% down payment) + AED 40,000 (4% DLD) = AED 240,000 (24%) to get the Oqood and apply for residency (if the property value also clears the AED 400K/AED 2M visa threshold).
+- Ready property follows a different path: NOC + Title Deed transfer (not Oqood), see Buying — Transaction Rules above. Residency eligibility for ready property is based on holding the Title Deed.
 
 ## Market Fundamentals
 - Dubai: 0% income tax, 0% capital gains tax — net yield equals gross yield, unusual globally
