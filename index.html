@@ -2727,7 +2727,7 @@ Get Complete Buying Guide
 </div>
 <div class="pc-field">
 <label class="pc-lbl">Dubai Area</label>
-<select class="pc-sel" id="pc-area">
+<select class="pc-sel" id="pc-area" onchange="document.getElementById('pc-area-other-wrap').style.display=(this.value==='Other'?'block':'none')">
 <option value="" disabled selected>Select area</option>
 <option>Business Bay</option><option>Downtown Dubai</option><option>Dubai Marina</option>
 <option>JVC (Jumeirah Village Circle)</option><option>JLT</option><option>Dubai Hills Estate</option>
@@ -2739,6 +2739,10 @@ Get Complete Buying Guide
 <option>Bulgari Island</option><option>JVT</option><option>Nad Al Sheba</option>
 <option>Other</option>
 </select>
+</div>
+<div class="pc-field" id="pc-area-other-wrap" style="display:none">
+<label class="pc-lbl">Exact Area / Community Name</label>
+<input class="pc-inp" id="pc-area-other" placeholder="e.g. Al Furjan, Town Square, Meydan One...">
 </div>
 <div class="pc-field">
 <label class="pc-lbl">Bedrooms</label>
@@ -3255,10 +3259,15 @@ const el=document.getElementById(id);
 if(!el||!el.value.trim()){if(el)el.style.borderColor='rgba(255,80,80,.5)';ok=false;}
 else{el.style.borderColor='';}
 });
+const _areaOtherEl=document.getElementById('pc-area-other');
+if(document.getElementById('pc-area').value==='Other'){
+if(!_areaOtherEl||!_areaOtherEl.value.trim()){if(_areaOtherEl)_areaOtherEl.style.borderColor='rgba(255,80,80,.5)';ok=false;}
+else{_areaOtherEl.style.borderColor='';}
+}
 if(!ok)return;
 const D={
 project:document.getElementById('pc-project').value.trim(),
-area:document.getElementById('pc-area').value,
+area:(document.getElementById('pc-area').value==='Other'&&document.getElementById('pc-area-other').value.trim())?document.getElementById('pc-area-other').value.trim():document.getElementById('pc-area').value,
 beds:document.getElementById('pc-beds').value,
 type:document.getElementById('pc-type').value,
 size:parseInt(document.getElementById('pc-size').value),
@@ -3273,7 +3282,7 @@ document.getElementById('pc-loading').style.display='block';
 // ── Live per-visitor cross-check against Property Finder (public, no login) ──
 // Runs in parallel with the loading animation; if it succeeds for this area we use
 // the real live figure, otherwise we fall back to the static MKT table below.
-var _liveFetch=fetch('/.netlify/functions/live-comps?area='+encodeURIComponent(D.area)+'&beds='+encodeURIComponent(D.beds)+'&type='+encodeURIComponent(D.type))
+var _liveFetch=fetch('/.netlify/functions/live-comps?area='+encodeURIComponent(D.area)+'&beds='+encodeURIComponent(D.beds)+'&type='+encodeURIComponent(D.type)+'&project='+encodeURIComponent(D.project))
 .then(function(r){return r.json();})
 .catch(function(){return {ok:false,reason:'client-fetch-error'};});
 // ── Dubai Market PSF Database (AED/sqft, 2025-2026) ──
@@ -3318,7 +3327,10 @@ var mkt=MKT[D.area]||DEF;
 // Live Property Finder figure takes priority over the static snapshot when available
 var realData=mkt.real;
 if(live&&live.ok&&live.sampleAvgPsf){
-realData={psf:live.sampleAvgPsf,src:live.source+' — '+live.sampleCount+' recent sale'+(live.sampleCount===1?'':'s')+(live.roiPct?', '+live.roiPct+'% avg ROI':''),asOf:live.asOf,live:true};
+var _liveDesc=live.matchedProject
+? (live.sampleCount+' recent sale'+(live.sampleCount===1?'':'s')+' matched to '+D.project)
+: (live.sampleCount+' recent sale'+(live.sampleCount===1?'':'s')+' in '+D.area+(live.roiPct?', '+live.roiPct+'% avg ROI':''));
+realData={psf:live.sampleAvgPsf,src:live.source+' — '+_liveDesc,asOf:live.asOf,live:true,matchedProject:live.matchedProject};
 }
 var isVilla=(D.type==='Villa'||D.type==='Townhouse');
 var rng=isVilla?mkt.vil:mkt.apt;
