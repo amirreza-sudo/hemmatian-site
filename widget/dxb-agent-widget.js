@@ -128,6 +128,22 @@
     msgsEl.scrollTop = msgsEl.scrollHeight;
   }
 
+  async function callAgent(text) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 25000);
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: history.slice(-10) }),
+        signal: controller.signal
+      });
+      return await res.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async function sendMessage(text) {
     if (!text.trim()) return;
     addMsg('user', text);
@@ -140,22 +156,27 @@
     msgsEl.appendChild(thinking);
     msgsEl.scrollTop = msgsEl.scrollHeight;
 
-    try {
-      const res = await fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: history.slice(-10) })
-      });
-      const data = await res.json();
-      thinking.remove();
-      const reply = data.reply || (currentLang === 'fa' ? 'مشکلی پیش اومد، لطفا دوباره امتحان کنید.' : 'Something went wrong, please try again.');
-      addMsg('bot', reply);
-      history.push({ role: 'assistant', content: reply });
-      speak(reply);
-    } catch (e) {
-      thinking.remove();
-      addMsg('bot', 'Connection error — please try again or message AmirReza directly on WhatsApp.');
+    // One automatic retry on failure -- a single slow/cold-start response
+    // shouldn't surface as a hard error to the visitor when a second attempt
+    // is likely to succeed quickly.
+    let data = null, lastErr = null;
+    for (let attempt = 0; attempt < 2 && !data; attempt++) {
+      try {
+        data = await callAgent(text);
+      } catch (e) {
+        lastErr = e;
+      }
     }
+
+    thinking.remove();
+    if (!data) {
+      addMsg('bot', 'Connection error — please try again or message AmirReza directly on WhatsApp.');
+      return;
+    }
+    const reply = data.reply || (currentLang === 'fa' ? 'مشکلی پیش اومد، لطفا دوباره امتحان کنید.' : 'Something went wrong, please try again.');
+    addMsg('bot', reply);
+    history.push({ role: 'assistant', content: reply });
+    speak(reply);
   }
 
   sendBtn.addEventListener('click', () => sendMessage(textEl.value));

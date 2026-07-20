@@ -12,6 +12,32 @@ const SITE_URL = 'https://dxbpropertyexpert.com';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const MODEL = 'claude-sonnet-4-6';
 
+// index.html is a large single-file site (6MB+, all languages/sections/images
+// inline). Re-downloading the whole thing on every single chat message just to
+// regex-scrape a couple of small numbers (FX rate, launch prices) was adding
+// real latency to every reply and was the likely cause of intermittent
+// "Connection error" reports -- under any latency variance it was pushing
+// total response time past Netlify's function timeout. Cache the result for a
+// few minutes (module-level, survives across invocations on a warm container)
+// so most messages skip the big fetch entirely. Prices/FX only change a
+// handful of times a day at most, so a short staleness window is harmless.
+let _liveDataCache = null;
+let _liveDataCacheAt = 0;
+const LIVE_DATA_TTL_MS = 5 * 60 * 1000;
+
+// Give any single network call a hard ceiling so one slow leg can't silently
+// consume the whole function's time budget -- fail fast with a clear error
+// instead of hanging until Netlify kills the invocation.
+async function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -63,10 +89,25 @@ exports.handler = async (event) => {
   }
 };
 
-// ── Live data extraction — reads the site's own current numbers ──────
+// -- Live data extraction -- reads the site's own current numbers ------
 async function fetchLiveData() {
-  const res = await fetch(SITE_URL);
-  const html = await res.text();
+  const now = Date.now();
+  if (_liveDataCache && (now - _liveDataCacheAt) < LIVE_DATA_TTL_MS) {
+    return _liveDataCache;
+  }
+
+  let html;
+  try {
+    const res = await fetchWithTimeout(SITE_URL, {}, 6000);
+    html = await res.text();
+  } catch (e) {
+    // Self-fetch failed or timed out (slow network, cold start, etc). Serve
+    // stale cached data if we have any rather than failing the whole chat
+    // turn over a non-essential enrichment step; otherwise fall back to
+    // built-in defaults below (fxMatch stays null).
+    if (_liveDataCache) return _liveDataCache;
+    html = '';
+  }
 
   // FX constants: const AED_USD=1/3.65, AED_TMN=45800;
   const fxMatch = html.match(/AED_USD\s*=\s*1\s*\/\s*([\d.]+)\s*,\s*AED_TMN\s*=\s*(\d+)/);
@@ -98,7 +139,7 @@ async function fetchLiveData() {
     });
   }
 
-  return {
+  const liveData = {
     aedToUsdDivisor, aedToTomanRate,
     launches: [
       { name: 'Raw District II (Imtiaz Developments)', units: rawDistrictUnits },
@@ -106,6 +147,13 @@ async function fetchLiveData() {
     ],
     fetchedAt: new Date().toISOString()
   };
+
+  if (html) {
+    _liveDataCache = liveData;
+    _liveDataCacheAt = now;
+  }
+
+  return liveData;
 }
 
 function buildSystemPrompt(liveData) {
@@ -168,7 +216,7 @@ async function runAgentTurn(systemPrompt, messages) {
   let currentMessages = [...messages];
 
   for (let turn = 0; turn < 3; turn++) {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -182,7 +230,7 @@ async function runAgentTurn(systemPrompt, messages) {
         messages: currentMessages,
         tools
       })
-    });
+    }, 20000);
 
     const result = await res.json();
     if (!res.ok) throw new Error('Anthropic API error: ' + JSON.stringify(result));
