@@ -1175,8 +1175,8 @@ padding-right:36px!important;
 </div>
 <div style="background:#f9f9f7;padding:32px 40px 48px;border-left:1px solid rgba(0,0,0,.08)">
 <div id="lnch-phase1">
-<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:12px">Launch Countdown</div>
-<div style="display:flex;gap:8px;align-items:center;margin-bottom:28px;flex-wrap:wrap">
+<div id="cd-label" style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:12px">Launch Countdown</div>
+<div id="cd-row" style="display:flex;gap:8px;align-items:center;margin-bottom:28px;flex-wrap:wrap">
 <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="cd-d" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Days</div></div>
 <span style="font-size:22px;color:#ccc;font-weight:300">:</span>
 <div style="text-align:center;background:#fff;border:1px solid rgba(0,0,0,.1);padding:10px 14px;border-radius:4px;min-width:56px;box-shadow:0 1px 4px rgba(0,0,0,.05)"><div id="cd-h" style="font-size:26px;font-weight:800;color:#111;line-height:1;display:block">--</div><div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;margin-top:2px">Hours</div></div>
@@ -3425,7 +3425,11 @@ function tick(){
 const now = Date.now();
 const diff = target - now;
 const ids = ['cd-d','cd-h','cd-m','cd-s'];
-if(diff <= 0){ ids.forEach(id=>{ const e=document.getElementById(id); if(e)e.textContent='00'; }); return; }
+if(diff <= 0){
+const lbl=document.getElementById('cd-label'); if(lbl) lbl.textContent='🔥 Registration Open Now';
+const row=document.getElementById('cd-row'); if(row) row.style.display='none';
+return;
+}
 const vals = [
 Math.floor(diff/86400000),
 Math.floor((diff%86400000)/3600000),
