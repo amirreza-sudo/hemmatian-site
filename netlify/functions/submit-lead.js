@@ -44,9 +44,7 @@ exports.handler = async (event) => {
   //   list 3 = Full 5-email sequence (buyers, owners, hero form)
   //   list 6 = Agent welcome only (1 email)
   // ⚠️  Update list IDs if you change them in Brevo
-  const brevoListId = (emailSequence === 'agent-welcome-only') ? 6
-    : (emailSequence === 'frond-f-quiz') ? (parseInt(process.env.BREVO_LIST_FROND_F_QUIZ) || 3) // TODO: AmirReza set BREVO_LIST_FROND_F_QUIZ once the dedicated list + 20-min-delay automation exists in Brevo
-    : 3;
+  const brevoListId = (emailSequence === 'agent-welcome-only') ? 6 : 3;
 
   await Promise.allSettled([
     addToHubSpot({ firstName, lastName, email, phone, budget, goal, role, source }),

@@ -3526,7 +3526,7 @@ function lnchStartQuiz(){
   fetch('/.netlify/functions/submit-lead', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     name: fn+' '+ln, email: em, phone: _lnchLead.phone,
     budget:'', goal:'Palm Jebel Ali — Frond F quiz started — country: '+co,
-    role:'buyer', emailSequence:'frond-f-quiz', source:'launch-palm-jebel-ali-frond-f-quiz',
+    role:'buyer', emailSequence:'full-5-sequence', source:'launch-palm-jebel-ali-frond-f-quiz',
     date:new Date().toISOString()
   })}).catch(function(){});
   _lnchQ = 0; _lnchAnswers = [];
@@ -3566,7 +3566,7 @@ function lnchFinishQuiz(){
     fetch('/.netlify/functions/submit-lead', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       name:_lnchLead.firstName+' '+_lnchLead.lastName, email:_lnchLead.email, phone:_lnchLead.phone,
       budget:'', goal:'Palm Jebel Ali — Frond F quiz completed — '+_lnchAnswers.join(' | '),
-      role:'buyer', emailSequence:'frond-f-quiz', source:'launch-palm-jebel-ali-frond-f-quiz',
+      role:'buyer', emailSequence:'full-5-sequence', source:'launch-palm-jebel-ali-frond-f-quiz',
       date:new Date().toISOString()
     })}).catch(function(){});
   }
