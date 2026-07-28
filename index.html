@@ -1162,17 +1162,17 @@ padding-right:36px!important;
 </div>
 <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 55%,rgba(249,249,247,.6) 80%,#f9f9f7 100%);z-index:2;pointer-events:none"></div>
 <div style="position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(to top,rgba(249,249,247,.85) 0%,transparent 100%);z-index:2;pointer-events:none"></div>
-<div style="position:absolute;top:32px;left:32px;z-index:3">
+<div id="lnch-badge-live" style="position:absolute;top:32px;left:32px;z-index:3">
 <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border:1px solid rgba(245,158,11,.4);color:#f59e0b;padding:6px 16px;border-radius:2px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-family:Inter,sans-serif"><span style="width:7px;height:7px;background:#f59e0b;border-radius:50%;display:inline-block;animation:blink 1.2s infinite"></span> Live Launch</div>
 </div>
-<div style="position:absolute;top:32px;right:32px;z-index:3;text-align:right">
+<div id="lnch-badge-nakheel" style="position:absolute;top:32px;right:32px;z-index:3;text-align:right">
 <div style="background:rgba(0,0,0,.6);padding:8px 12px;backdrop-filter:blur(6px);border-radius:2px;display:inline-block">
 <div style="font-size:7px;letter-spacing:2.5px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:3px">NAKHEEL</div>
 <div style="font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.3px;line-height:1.2">Palm Jebel Ali — Frond F</div>
 <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">The Villa Collection · Dubai</div>
 </div>
 </div>
-<div style="position:absolute;top:80px;left:32px;z-index:3">
+<div id="lnch-badge-scarcity" style="position:absolute;top:80px;left:32px;z-index:3">
 <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#fff;padding:5px 12px;border-radius:2px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-family:Inter,sans-serif">Only 36 Villas Worldwide</div>
 </div>
 </div>
@@ -3651,7 +3651,12 @@ function mktTab(tab,btn){
 .mob{display:none!important}
 body{padding-bottom:62px!important}
 #launches{grid-template-columns:1fr!important;min-height:auto}
+#launches,#calc,#pricechecker,#market{padding-top:58px!important}
 #lnch-photo-panel{position:relative!important;width:100%!important;height:52vw!important;min-height:220px!important}
+#lnch-badge-live{top:16px!important;left:16px!important}
+#lnch-badge-scarcity{top:54px!important;left:16px!important}
+#lnch-badge-nakheel{top:96px!important;left:16px!important;right:16px!important;text-align:left!important}
+#lnch-badge-nakheel>div{display:block!important}
 #ay-photo-panel{flex:none!important;width:100%!important;height:52vw;min-height:220px;order:-1}
 #launches>div:last-child{flex:none;width:100%;padding:32px 20px!important}
 #ay-unit-cards,#lnch-unit-cards{grid-template-columns:1fr!important;display:grid!important}
@@ -3686,7 +3691,17 @@ var ab=document.getElementById('mtab-'+name);
 if(ab)ab.classList.add('active');
 window.scrollTo(0,0);
 };
-function init(){if(window.innerWidth<=960)mobTab('home');}
+function init(){
+if(window.innerWidth<=960){
+var hash=(window.location.hash||'').replace('#','');
+var tab='home';
+for(var t in TABS){if(TABS[t].indexOf(hash)!==-1){tab=t;break;}}
+mobTab(tab);
+if(hash&&tab==='home'&&hash!=='contact'){
+setTimeout(function(){var el=document.getElementById(hash);if(el)el.scrollIntoView();},60);
+}
+}
+}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 window.addEventListener('resize',function(){
 if(window.innerWidth>960){ALL.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='';});var ft=document.querySelector('footer');if(ft)ft.style.display='';}
