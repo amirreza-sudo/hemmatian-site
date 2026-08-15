@@ -2890,9 +2890,10 @@ document.getElementById('lf-ok').style.display='block';
    A new device, or coming back after 10 days, will need to register again. */
 var PC_SESSION_KEY='dxb_pc_session';
 var PC_SESSION_DAYS=10;
-function pcSaveSession(name,email){
+function pcSaveSession(name,email,phone){
 try{
-localStorage.setItem(PC_SESSION_KEY, JSON.stringify({name:name,email:email,ts:Date.now()}));
+var prev={}; try{prev=JSON.parse(localStorage.getItem(PC_SESSION_KEY))||{};}catch(ex2){}
+localStorage.setItem(PC_SESSION_KEY, JSON.stringify({name:name||prev.name||'',email:email||prev.email||'',phone:phone||prev.phone||'',ts:Date.now()}));
 }catch(ex){}
 }
 function pcGetSession(){
@@ -3079,6 +3080,13 @@ source:'PRICE_CHECK',budget:'AED '+D.price.toLocaleString(),
 goal:D.beds+' '+D.type+' in '+D.area+' — '+verdict,
 date:new Date().toISOString()
 })});}catch(ex){}
+// Also notify Telegram/HubSpot/Brevo via the standard lead pipeline (added 2026-08-15 — GAS alone never reached Telegram)
+try{
+var _pcS=pcGetSession()||{};
+if(_pcS.phone){
+fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:_pcS.name||'Price Check',email:_pcS.email||'',phone:_pcS.phone,budget:'AED '+D.price.toLocaleString(),goal:'Price Check — '+D.beds+' '+D.type+' in '+D.area+' — '+verdict,role:'buyer',emailSequence:'full-5-sequence',source:'PRICE_CHECK'})}).catch(function(){});
+}
+}catch(ex){}
 });
 }
 function resetPC(){
@@ -3190,6 +3198,8 @@ const amt = _selUnit ? _selUnit.eoi : '100000';
 const wa=encodeURIComponent('Hi AmirReza, I submitted my EOI for Palm Central ('+(_selUnit?_selUnit.name:'')+') on dxbpropertyexpert.com. Name: '+n+'. EOI: AED '+amt+'. Please confirm.');
 document.getElementById('w-wa-link').href='https://wa.me/971542347774?text='+wa;
 fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'eoi',name:n,email:document.getElementById('w-email').value.trim(),phone:cc+ph,unit:_selUnit?_selUnit.name:'',plan:_selUnit?_selUnit.plan:'',eoiAmount:'AED '+amt,idFile:_F.wid||'',receiptFile:_F.wrcpt||'',source:'website-launch-wizard',date:new Date().toISOString()})}).catch(()=>{});
+// Also notify Telegram/HubSpot/Brevo via the standard lead pipeline (added 2026-08-15 — GAS alone never reached Telegram)
+fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:document.getElementById('w-email').value.trim(),phone:cc+ph,budget:'AED '+amt,goal:'EOI submitted — '+(_selUnit?_selUnit.name:'')+' ('+(_selUnit?_selUnit.plan:'')+')',role:'buyer',emailSequence:'full-5-sequence',source:'launch-eoi-wizard'})}).catch(function(){});
 wizStep(7);
 }
 function wFile(key,input){
@@ -3231,6 +3241,11 @@ function buyBack(){ document.getElementById('bs2').style.display='none'; documen
 function buySearch(){
 const name=document.getElementById('bn').value.trim(),beds=document.getElementById('bbeds').value,type=document.getElementById('btype').value,minB=parseInt(document.getElementById('bmin').value)||0,maxB=parseInt(document.getElementById('bmax').value)||999999999,stat=document.getElementById('bstat').value,pay=document.getElementById('bpay').value,cc=document.getElementById('bcc').value,ph=document.getElementById('bp').value.trim();
 fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'buyer',name,email:document.getElementById('be').value.trim(),phone:cc+ph,beds,type,minBudget:minB,maxBudget:maxB===999999999?'No limit':maxB,status:stat,payment:pay,role:document.getElementById('buy-role').value||'buyer',source:'website',date:new Date().toISOString()})}).catch(()=>{});
+// Also notify Telegram/HubSpot/Brevo via the standard lead pipeline (added 2026-08-15 — GAS alone never reached Telegram)
+(function(){
+var _role=document.getElementById('buy-role').value||'buyer';
+fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:document.getElementById('be').value.trim(),phone:cc+ph,budget:(minB?('AED '+minB.toLocaleString()):'')+(maxB!==999999999?(' - AED '+maxB.toLocaleString()):'+'),goal:'Buy search — '+(beds||'any beds')+' '+(type||'')+' — status: '+(stat||'any')+' — payment: '+(pay||'any'),role:_role,emailSequence:(_role==='agent'?'agent-welcome-only':'full-5-sequence'),source:'website-buy-search'})}).catch(function(){});
+})();
 document.getElementById('bs2').style.display='none'; document.getElementById('bs3').style.display='block';
 const wa=encodeURIComponent('Hi AmirReza, I searched secondary market: '+(beds||'any')+' '+(type||'')+' AED '+minB.toLocaleString()+'-'+(maxB===999999999?'open':maxB.toLocaleString())+'. Name: '+name+'.');
 document.getElementById('bwa').href='https://wa.me/971542347774?text='+wa;
@@ -3262,6 +3277,11 @@ const n=document.getElementById('sn').value.trim(),cc=document.getElementById('s
 const wa=encodeURIComponent('Hi AmirReza, property submitted: '+pt+' '+bd+' in '+ar+' AED '+prN.toLocaleString()+'. Name: '+n+'.');
 document.getElementById('sell-wa').href='https://wa.me/971542347774?text='+wa;
 fetch(GAS,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'seller',name:n,email:document.getElementById('se').value.trim(),phone:cc+ph,propType:pt,beds:bd,area:ar,price:'AED '+prN.toLocaleString(),size:document.getElementById('ssz').value||'',propStatus:st,payment:document.getElementById('spay').value,notes:document.getElementById('snotes').value,idFile:_F.sid||'',docFile:_F.sdoc||'',role:document.getElementById('sell-role').value||'seller',source:'website',date:new Date().toISOString()})}).catch(()=>{});
+// Also notify Telegram/HubSpot/Brevo via the standard lead pipeline (added 2026-08-15 — GAS alone never reached Telegram)
+(function(){
+var _role=document.getElementById('sell-role').value||'seller';
+fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:document.getElementById('se').value.trim(),phone:cc+ph,budget:'AED '+prN.toLocaleString(),goal:'Sell listing — '+pt+' '+bd+' in '+ar+' — status: '+st,role:_role,emailSequence:(_role==='agent'?'agent-welcome-only':'full-5-sequence'),source:'website-sell-listing'})}).catch(function(){});
+})();
 document.getElementById('ss2').style.display='none'; document.getElementById('ss3').style.display='block';
 }
 /* FILE HANDLERS */
@@ -3402,10 +3422,10 @@ document.getElementById('pc-tab-register').style.color=tab==='register'?'#fff':'
 document.getElementById('pc-tab-login').style.background=tab==='login'?'#111':'transparent';
 document.getElementById('pc-tab-login').style.color=tab==='login'?'#fff':'#888';
 }
-function pcUnlockTool(name,email){
+function pcUnlockTool(name,email,phone){
 document.getElementById('pc-reg-section').style.display='none';
 const w=document.getElementById('pc-wrap-main');if(w)w.style.display='block';
-pcSaveSession(name,email);
+pcSaveSession(name,email,phone);
 const fn=document.getElementById('lf-name');if(fn&&!fn.value)fn.value=name;
 const fe=document.getElementById('lf-email');if(fe&&!fe.value)fe.value=email;
 }
@@ -3438,13 +3458,13 @@ body:JSON.stringify({action:'pc_register',name:n,email:e,phone:cc+p,role:role,da
 }).catch(()=>{});
 // Also notify Telegram/HubSpot/Brevo via the standard lead pipeline (added 2026-08-15 — GAS alone never reached Telegram)
 fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:e,phone:cc+p,budget:'',goal:'Price Checker registration',role:role,emailSequence:(role==='agent'?'agent-welcome-only':'full-5-sequence'),source:'PRICE_CHECK_REGISTER'})}).catch(()=>{});
-pcUnlockTool(n,e);
+pcUnlockTool(n,e,cc+p);
 }
 function pcLogin(){
 const e=document.getElementById('pc-login-email').value.trim();
 const p=document.getElementById('pc-login-phone').value.trim();
 if(!e||!p){alert('Please enter your email and WhatsApp number.');return;}
-pcUnlockTool('',e);
+pcUnlockTool('',e,p);
 }
 /* Auto-unlock if already registered on this device within the last 10 days */
 (function(){

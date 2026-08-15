@@ -163,9 +163,14 @@ async function sendTelegram({ name, email, phone, budget, goal, role, source }) 
 
   const cleanPhone = phone.replace(/\D/g, '');
 
-  const roleEmoji = { buyer: '🏠', owner: '🔑', agent: '🤝' }[role] || '👤';
+  const roleEmoji = { buyer: '🏠', owner: '🔑', seller: '🔑', agent: '🤝' }[role] || '👤';
   const sourceLabel = source === 'hero-form' ? 'Hero Form (Consultation)'
+    : source === 'CONSULTATION' ? 'Consultation Form'
     : source === 'price-checker-signup' ? 'Price Checker Sign-Up'
+    : source === 'PRICE_CHECK_REGISTER' ? 'Price Checker Registration'
+    : source === 'PRICE_CHECK' ? 'Price Checker Result'
+    : source === 'website-buy-search' ? 'Buy — Secondary Market Search'
+    : source === 'website-sell-listing' ? 'Sell — Property Listing'
     : source.startsWith('launch-') ? 'Launch EOI — ' + source.replace('launch-','').replace(/-/g,' ')
     : source;
 
