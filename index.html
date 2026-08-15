@@ -2859,6 +2859,8 @@ fetch(window.GAS,{
 method:'POST',mode:'no-cors',
 body:JSON.stringify({action:'lead',name:n,email:e,phone:p,budget:b,goal:g,source:'CONSULTATION',status:'🔴 HOT',emailSequence:'full-5-sequence',date:new Date().toISOString()})
 }).catch(()=>{});
+// Also notify Telegram/HubSpot/Brevo via the standard lead pipeline (added 2026-08-15 — GAS alone never reached Telegram)
+fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:e,phone:p,budget:b,goal:g,role:'buyer',emailSequence:'full-5-sequence',source:'CONSULTATION'})}).catch(()=>{});
 document.getElementById('lf-form').style.opacity='.3';
 document.getElementById('lf-form').style.pointerEvents='none';
 document.getElementById('lf-ok').style.display='block';
@@ -3434,6 +3436,8 @@ if(btn){btn.disabled=true;btn.textContent='Registering...';}
 fetch(window.GAS,{method:'POST',mode:'no-cors',
 body:JSON.stringify({action:'pc_register',name:n,email:e,phone:cc+p,role:role,date:new Date().toISOString()})
 }).catch(()=>{});
+// Also notify Telegram/HubSpot/Brevo via the standard lead pipeline (added 2026-08-15 — GAS alone never reached Telegram)
+fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:e,phone:cc+p,budget:'',goal:'Price Checker registration',role:role,emailSequence:(role==='agent'?'agent-welcome-only':'full-5-sequence'),source:'PRICE_CHECK_REGISTER'})}).catch(()=>{});
 pcUnlockTool(n,e);
 }
 function pcLogin(){
