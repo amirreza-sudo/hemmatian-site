@@ -2450,8 +2450,14 @@ Get Complete Buying Guide
 </select>
 </div>
 <div class="pc-field">
-<label class="pc-lbl">Size (sqft)</label>
+<label class="pc-lbl" id="pc-size-lbl">Size (sqft)</label>
 <input class="pc-inp" id="pc-size" type="number" placeholder="e.g. 950">
+<div id="pc-size-hint" style="display:none;font-size:9px;color:var(--w25);margin-top:4px;line-height:1.4">Villas/townhouses in Dubai are priced per sqft by <strong>plot size</strong> — that's what the market-avg comparison uses.</div>
+</div>
+<div class="pc-field" id="pc-size-bua-wrap" style="display:none">
+<label class="pc-lbl">Built-up Area (sqft)</label>
+<input class="pc-inp" id="pc-size-bua" type="number" placeholder="e.g. 2100">
+<div style="font-size:9px;color:var(--w25);margin-top:4px;line-height:1.4">Interior/built-up size, for your record — not used in the price/sqft math (Dubai prices villas by plot size), but shown alongside it so nothing gets mixed up.</div>
 </div>
 <div class="pc-field" id="pc-floor-wrap">
 <label class="pc-lbl">Floor Level</label>
@@ -2473,7 +2479,7 @@ Get Complete Buying Guide
 <input class="pc-inp" id="pc-price" type="number" placeholder="e.g. 1850000">
 </div>
 </div>
-<p class="pc-note">* Villas/townhouses: Floor Level is not asked (floors don't apply). Dubai convention prices villas/townhouses by plot size and apartments by built-up area — make sure the "Size" you enter matches how the project you're comparing against is normally measured. All fields required. Verdict cross-referenced against Property Monitor, DXB Interact, Bayut and Property Finder benchmark data.</p>
+<p class="pc-note">* Villas/townhouses: Floor Level is not asked (floors don't apply), and both Plot Size and Built-up Area are asked — Plot Size drives the price/sqft comparison (Dubai's convention for villas/townhouses), Built-up Area is kept for your record so the two never get mixed up. Apartments/penthouses/duplexes: only Built-up Area applies. All fields required. Verdict cross-referenced against Property Monitor, DXB Interact, Bayut and Property Finder benchmark data.</p>
 <button class="pc-submit" onclick="runPriceCheck()">
 <svg style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
 Analyse Price — 4-Source Check
@@ -2945,8 +2951,13 @@ return;
 }
 if(_warn) _warn.style.display='none';
 const _floorType=document.getElementById('pc-type').value;
-const _floorApplies=!(_floorType==='Villa'||_floorType==='Townhouse');
-const fields=['pc-project','pc-area','pc-beds','pc-type','pc-size','pc-cond','pc-price'].concat(_floorApplies?['pc-floor']:[]);
+const _isVillaType=(_floorType==='Villa'||_floorType==='Townhouse');
+const _floorApplies=!_isVillaType;
+// Villas/townhouses: no Floor Level, but Plot Size + Built-up Area are both
+// required (added 2026-08-28) so the two never get mixed up in the calculation.
+const fields=['pc-project','pc-area','pc-beds','pc-type','pc-size','pc-cond','pc-price']
+.concat(_floorApplies?['pc-floor']:[])
+.concat(_isVillaType?['pc-size-bua']:[]);
 let ok=true;
 fields.forEach(id=>{
 const el=document.getElementById(id);
@@ -2965,10 +2976,14 @@ area:(document.getElementById('pc-area').value==='Other'&&document.getElementByI
 beds:document.getElementById('pc-beds').value,
 type:document.getElementById('pc-type').value,
 size:parseInt(document.getElementById('pc-size').value),
+sizeBua:_isVillaType?parseInt(document.getElementById('pc-size-bua').value):null,
 floor:document.getElementById('pc-floor').value,
 cond:document.getElementById('pc-cond').value,
 price:parseInt(document.getElementById('pc-price').value),
 };
+// D.size is Plot Size for Villa/Townhouse, Built-up Area for everything else --
+// that's the correct Dubai price/sqft basis in both cases (D.sizeBua above is
+// kept only for display, never used here).
 D.psf=Math.round(D.price/D.size);
 // Show loading
 document.getElementById('pc-form').style.display='none';
@@ -3068,6 +3083,10 @@ var _liveDesc=live.matchedProject
 : (live.sampleCount+' recent sale'+(live.sampleCount===1?'':'s')+' in '+D.area+(live.roiPct?', '+live.roiPct+'% avg ROI':''));
 realData={psf:live.sampleAvgPsf,src:live.source+' — '+_liveDesc,asOf:live.asOf,live:true,matchedProject:live.matchedProject};
 }
+// ── Added 2026-08-28: surface the actual individual comps behind the live figure
+// (fixed the same day: parseRows() in live-comps.js was never matching Property
+// Finder's real row format, so this was always empty before -- see project memory).
+var liveComps=(live&&live.ok&&Array.isArray(live.comps))?live.comps:[];
 var isVilla=(D.type==='Villa'||D.type==='Townhouse');
 var rng=isVilla?mkt.vil:mkt.apt;
 // Floor level doesn't apply to villas/townhouses (they aren't stacked) -- the field
@@ -3126,6 +3145,25 @@ compsHtml+='<div style="display:flex;justify-content:space-between;align-items:c
 if(!realData){
 compsHtml+='<div style="font-size:10px;color:var(--w25);margin-top:10px;line-height:1.5">No independently verified live figure for '+D.area+' yet this cycle — showing citywide benchmarks above plus the baseline PSF range below. Ask AmirReza to confirm the latest comparable sales for this specific project before relying on the exact verdict.</div>';
 }
+// ── Added 2026-08-28: list up to 3 of the actual DLD-sourced sale transactions
+// this check was based on, so the visitor can see real comparables, not just an
+// aggregate number. Property Finder only for now (live, no login needed); Bayut's
+// transactions page is JS-rendered so can't be fetched this way, and DXB
+// Interact/Property Monitor need AmirReza's personal login, so those stay on the
+// twice-weekly verified snapshot above rather than a live per-visitor fetch. ──
+if(liveComps.length){
+compsHtml+='<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w25);margin:18px 0 12px">Real Comparable Sales — Property Finder (live)</div>';
+liveComps.slice(0,3).forEach(function(c){
+var locTxt=c.location||D.area;
+var dateTxt=c.date?(' · '+c.date):'';
+compsHtml+='<div style="padding:10px 0;border-bottom:1px solid var(--line)">'
++'<div style="font-size:11px;color:var(--w);font-weight:600">'+locTxt+dateTxt+'</div>'
++'<div style="font-size:10px;color:var(--w25);margin-top:2px">'+c.beds+' '+c.type+' · AED '+c.priceAED.toLocaleString()+' · '+c.sizeSqft.toLocaleString()+' sqft'+(c.status?' · '+c.status:'')+'</div>'
++'<div style="font-size:12px;font-weight:700;color:var(--w);margin-top:3px">AED '+c.psf.toLocaleString()+'<span style="font-size:9px;font-weight:400;color:var(--w25)">/sqft</span></div>'
++'</div>';
+});
+compsHtml+='<div style="font-size:9px;color:var(--w25);margin-top:8px">Source: '+live.sourceUrl+'</div>';
+}
 document.getElementById('pc-loading').style.display='none';
 document.getElementById('pc-result').style.display='block';
 document.getElementById('pc-vbox').className='pc-verdict-box '+vclass;
@@ -3142,9 +3180,13 @@ document.getElementById('pc-comps').innerHTML=compsHtml;
 var sourceNote=realData
 ? ('Sources: '+realData.src+(realData.live?' (live)':' (area-verified '+realData.asOf+')')+' · Bayut &amp; Property Finder city benchmarks (2026-07-17)')
 : ('Sources: Bayut &amp; Property Finder city benchmarks (2026-07-17) — '+D.area+' has no independently verified figure yet, so the "Market avg" above is a generic baseline range estimate, not a confirmed comparable. Confirm with AmirReza before relying on this for negotiation.');
+var _sizeNote=(isVilla&&D.sizeBua)
+? (' <span style="color:var(--w25);font-size:10px">(Plot size '+D.size.toLocaleString()+' sqft used for the price/sqft comparison per Dubai convention · Built-up area '+D.sizeBua.toLocaleString()+' sqft for your record.)</span>')
+: '';
 document.getElementById('pc-assessment').innerHTML='<strong>Assessment:</strong> '+D.project+' in '+D.area
 +' — asking AED '+D.psf.toLocaleString()+'/sqft vs market avg AED '+adjPsf.toLocaleString()
 +'/sqft for '+(isVilla?(D.type.toLowerCase()+'s'):(D.floor.toLowerCase()+' '+D.type.toLowerCase()+'s'))+'. '+vdesc
++_sizeNote
 +' <span style="color:var(--w25);font-size:10px">'+sourceNote+'</span>';
 var _pcResEl=document.getElementById('pc-result');
 if(_pcResEl) _pcResEl.scrollIntoView({behavior:'smooth',block:'start'});
@@ -3172,12 +3214,36 @@ document.getElementById('pc-form').style.display='block';
 function pcTypeChange(){
 var t=document.getElementById('pc-type').value;
 var wrap=document.getElementById('pc-floor-wrap');
-if(!wrap)return;
 var isVilla=(t==='Villa'||t==='Townhouse');
+if(wrap){
 wrap.style.display=isVilla?'none':'block';
 if(isVilla){
 var floorEl=document.getElementById('pc-floor');
 if(floorEl){floorEl.value='';floorEl.style.borderColor='';}
+}
+}
+// ── Added 2026-08-28: villas/townhouses are priced per sqft by PLOT size in
+// Dubai (Property Finder, DLD, Bayut all compute it this way); apartments by
+// their own unit/built-up size. The Price Checker only has one size field, so
+// make it explicit which basis to enter -- this was a real source of mismatched
+// verdicts (e.g. Velora 2 townhouse checks) when a visitor entered built-up area
+// instead of plot size for a villa/townhouse. ──
+var sizeLbl=document.getElementById('pc-size-lbl');
+var sizeHint=document.getElementById('pc-size-hint');
+if(sizeLbl) sizeLbl.textContent=isVilla?'Plot Size (sqft)':'Size (sqft — built-up area)';
+if(sizeHint) sizeHint.style.display=isVilla?'block':'none';
+// ── Added 2026-08-28: AmirReza asked for both sizes on villas/townhouses so a
+// visitor can't accidentally enter the wrong one -- Plot Size (pc-size) still
+// drives the price/sqft math per Dubai convention, Built-up Area (pc-size-bua) is
+// captured alongside it purely for the visitor's own record and shown in the
+// result, never mixed into the calculation. ──
+var buaWrap=document.getElementById('pc-size-bua-wrap');
+if(buaWrap){
+buaWrap.style.display=isVilla?'block':'none';
+if(!isVilla){
+var buaEl=document.getElementById('pc-size-bua');
+if(buaEl){buaEl.value='';buaEl.style.borderColor='';}
+}
 }
 }
 // ── Added 2026-08-27: Project Name autocomplete + Dubai Area auto-fill ──
