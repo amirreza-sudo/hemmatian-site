@@ -2314,7 +2314,7 @@ Get Complete Buying Guide
 <div id="cout" style="display:none;margin-top:16px">
 <div style="display:none" id="cl6">All Plans — Full Breakdown</div>
 <div class="pg" id="pg" style="display:none"></div>
-<p class="cnote" id="cnote" style="font-size:10px;color:rgba(255,255,255,.3);line-height:1.6;margin-top:12px">* 1 AED = 0.2740 USD (fixed peg) · 1 AED ≈ 54,875 Toman (bonbast.com — updated 2026-08-27). DLD = exactly 4% of property price. AED 4,200 admin fee at Trustee office.</p>
+<p class="cnote" id="cnote" style="font-size:10px;color:rgba(255,255,255,.3);line-height:1.6;margin-top:12px">* 1 AED = 0.2740 USD (fixed peg) · 1 AED ≈ 54,575 Toman (bonbast.com — updated 2026-08-27). DLD = exactly 4% of property price. AED 4,200 admin fee at Trustee office.</p>
 </div>
 </div>
 <div style="background:rgba(8,8,8,.75);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:36px 32px;backdrop-filter:blur(16px);max-width:420px;margin-left:auto">
@@ -2397,26 +2397,41 @@ Get Complete Buying Guide
 <div class="pc-grid">
 <div class="pc-field">
 <label class="pc-lbl">Project / Building Name</label>
-<input class="pc-inp" id="pc-project" placeholder="e.g. DAMAC Icon Tower, Emaar Creek Rise...">
+<input class="pc-inp" id="pc-project" list="pc-project-list" placeholder="e.g. DAMAC Icon Tower, Emaar Creek Rise..." oninput="pcProjectAutofill(this.value)">
+<datalist id="pc-project-list"></datalist>
 </div>
 <div class="pc-field">
 <label class="pc-lbl">Dubai Area</label>
 <select class="pc-sel" id="pc-area" onchange="document.getElementById('pc-area-other-wrap').style.display=(this.value==='Other'?'block':'none')">
 <option value="" disabled selected>Select area</option>
-<option>Business Bay</option><option>Downtown Dubai</option><option>Dubai Marina</option>
-<option>JVC (Jumeirah Village Circle)</option><option>JLT</option><option>Dubai Hills Estate</option>
-<option>Dubai Creek Harbour</option><option>MBR City / Meydan</option><option>Palm Jumeirah</option>
-<option>DIFC</option><option>Sobha Hartland</option><option>DAMAC Hills</option>
-<option>Dubai South</option><option>Arjan</option><option>Dubailand</option>
-<option>Al Jaddaf</option><option>Mina Rashid</option><option>Maritime City</option>
-<option>Dubai Islands</option><option>Palm Jebel Ali</option><option>Emirates Hills</option>
-<option>Bulgari Island</option><option>JVT</option><option>Nad Al Sheba</option>
+<option>Al Barari</option><option>Al Furjan</option><option>Al Jaddaf</option>
+<option>Al Sufouh</option><option>Al Warqa</option>
+<option>Arabian Ranches</option><option>Arabian Ranches 2</option><option>Arabian Ranches 3</option>
+<option>Arjan</option><option>Barsha Heights (TECOM)</option><option>Bluewaters Island</option>
+<option>Bulgari Island</option><option>Bur Dubai</option><option>Business Bay</option>
+<option>City Walk</option><option>DAMAC Hills</option><option>DAMAC Hills 2</option>
+<option>Deira</option><option>DIFC</option><option>Discovery Gardens</option>
+<option>Downtown Dubai</option><option>Dubai Creek Harbour</option><option>Dubai Hills Estate</option>
+<option>Dubai Investment Park (DIP)</option><option>Dubai Islands</option><option>Dubai Marina</option>
+<option>Dubai Production City (IMPZ)</option><option>Dubai South</option><option>Dubai Sports City</option>
+<option>Dubailand</option><option>Emirates Hills</option><option>Green Community</option>
+<option>International City</option><option>JBR (Jumeirah Beach Residence)</option>
+<option>JLT</option><option>Jumeirah</option><option>Jumeirah Golf Estates</option>
+<option>JVC (Jumeirah Village Circle)</option><option>JVT</option><option>La Mer</option>
+<option>Liwan</option><option>Living Legends</option><option>Maritime City</option>
+<option>MBR City / Meydan</option><option>Mina Rashid</option><option>Mirdif</option>
+<option>Motor City</option><option>Mudon</option><option>Nad Al Sheba</option>
+<option>Palm Jebel Ali</option><option>Palm Jumeirah</option><option>Remraam</option>
+<option>Rukan</option><option>Serena</option><option>Sobha Hartland</option>
+<option>The Springs / Meadows / Lakes</option><option>The Valley</option>
+<option>Tilal Al Ghaf</option><option>Town Square</option><option>Villanova</option>
+<option>World Islands</option><option>Zabeel</option>
 <option>Other</option>
 </select>
 </div>
 <div class="pc-field" id="pc-area-other-wrap" style="display:none">
 <label class="pc-lbl">Exact Area / Community Name</label>
-<input class="pc-inp" id="pc-area-other" placeholder="e.g. Al Furjan, Town Square, Meydan One...">
+<input class="pc-inp" id="pc-area-other" placeholder="e.g. Al Yufrah, Meydan One, Wadi Al Safa...">
 </div>
 <div class="pc-field">
 <label class="pc-lbl">Bedrooms</label>
@@ -2428,7 +2443,7 @@ Get Complete Buying Guide
 </div>
 <div class="pc-field">
 <label class="pc-lbl">Property Type</label>
-<select class="pc-sel" id="pc-type">
+<select class="pc-sel" id="pc-type" onchange="pcTypeChange()">
 <option value="" disabled selected>Select</option>
 <option>Apartment</option><option>Villa</option><option>Townhouse</option>
 <option>Penthouse</option><option>Duplex</option>
@@ -2438,7 +2453,7 @@ Get Complete Buying Guide
 <label class="pc-lbl">Size (sqft)</label>
 <input class="pc-inp" id="pc-size" type="number" placeholder="e.g. 950">
 </div>
-<div class="pc-field">
+<div class="pc-field" id="pc-floor-wrap">
 <label class="pc-lbl">Floor Level</label>
 <select class="pc-sel" id="pc-floor">
 <option value="" disabled selected>Select</option>
@@ -2458,7 +2473,7 @@ Get Complete Buying Guide
 <input class="pc-inp" id="pc-price" type="number" placeholder="e.g. 1850000">
 </div>
 </div>
-<p class="pc-note">* All fields required. Verdict cross-referenced against Property Monitor, DXB Interact, Bayut and Property Finder benchmark data.</p>
+<p class="pc-note">* Villas/townhouses: Floor Level is not asked (floors don't apply). Dubai convention prices villas/townhouses by plot size and apartments by built-up area — make sure the "Size" you enter matches how the project you're comparing against is normally measured. All fields required. Verdict cross-referenced against Property Monitor, DXB Interact, Bayut and Property Finder benchmark data.</p>
 <button class="pc-submit" onclick="runPriceCheck()">
 <svg style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
 Analyse Price — 4-Source Check
@@ -2804,7 +2819,7 @@ if(el)el.placeholder=val;
 }
 function tog(id,btn){document.getElementById(id).classList.toggle('open');btn.classList.toggle('open')}
 // CALCULATOR — AED/USD: 3.65 fixed peg (20yr stable)
-const AED_USD=1/3.65, AED_TMN=54875; // open market, bonbast.com — updated 2026-08-27
+const AED_USD=1/3.65, AED_TMN=54575; // open market, bonbast.com — updated 2026-08-27
 const PLANS=[
 {k:'80_20',l:'80/20',c:60,h:20},{k:'75_25',l:'75/25',c:55,h:25},
 {k:'70_30',l:'70/30',c:50,h:30},{k:'65_35',l:'65/35',c:45,h:35},
@@ -2929,7 +2944,9 @@ if(_warn){_warn.style.display='block';_warn.scrollIntoView({behavior:'smooth',bl
 return;
 }
 if(_warn) _warn.style.display='none';
-const fields=['pc-project','pc-area','pc-beds','pc-type','pc-size','pc-floor','pc-cond','pc-price'];
+const _floorType=document.getElementById('pc-type').value;
+const _floorApplies=!(_floorType==='Villa'||_floorType==='Townhouse');
+const fields=['pc-project','pc-area','pc-beds','pc-type','pc-size','pc-cond','pc-price'].concat(_floorApplies?['pc-floor']:[]);
 let ok=true;
 fields.forEach(id=>{
 const el=document.getElementById(id);
@@ -2987,7 +3004,49 @@ var MKT={
 'Emirates Hills':       {apt:[3000,5000],vil:[4000,7000],low:-5,mid:0,high:12,sky:22,op:-10,real:null},
 'Bulgari Island':       {apt:[4000,7000],vil:[5500,9000],low:-4,mid:0,high:14,sky:25,op:-12,real:null},
 'JVT':                  {apt:[1000,1500],vil:[1200,1800],low:-4,mid:0,high:6,sky:11,op:-6,real:{psf:1690,src:'DXB Interact — live community median (YTD 2026, n=2,034)',asOf:'2026-08-19'}},
-'Nad Al Sheba':         {apt:[1200,1800],vil:[1500,2400],low:-4,mid:0,high:7,sky:13,op:-7,real:null}
+'Nad Al Sheba':         {apt:[1200,1800],vil:[1500,2400],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+// Added 2026-08-27 (Price Checker area-coverage fix) -- baseline ranges only, no
+// verified 'real' median yet for any of these. Flagged honestly to the visitor via
+// the existing "not yet verified" note; ask AmirReza / the twice-weekly data-refresh
+// task to confirm live Property Monitor / DXB Interact figures for these next.
+'Al Barari':            {apt:[1800,2600],vil:[2200,3500],low:-4,mid:0,high:8,sky:15,op:-8,real:null},
+'Al Furjan':            {apt:[1000,1500],vil:[1100,1700],low:-4,mid:0,high:6,sky:11,op:-5,real:null},
+'Al Sufouh':            {apt:[1600,2400],vil:[2200,3200],low:-4,mid:0,high:9,sky:16,op:-8,real:null},
+'Al Warqa':             {apt:[700,1000],vil:[750,1100],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Arabian Ranches':      {apt:[1400,2000],vil:[1700,2600],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'Arabian Ranches 2':    {apt:[1300,1900],vil:[1300,2000],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'Arabian Ranches 3':    {apt:[1300,1900],vil:[1300,2000],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'Barsha Heights (TECOM)':{apt:[1000,1500],vil:[1200,1700],low:-4,mid:0,high:6,sky:12,op:-5,real:null},
+'Bluewaters Island':    {apt:[2800,4200],vil:[3500,6000],low:-4,mid:0,high:12,sky:22,op:-10,real:null},
+'Bur Dubai':            {apt:[900,1400],vil:[1000,1500],low:-3,mid:0,high:6,sky:10,op:-5,real:null},
+'City Walk':            {apt:[2200,3200],vil:[2600,3600],low:-4,mid:0,high:9,sky:16,op:-8,real:null},
+'DAMAC Hills 2':        {apt:[850,1250],vil:[900,1350],low:-3,mid:0,high:5,sky:10,op:-5,real:null},
+'Deira':                {apt:[700,1100],vil:[800,1200],low:-3,mid:0,high:5,sky:9,op:-4,real:null},
+'Discovery Gardens':    {apt:[750,1100],vil:[800,1150],low:-3,mid:0,high:5,sky:9,op:-4,real:null},
+'Dubai Investment Park (DIP)':{apt:[700,1050],vil:[800,1150],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Dubai Production City (IMPZ)':{apt:[750,1100],vil:[850,1200],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Dubai Sports City':    {apt:[800,1200],vil:[900,1350],low:-3,mid:0,high:6,sky:10,op:-5,real:null},
+'Green Community':      {apt:[1000,1500],vil:[1200,1700],low:-4,mid:0,high:6,sky:11,op:-6,real:null},
+'International City':   {apt:[600,900],vil:[700,1000],low:-3,mid:0,high:4,sky:8,op:-4,real:null},
+'JBR (Jumeirah Beach Residence)':{apt:[1900,2800],vil:[2200,3200],low:-5,mid:0,high:9,sky:18,op:-8,real:null},
+'Jumeirah':             {apt:[1800,2600],vil:[2200,3200],low:-4,mid:0,high:8,sky:15,op:-8,real:null},
+'Jumeirah Golf Estates':{apt:[1400,2000],vil:[1600,2400],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'La Mer':               {apt:[2200,3200],vil:[2600,3600],low:-4,mid:0,high:9,sky:16,op:-8,real:null},
+'Liwan':                {apt:[750,1100],vil:[850,1200],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Living Legends':       {apt:[1200,1700],vil:[1300,1900],low:-4,mid:0,high:6,sky:11,op:-6,real:null},
+'Mirdif':               {apt:[800,1200],vil:[900,1350],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Motor City':           {apt:[900,1350],vil:[1000,1500],low:-4,mid:0,high:6,sky:11,op:-5,real:null},
+'Mudon':                {apt:[1000,1500],vil:[1100,1700],low:-4,mid:0,high:6,sky:11,op:-6,real:null},
+'Remraam':              {apt:[750,1100],vil:[850,1200],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Rukan':                {apt:[850,1250],vil:[900,1350],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'Serena':               {apt:[950,1400],vil:[1000,1550],low:-3,mid:0,high:5,sky:9,op:-5,real:null},
+'The Springs / Meadows / Lakes':{apt:[1300,1900],vil:[1500,2200],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'The Valley':           {apt:[1100,1600],vil:[1300,2200],low:-4,mid:0,high:6,sky:11,op:-6,real:null},
+'Tilal Al Ghaf':        {apt:[1500,2200],vil:[1600,2400],low:-4,mid:0,high:7,sky:13,op:-7,real:null},
+'Town Square':          {apt:[950,1400],vil:[1100,1700],low:-4,mid:0,high:6,sky:11,op:-6,real:null},
+'Villanova':            {apt:[1000,1500],vil:[1100,1700],low:-4,mid:0,high:6,sky:11,op:-6,real:null},
+'World Islands':        {apt:[2000,3500],vil:[3000,6000],low:-5,mid:0,high:12,sky:20,op:-10,real:null},
+'Zabeel':               {apt:[1800,2600],vil:[2200,3200],low:-4,mid:0,high:8,sky:15,op:-8,real:null}
 };
 var DEF={apt:[1400,2000],vil:[1800,2600],low:-4,mid:0,high:8,sky:15,op:-7,real:null};
 // ── Cross-source citywide benchmarks — refreshed via weekly Cowork data-refresh task ──
@@ -3011,14 +3070,30 @@ realData={psf:live.sampleAvgPsf,src:live.source+' — '+_liveDesc,asOf:live.asOf
 }
 var isVilla=(D.type==='Villa'||D.type==='Townhouse');
 var rng=isVilla?mkt.vil:mkt.apt;
-var mktAvg=Math.round((rng[0]+rng[1])/2);
+// Floor level doesn't apply to villas/townhouses (they aren't stacked) -- the field
+// is hidden for those types in the UI (see pcTypeChange()), so never let a stale
+// floor value skew a villa/townhouse verdict even if one is somehow still present.
 var floorAdj=0;
+if(!isVilla){
 if(D.floor.indexOf('Low')>=0) floorAdj=mkt.low;
 else if(D.floor.indexOf('Mid')>=0) floorAdj=mkt.mid;
 else if(D.floor.indexOf('High')>=0) floorAdj=mkt.high;
 else if(D.floor.indexOf('Sky')>=0||D.floor.indexOf('Pent')>=0) floorAdj=mkt.sky;
+}
 var condAdj=(D.cond.indexOf('Pre')>=0||D.cond.indexOf('Off')>=0)?mkt.op:0;
-var adjPsf=Math.round(mktAvg*(1+(floorAdj+condAdj)/100));
+// ── Fixed 2026-08-27: the verdict/"Market avg" figure used to be computed purely
+// from the generic MKT/DEF baseline range, completely ignoring the live per-visitor
+// Property Finder figure (or the verified static MKT.real snapshot) fetched above --
+// so a real, accurate number could be sitting right there and the headline verdict
+// would still be built from a generic city-tier estimate instead. Now: when we have
+// a verified/live median for this specific area (and, if matched, this specific
+// project), that number IS the market-avg basis; the generic range is only used as
+// a last resort when nothing verified is available for this area at all. ──
+var usingRealBasis=!!(realData&&realData.psf);
+var mktAvg=usingRealBasis?realData.psf:Math.round((rng[0]+rng[1])/2);
+// A live building-specific match is already a same-project median -- don't layer
+// generic citywide floor/condition premiums on top of it a second time.
+var adjPsf=(usingRealBasis&&realData.matchedProject)?mktAvg:Math.round(mktAvg*(1+(floorAdj+condAdj)/100));
 var diffPct=Math.round((D.psf-adjPsf)/adjPsf*100);
 var verdict,vclass,vemoji,vdesc;
 if(diffPct<=-12){verdict='GREAT DEAL';vclass='good';vemoji='🟢';vdesc='Significantly below market. Strong buy signal.';}
@@ -3066,10 +3141,10 @@ document.getElementById('pc-stats').innerHTML=
 document.getElementById('pc-comps').innerHTML=compsHtml;
 var sourceNote=realData
 ? ('Sources: '+realData.src+(realData.live?' (live)':' (area-verified '+realData.asOf+')')+' · Bayut &amp; Property Finder city benchmarks (2026-07-17)')
-: ('Sources: Bayut &amp; Property Finder city benchmarks (2026-07-17) · area-specific figure pending verification — confirm with AmirReza before relying on this for negotiation');
+: ('Sources: Bayut &amp; Property Finder city benchmarks (2026-07-17) — '+D.area+' has no independently verified figure yet, so the "Market avg" above is a generic baseline range estimate, not a confirmed comparable. Confirm with AmirReza before relying on this for negotiation.');
 document.getElementById('pc-assessment').innerHTML='<strong>Assessment:</strong> '+D.project+' in '+D.area
 +' — asking AED '+D.psf.toLocaleString()+'/sqft vs market avg AED '+adjPsf.toLocaleString()
-+'/sqft for '+D.floor.toLowerCase()+' '+(isVilla?'villas':'apartments')+'. '+vdesc
++'/sqft for '+(isVilla?(D.type.toLowerCase()+'s'):(D.floor.toLowerCase()+' '+D.type.toLowerCase()+'s'))+'. '+vdesc
 +' <span style="color:var(--w25);font-size:10px">'+sourceNote+'</span>';
 var _pcResEl=document.getElementById('pc-result');
 if(_pcResEl) _pcResEl.scrollIntoView({behavior:'smooth',block:'start'});
@@ -3092,6 +3167,81 @@ fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'
 function resetPC(){
 document.getElementById('pc-result').style.display='none';
 document.getElementById('pc-form').style.display='block';
+}
+// ── Added 2026-08-27: hide Floor Level for Villa/Townhouse (floors don't apply) ──
+function pcTypeChange(){
+var t=document.getElementById('pc-type').value;
+var wrap=document.getElementById('pc-floor-wrap');
+if(!wrap)return;
+var isVilla=(t==='Villa'||t==='Townhouse');
+wrap.style.display=isVilla?'none':'block';
+if(isVilla){
+var floorEl=document.getElementById('pc-floor');
+if(floorEl){floorEl.value='';floorEl.style.borderColor='';}
+}
+}
+// ── Added 2026-08-27: Project Name autocomplete + Dubai Area auto-fill ──
+// A best-effort, manually curated list of well-known project/phase names mapped to
+// their real Dubai community -- NOT exhaustive (see "never fabricate" rule: only
+// real, publicly known project names are listed here; anything not recognised just
+// falls through to free typing + manual area selection, same as before). Expand
+// this list over time as AmirReza confirms more projects per area.
+var KNOWN_PROJECTS=[
+{name:'Velora',area:'The Valley'},{name:'Velora 2',area:'The Valley'},
+{name:'Nara',area:'The Valley'},{name:'Eden',area:'The Valley'},
+{name:'Rivana',area:'The Valley'},{name:'Kaya',area:'The Valley'},
+{name:'Nima',area:'The Valley'},{name:'Lyra',area:'The Valley'},
+{name:'Palmera',area:'Arabian Ranches'},{name:'Alvorada',area:'Arabian Ranches'},
+{name:'Mirador',area:'Arabian Ranches'},
+{name:'Zahra',area:'Town Square'},{name:'Hayat',area:'Town Square'},
+{name:'Nasma Residences',area:'Town Square'},
+{name:'Avena',area:'Al Furjan'},{name:'Sequoia',area:'Al Furjan'},
+{name:'Amazonia',area:'DAMAC Hills 2'},{name:'Bahamas',area:'DAMAC Hills 2'},
+{name:'Pacific',area:'DAMAC Hills 2'},
+{name:'Alaya',area:'Tilal Al Ghaf'},{name:'Harmony',area:'Tilal Al Ghaf'},
+{name:'Elan',area:'Tilal Al Ghaf'},
+{name:'Sobha Creek Vistas',area:'Sobha Hartland'},{name:'Sobha Hartland Waves',area:'Sobha Hartland'},
+{name:'Park Ridge',area:'Dubai Hills Estate'},{name:'Golf Grand',area:'Dubai Hills Estate'},
+{name:'Sidra Villas',area:'Dubai Hills Estate'},
+{name:'Creek Rise',area:'Dubai Creek Harbour'},{name:'Address Harbour Point',area:'Dubai Creek Harbour'},
+{name:'Creek Beach',area:'Dubai Creek Harbour'},
+{name:'Burj Vista',area:'Downtown Dubai'},{name:'The Address Sky View',area:'Downtown Dubai'},
+{name:'Opera Grand',area:'Downtown Dubai'},{name:'Forte',area:'Downtown Dubai'},
+{name:'Marina Gate',area:'Dubai Marina'},{name:'Cayan Tower',area:'Dubai Marina'},
+{name:'Damac Heights',area:'Dubai Marina'},
+{name:'Peninsula',area:'Business Bay'},{name:'Bayz101',area:'Business Bay'},
+{name:'Aykon City',area:'Business Bay'},
+{name:'Central Park',area:'DIFC'},{name:'Index Tower',area:'DIFC'},
+{name:'Palm Tower',area:'Palm Jumeirah'},{name:'One Palm',area:'Palm Jumeirah'},
+{name:'Serenia Residences',area:'Palm Jumeirah'},
+{name:'Emaar South',area:'Dubai South'},{name:'The Pulse',area:'Dubai South'}
+];
+function pcProjectAutofill(q){
+var dl=document.getElementById('pc-project-list');
+if(!dl)return;
+q=(q||'').trim().toLowerCase();
+dl.innerHTML='';
+if(!q||q.length<2)return;
+var matches=KNOWN_PROJECTS.filter(function(p){return p.name.toLowerCase().indexOf(q)!==-1;});
+matches.slice(0,8).forEach(function(p){
+var opt=document.createElement('option');
+opt.value=p.name;
+dl.appendChild(opt);
+});
+// Auto-fill the Dubai Area the moment the typed text exactly matches a known
+// project -- but never override an area the visitor already picked themselves.
+var areaSel=document.getElementById('pc-area');
+if(areaSel&&!areaSel.value){
+var exact=KNOWN_PROJECTS.filter(function(p){return p.name.toLowerCase()===q;})[0];
+if(exact){
+var hasOpt=Array.prototype.some.call(areaSel.options,function(o){return o.value===exact.area;});
+if(hasOpt){
+areaSel.value=exact.area;
+var otherWrap=document.getElementById('pc-area-other-wrap');
+if(otherWrap)otherWrap.style.display='none';
+}
+}
+}
 }
 </script>
 <script>
