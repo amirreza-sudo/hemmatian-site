@@ -129,21 +129,42 @@ async function fetchPage(url) {
   }
 }
 
+// Rewritten 2026-08-28 (Price Checker accuracy fix, round 2). The previous regex
+// assumed decimal-point numbers (e.g. "1234.56") and a single trailing size
+// column. Live-checked against the actual page on 2026-08-28: Property Finder's
+// current table is Date | Location | Sold price | Price/ft² | Completion Status |
+// Property Type | Bedrooms | Plot size (ft²) | Built-up area (ft²) -- all numbers
+// are comma-grouped INTEGERS (no decimals), and there are two size columns. For
+// villas/townhouses "Plot size" is the basis their displayed Price/ft² is computed
+// from; for apartments the "Plot size" column actually holds the unit's own size
+// and "Built-up area" shows "-". Anchoring on the fixed tokens (Ready/Off-plan,
+// the property-type word, the beds pattern) after the price+psf pair, same
+// approach as before, just with the corrected number format and column order.
 function parseRows(text) {
-  const rowRe = /([\d,]{5,12})\s+(\d{2,5}\.\d{1,2})\s+(\d{1,2} [A-Z][a-z]{2} \d{4})\s+(Ready|Off-plan)\s+(Apartment|Villa|Townhouse|Hotel Apartment|Land)\s+(Studio|\d Beds?)\s+(\d{2,6}\.\d{1,2})/g;
+  const rowRe = /([\d,]{4,15})\s+([\d,]{1,7})\s+(Ready|Off-plan)\s+(Apartment|Villa|Townhouse|Hotel Apartment|Land)\s+(Studio|\d Beds?)\s+([\d,]{1,7})\s+([\d,]{1,7}|-)/g;
   let m, comps = [], lastEnd = 0;
   while ((m = rowRe.exec(text)) && comps.length < 40) {
     const label = text.slice(lastEnd, m.index).trim().slice(-140);
     lastEnd = rowRe.lastIndex;
+    const dateMatch = label.match(/(\d{1,2}\s+[A-Z][a-z]{2}\s+.?\d{2,4})/);
+    // "location" strips the date prefix so the frontend can show a clean
+    // project/community name (e.g. "Elora The Valley") instead of the raw
+    // "27 Aug '26 Elora The Valley" text.
+    const location = dateMatch ? label.slice(dateMatch.index + dateMatch[0].length).trim() : label;
+    const builtUpRaw = m[7];
     comps.push({
       label,
+      location,
+      date: dateMatch ? dateMatch[1] : null,
       priceAED: parseInt(m[1].replace(/,/g, ''), 10),
-      psf: parseFloat(m[2]),
-      date: m[3],
-      status: m[4],
-      type: m[5],
-      beds: m[6],
-      sizeSqft: parseFloat(m[7])
+      psf: parseInt(m[2].replace(/,/g, ''), 10),
+      status: m[3],
+      type: m[4],
+      beds: m[5],
+      // The size the displayed Price/ft² is actually based on (plot size for
+      // villas/townhouses; the apartment's own unit size for apartments).
+      sizeSqft: parseInt(m[6].replace(/,/g, ''), 10),
+      builtUpAreaSqft: builtUpRaw === '-' ? null : parseInt(builtUpRaw.replace(/,/g, ''), 10)
     });
   }
   return comps;
@@ -262,7 +283,7 @@ exports.handler = async (event) => {
       sampleCount: usedComps.length,
       matchedProject,
       typeFiltered,
-      comps: usedComps.slice(0, 5).map(c => ({ priceAED: c.priceAED, psf: c.psf, date: c.date, status: c.status, type: c.type, beds: c.beds, sizeSqft: c.sizeSqft }))
+      comps: usedComps.slice(0, 5).map(c => ({ location: c.location, priceAED: c.priceAED, psf: c.psf, date: c.date, status: c.status, type: c.type, beds: c.beds, sizeSqft: c.sizeSqft, builtUpAreaSqft: c.builtUpAreaSqft }))
     });
   } catch (e) {
     return jsonResponse({ ok: false, reason: 'parse-error', detail: String((e && e.message) || e), area });
