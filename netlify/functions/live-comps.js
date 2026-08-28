@@ -41,7 +41,15 @@ const AREA_SLUGS = {
   'MBR City / Meydan': 'mohammed-bin-rashid-city',
   'JLT': 'jumeirah-lake-towers',
   'DIFC': 'difc',
-  'JVT': 'jumeirah-village-triangle'
+  'JVT': 'jumeirah-village-triangle',
+  // Added 2026-08-27 (Price Checker accuracy fix, PR TBD) — each slug below was
+  // manually confirmed live against propertyfinder.ae before being hardcoded here,
+  // per the "never guess a slug for the fast-path map itself" rule above.
+  'The Valley': 'the-valley',
+  'Arabian Ranches': 'arabian-ranches',
+  'Town Square': 'town-square',
+  'Al Furjan': 'al-furjan',
+  'DAMAC Hills 2': 'damac-hills-2'
 };
 
 const CORS_HEADERS = {
@@ -70,10 +78,31 @@ function slugCandidates(area) {
   const parenMatch = area.match(/\(([^)]+)\)/);
   const withoutParen = area.replace(/\([^)]*\)/g, ' ').trim();
   if (parenMatch) candidates.push(slugify(parenMatch[1]));
+  // Added 2026-08-27: visitors very often type the developer name along with the
+  // community when filling in the free-text "Other" area field -- e.g. "The Valley
+  // by Emaar" or "Damac Hills by Damac". Property Finder's own slugs never include
+  // the developer, so a trailing " by <Developer>" (and any sub-community suffix
+  // after a comma, e.g. "The Valley, Al Yufrah 1") broke slug resolution entirely
+  // and silently fell back to the (much less accurate) citywide benchmark. Strip
+  // both before falling back to the raw guesses.
+  const withoutDeveloper = withoutParen.replace(/\s+by\s+[a-z][a-z .]*$/i, '').trim();
+  const beforeComma = withoutDeveloper.split(',')[0].trim();
+  if (beforeComma && beforeComma !== withoutDeveloper) candidates.push(slugify(beforeComma));
+  if (withoutDeveloper && withoutDeveloper !== withoutParen) candidates.push(slugify(withoutDeveloper));
   candidates.push(slugify(withoutParen));
   candidates.push(slugify(area));
   // de-dupe while preserving order
   return candidates.filter((c, i) => c && candidates.indexOf(c) === i);
+}
+
+// Map the Price Checker's "Property Type" field to the category labels Property
+// Finder uses on its transaction rows, so an area-wide average is never diluted
+// by mixing villas/townhouses in with apartments (or vice versa) when no specific
+// project match is found. Added 2026-08-27.
+function typeCategory(type) {
+  const t = String(type || '').toLowerCase();
+  if (t === 'villa' || t === 'townhouse') return ['Villa', 'Townhouse'];
+  return ['Apartment', 'Hotel Apartment']; // Apartment, Penthouse, Duplex all sell as "Apartment" rows on PF
 }
 
 function normalize(s) {
@@ -137,6 +166,7 @@ exports.handler = async (event) => {
   const params = event.queryStringParameters || {};
   const area = (params.area || '').trim();
   const project = (params.project || '').trim();
+  const propType = (params.type || '').trim();
 
   if (!area) {
     return jsonResponse({ ok: false, reason: 'no-area' });
@@ -184,7 +214,7 @@ exports.handler = async (event) => {
       }
     }
 
-    let matchedProject = false, usedComps = comps;
+    let matchedProject = false, usedComps = comps, typeFiltered = false;
     if (project) {
       const pWords = normalize(project).split(' ').filter(w => w.length > 2);
       if (pWords.length) {
@@ -196,6 +226,16 @@ exports.handler = async (event) => {
           usedComps = projectComps;
           matchedProject = true;
         }
+      }
+    }
+    // No specific building match -- at least keep the area average honest by not
+    // blending villas/townhouses in with apartments (or vice versa). Added 2026-08-27.
+    if (!matchedProject && propType) {
+      const cats = typeCategory(propType);
+      const typeComps = comps.filter(c => cats.indexOf(c.type) !== -1);
+      if (typeComps.length) {
+        usedComps = typeComps;
+        typeFiltered = true;
       }
     }
 
@@ -221,6 +261,7 @@ exports.handler = async (event) => {
       sampleAvgPsf,
       sampleCount: usedComps.length,
       matchedProject,
+      typeFiltered,
       comps: usedComps.slice(0, 5).map(c => ({ priceAED: c.priceAED, psf: c.psf, date: c.date, status: c.status, type: c.type, beds: c.beds, sizeSqft: c.sizeSqft }))
     });
   } catch (e) {
