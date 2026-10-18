@@ -157,8 +157,10 @@ async function fetchLiveData() {
 }
 
 function buildSystemPrompt(liveData) {
-  const launchBlock = liveData.launches.map(l => {
-    if (!l.units.length) return `${l.name}: no live units found — direct visitor to check the Launch page directly.`;
+  const openLaunches = liveData.launches.filter(l => l.units.length);
+  const launchBlock = !openLaunches.length
+    ? `NO LAUNCH IS OPEN FOR REGISTRATION RIGHT NOW. The previous launches (including Palm Jebel Ali Frond F, Raw District II and Arancia Yards) are closed. The site's Launches section is a "Next Launch · Coming Soon" teaser. AmirReza is deliberately keeping the next project secret — do NOT guess or hint at its name, location, developer, price, or whether it is residential or commercial. If a visitor asks about launches, build curiosity, say details go to the list first, and invite them to join the Telegram channel (t.me/amirrez_realtor) or message AmirReza on WhatsApp for early access; you may also offer to note their interest with submit_qualified_lead once you have name, email and WhatsApp.`
+    : openLaunches.map(l => {
     const lines = l.units.map(u => `  - ${u.type}: AED ${u.priceAED.toLocaleString()} | EOI: AED ${u.eoiAED.toLocaleString()} cash | ${u.plan}`).join('\n');
     return `${l.name}:\n${lines}`;
   }).join('\n\n');
@@ -166,8 +168,7 @@ function buildSystemPrompt(liveData) {
   const liveBlock = `
 ## LIVE DATA (fetched just now from dxbpropertyexpert.com — use these, don't guess)
 
-There are currently TWO separate active launches. Do not mix their names, prices, or plans together — they are different projects with different developers and different payment plans.
-
+${openLaunches.length > 1 ? 'There are currently several separate active launches. Do not mix their names, prices, or plans together — they are different projects with different developers and different payment plans.\n' : ''}
 ${launchBlock}
 
 FX: 1 AED = ${liveData.aedToUsdDivisor ? (1 / liveData.aedToUsdDivisor).toFixed(4) : '0.2740'} USD (divide AED by ${liveData.aedToUsdDivisor || 3.65}) · 1 AED ≈ ${liveData.aedToTomanRate || 'N/A'} Toman
