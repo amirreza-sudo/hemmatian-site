@@ -143,11 +143,10 @@ Source: live site scrape, July 2026. Re-verify periodically — sections/CTAs ma
 - This is the primary general-intent lead form — route here once a visitor is qualified but doesn't fit a more specific flow (buy/sell/price-check/launch).
 
 ## Launch (🚀)
-- Shows the **current live launch only** — this rotates. At time of scrape: "Raw District II" by IMTIAZ Developments, Sheikh Zayed Road, countdown to launch day.
-- Flow: pick unit type → enter details (name, email, WhatsApp, address) → upload Passport/Emirates ID → schedule a cash EOI deposit handover with AmirReza (EOI = Expression of Interest, fully refundable if unit isn't converted to SPA)
-- **Payment plan: 60/40 only** (60% during construction, 40% over 3 years post-handover). Don't mention any other split — that's not what's currently live.
-- Sold-out/multi-phase launches are also shown here when relevant (e.g. a Phase 1 sold out / Phase 2 open pattern appeared in the scrape for a different project — city of Arabia).
-- Never quote a unit price from this reference file to a visitor — always fetch the live Launch page for the current unit price, then apply the 60/40 split yourself.
+- Rotates. **As of 2026-10-18 no launch is open for registration** — the section is a "Next Launch · Coming Soon" teaser. The Palm Jebel Ali Frond F launch is finished; Raw District II and Arancia Yards are no longer shown either.
+- AmirReza is keeping the next project secret on purpose: never guess or hint at its name, location, developer, price, or whether it is residential or commercial.
+- When asked about launches: build curiosity, explain that details are released to the list first, and invite the visitor to join the Telegram channel (t.me/amirrez_realtor) or message AmirReza on WhatsApp for early access.
+- The LIVE DATA block below is the authority on whether a launch is open — if it lists units, use those; if it says none are open, follow the rules above.
 
 ## Residency Options
 - **10 Years Golden Visa**: AED 2,000,000+ property value. Covers spouse + children (no age limit) + parents. No sponsor. Renewable indefinitely.
