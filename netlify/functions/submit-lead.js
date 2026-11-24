@@ -33,7 +33,7 @@ exports.handler = async (event) => {
     source        = 'hero-form',
     reservation   = null,   // launch reservation details (Palm Central Frond D, 2026-11-24)
     idFile        = null,   // legacy single document { name, type, data(base64) }
-    idFiles       = null    // [{ label, name, type, data(base64) }] — passport + ID card (required by the launch form)
+    idFiles       = null    // [{ label, name, type, data(base64) }] — passport and/or ID card (launch form requires at least one)
   } = data;
 
   if (!name || !email || !phone) {
@@ -257,7 +257,7 @@ function flattenReservation(r) {
     reservation_location: (R_LABELS.location[r.location] || r.location) + (r.locationDetails ? ' — ' + r.locationDetails : ''),
     reservation_date: r.date, reservation_time: R_LABELS.time[r.time] || r.time,
     nationality: r.nationality, residence: r.residence, notes: r.notes,
-    id_attached: r.idAttached ? 'passport + ID card (sent to Telegram)' : 'no', plan_accepted: r.planAccepted ? 'yes' : '', site_language: r.lang
+    id_attached: r.idAttached ? 'yes (sent to Telegram)' : 'no', plan_accepted: r.planAccepted ? 'yes' : '', site_language: r.lang
   };
 }
 async function sendReservationTelegram({ name, email, phone, reservation: r, idFiles = [] }) {
