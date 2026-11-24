@@ -1197,27 +1197,912 @@ document.getElementById('lf-ok').style.display='block';
 </div>
 </div>
 <section id="launches" style="display:block;min-height:auto;background:#050505;position:relative;overflow:hidden">
+<!-- ============================================================
+     LAUNCH: Palm Central Private Residences — Frond D, Palm Jebel Ali (Nakheel)
+     Added 2026-11-24. Reservations close Mon 7 Dec 2026, 23:59 Dubai time.
+     All figures from Nakheel's official factsheet / price list / project briefing.
+     The AI assistant (netlify/functions/dxb-agent.js) reads the pcfSelect(...) calls
+     in the price table below — keep that exact argument format if prices change.
+     ============================================================ -->
 <style>
-#launches>#lnch-teaser{position:relative!important;height:auto!important;min-height:0!important;padding:96px 48px!important}
-@media(max-width:800px){#launches>#lnch-teaser{padding:64px 22px!important}}
-#lnch-teaser .lt-glow{position:absolute;inset:-40% -10% auto auto;width:70vw;height:70vw;max-width:900px;max-height:900px;background:radial-gradient(circle,rgba(245,158,11,.16) 0%,rgba(245,158,11,0) 62%);pointer-events:none}
-#lnch-teaser .lt-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:700;font-family:Inter,sans-serif;border-radius:3px;transition:transform .2s,opacity .2s}
-#lnch-teaser .lt-btn:hover{transform:translateY(-2px);opacity:.92}
-body.fa #lt-h,body.ar #lt-h{line-height:1.4;letter-spacing:0}body.fa #lt-p,body.ar #lt-p{line-height:1.9}
+#pcf{--pz-sand:#e9e1d3;--pz-sea:#6fa8a6;--pz-acc:#f59e0b;--pz-ink:#f3f1ec;--pz-mute:rgba(243,241,236,.6);--pz-line:rgba(243,241,236,.12);color:var(--pz-ink);font-family:Inter,sans-serif}
+body.fa #pcf,body.ar #pcf{font-family:var(--R),Vazirmatn,Tahoma,sans-serif}
+#pcf *{box-sizing:border-box}
+#pcf .pz-serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400}
+body.fa #pcf .pz-serif,body.ar #pcf .pz-serif{font-family:var(--R),Vazirmatn,sans-serif;font-weight:500}
+#pcf .pz-hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;padding:120px 48px 64px;background:#0b1416 url('/img/palm-central-d/aerial-1.webp') center/cover no-repeat}
+#pcf .pz-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,5,.15) 0%,rgba(5,5,5,.2) 45%,rgba(5,5,5,.95) 100%),linear-gradient(90deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.6) 40%,rgba(5,5,5,.05) 75%)}
+body.fa #pcf .pz-hero:before,body.ar #pcf .pz-hero:before{background:linear-gradient(180deg,rgba(5,5,5,.15) 0%,rgba(5,5,5,.2) 45%,rgba(5,5,5,.95) 100%),linear-gradient(270deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.6) 40%,rgba(5,5,5,.05) 75%)}
+@media(max-width:640px){#pcf .pz-hero:before{background:linear-gradient(180deg,rgba(5,5,5,.55) 0%,rgba(5,5,5,.75) 50%,rgba(5,5,5,.95) 100%)!important}}
+#pcf .pz-hin{position:relative;z-index:2;max-width:1160px;margin:0 auto;width:100%}
+#pcf .pz-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(245,158,11,.5);background:rgba(5,5,5,.35);color:var(--pz-acc);padding:7px 16px;border-radius:2px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:22px;backdrop-filter:blur(4px)}
+#pcf .pz-dot{width:7px;height:7px;background:var(--pz-acc);border-radius:50%;display:inline-block;animation:blink 1.2s infinite}
+#pcf .pz-title{font-size:clamp(44px,7vw,96px);line-height:.95;letter-spacing:2px;margin:0;color:#fff;text-transform:uppercase}
+#pcf .pz-sub{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--pz-sand);margin:14px 0 6px}
+#pcf .pz-loc{font-size:15px;color:var(--pz-ink);margin:0 0 18px;font-weight:600}
+#pcf .pz-lead{font-size:15px;line-height:1.75;color:rgba(243,241,236,.78);max-width:620px;margin:0 0 30px}
+#pcf .pz-cdw{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-bottom:30px}
+#pcf .pz-cdl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--pz-acc);margin-bottom:8px}
+#pcf .pz-cdd{font-size:12px;color:var(--pz-mute);margin-top:8px}
+#pcf .pz-cd{display:flex;gap:10px;direction:ltr}
+#pcf .pz-cd>div{min-width:74px;text-align:center;background:rgba(5,5,5,.55);border:1px solid rgba(245,158,11,.35);border-radius:6px;padding:12px 8px;backdrop-filter:blur(6px)}
+#pcf .pz-cd b{display:block;font-size:32px;font-weight:700;color:#fff;line-height:1;font-variant-numeric:tabular-nums;font-family:Inter,sans-serif}
+#pcf .pz-cd span{display:block;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pz-mute);margin-top:6px}
+body.fa #pcf .pz-cd span,body.ar #pcf .pz-cd span{letter-spacing:0;font-size:11px}
+#pcf .pz-closed{display:none;font-size:15px;font-weight:700;color:var(--pz-acc);padding:14px 18px;border:1px solid rgba(245,158,11,.4);border-radius:6px;background:rgba(5,5,5,.6)}
+#pcf .pz-btns{display:flex;gap:12px;flex-wrap:wrap}
+#pcf .pz-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:700;border-radius:3px;border:none;cursor:pointer;font-family:inherit;transition:transform .2s,opacity .2s}
+body.fa #pcf .pz-btn,body.ar #pcf .pz-btn{letter-spacing:0;font-size:14px}
+#pcf .pz-btn:hover{transform:translateY(-2px);opacity:.92}
+#pcf .pz-pri{background:var(--pz-acc);color:#111}
+#pcf .pz-sec{background:rgba(5,5,5,.4);color:var(--pz-ink);border:1px solid rgba(243,241,236,.3)}
+#pcf .pz-facts{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--pz-line);border-bottom:1px solid var(--pz-line);background:#0a0a0a}
+#pcf .pz-fact{padding:24px 18px;text-align:center;border-inline-end:1px solid var(--pz-line)}
+#pcf .pz-fact:last-child{border-inline-end:none}
+#pcf .pz-fact b{display:block;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;font-family:Inter,sans-serif}
+#pcf .pz-fact span{font-size:11px;color:var(--pz-mute);line-height:1.4;display:block}
+#pcf .pz-wrap{max-width:1160px;margin:0 auto;padding:72px 48px}
+#pcf .pz-h2{font-size:clamp(30px,3.6vw,46px);margin:0 0 8px;color:#fff;line-height:1.1}
+#pcf .pz-hint{font-size:13px;color:var(--pz-mute);margin:0 0 28px}
+#pcf .pz-gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:8px}
+#pcf .pz-gal button{position:relative;padding:0;border:none;cursor:zoom-in;overflow:hidden;border-radius:6px;background:#111}
+#pcf .pz-gal button.w2{grid-column:span 2;grid-row:span 2}
+#pcf .pz-gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+#pcf .pz-gal button:hover img{transform:scale(1.05)}
+#pcf .pz-gal .pz-more{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,5,5,.6);color:#fff;font-size:22px;font-weight:700}
+#pcf .pz-tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--pz-line);margin-bottom:28px}
+#pcf .pz-tab{background:none;border:none;color:var(--pz-mute);padding:14px 18px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;font-weight:600}
+body.fa #pcf .pz-tab,body.ar #pcf .pz-tab{letter-spacing:0;font-size:14px}
+#pcf .pz-tab.on{color:#fff;border-bottom-color:var(--pz-acc)}
+#pcf .pz-pane{display:none}#pcf .pz-pane.on{display:block}
+#pcf table.pz-tbl{width:100%;border-collapse:collapse;font-size:14px}
+#pcf .pz-tbl th{text-align:start;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pz-mute);font-weight:600;padding:12px 14px;border-bottom:1px solid var(--pz-line)}
+body.fa #pcf .pz-tbl th,body.ar #pcf .pz-tbl th{letter-spacing:0;font-size:12px}
+#pcf .pz-tbl td{padding:16px 14px;border-bottom:1px solid var(--pz-line);vertical-align:middle}
+#pcf .pz-tbl tr:hover td{background:rgba(255,255,255,.025)}
+#pcf .pz-pr{font-weight:700;color:#fff;white-space:nowrap;font-family:Inter,sans-serif;direction:ltr;unicode-bidi:isolate}
+#pcf .pz-ar{color:var(--pz-mute);white-space:nowrap;direction:ltr;unicode-bidi:isolate}
+#pcf .pz-tag{display:inline-block;font-size:11px;padding:4px 9px;border-radius:20px;border:1px solid rgba(111,168,166,.5);color:#9fd0ce;white-space:nowrap;direction:ltr}
+#pcf .pz-rsv{background:var(--pz-acc);color:#111;border:none;border-radius:3px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+#pcf .pz-note{font-size:12px;color:var(--pz-mute);margin-top:16px;line-height:1.7}
+#pcf .pz-plans{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+#pcf .pz-plan{border:1px solid var(--pz-line);border-radius:10px;padding:26px;background:#0b0b0b}
+#pcf .pz-plan h3{margin:0 0 4px;font-size:30px;color:#fff;direction:ltr;text-align:start}
+#pcf .pz-plan .pz-for{font-size:13px;color:var(--pz-mute);margin:0 0 18px;line-height:1.6}
+#pcf .pz-plan table{width:100%;border-collapse:collapse;font-size:13px}
+#pcf .pz-plan td{padding:9px 4px;border-bottom:1px solid rgba(243,241,236,.07)}
+#pcf .pz-plan td.p{text-align:end;font-weight:700;color:#fff;font-family:Inter,sans-serif;width:56px}
+#pcf .pz-plan td.a{text-align:end;color:#9fd0ce;font-family:Inter,sans-serif;white-space:nowrap;direction:ltr;width:120px}
+#pcf .pz-plan tr.hl td{color:var(--pz-acc)}
+#pcf .pz-plan tr.hl td.p{color:var(--pz-acc)}
+#pcf .pz-calc{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px;font-size:13px;color:var(--pz-mute)}
+#pcf select,#pcf input,#pcf textarea{background:#111;color:#fff;border:1px solid rgba(243,241,236,.2);border-radius:4px;padding:11px 12px;font-size:14px;font-family:inherit;width:100%}
+#pcf .pz-calc select{width:auto;min-width:240px}
+#pcf .pz-fps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+#pcf .pz-fps button{background:#f6f4ef;border:none;border-radius:8px;padding:0;cursor:zoom-in;overflow:hidden;text-align:start}
+#pcf .pz-fps img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+#pcf .pz-fps span{display:block;padding:10px 14px;color:#111;font-size:13px;font-weight:600;font-family:inherit}
+#pcf .pz-loc-g{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+#pcf .pz-list{list-style:none;margin:0;padding:0}
+#pcf .pz-list li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--pz-line);font-size:14px}
+#pcf .pz-list li b{color:#fff;white-space:nowrap}
+#pcf .pz-chips{display:flex;flex-wrap:wrap;gap:8px}
+#pcf .pz-chips span{border:1px solid var(--pz-line);border-radius:20px;padding:8px 14px;font-size:13px;color:rgba(243,241,236,.85)}
+#pcf .pz-h3{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--pz-acc);margin:0 0 14px;font-weight:700}
+body.fa #pcf .pz-h3,body.ar #pcf .pz-h3{letter-spacing:0;font-size:14px}
+#pcf .pz-cta{margin-top:44px;padding:34px;border:1px solid rgba(245,158,11,.35);border-radius:10px;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(111,168,166,.06));display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+#pcf .pz-cta p{margin:6px 0 0;color:var(--pz-mute);font-size:14px;line-height:1.7;max-width:620px}
+/* lightbox */
+#pz-lb{position:fixed;inset:0;z-index:2147483601;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;flex-direction:column}
+#pz-lb.on{display:flex}
+#pz-lb img{max-width:94vw;max-height:80vh;object-fit:contain;border-radius:4px;background:#111}
+#pz-lb .lb-cap{color:#ddd;font-size:14px;margin-top:14px;text-align:center;padding:0 20px;font-family:inherit}
+#pz-lb .lb-n{color:#888;font-size:12px;margin-top:4px;font-family:Inter,sans-serif}
+#pz-lb button{position:absolute;background:rgba(255,255,255,.1);border:none;color:#fff;width:52px;height:52px;border-radius:50%;font-size:26px;cursor:pointer;line-height:1}
+#pz-lb button:hover{background:rgba(255,255,255,.22)}
+#pz-lb .lb-x{top:18px;right:18px}#pz-lb .lb-p{left:18px;top:50%;margin-top:-26px}#pz-lb .lb-nx{right:18px;top:50%;margin-top:-26px}
+/* reservation modal */
+#pz-rv{position:fixed;inset:0;z-index:2147483600;background:rgba(0,0,0,.75);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto;backdrop-filter:blur(4px)}
+#pz-rv.on{display:flex}
+#pz-rv .rv-box{background:#fff;color:#111;border-radius:10px;width:100%;max-width:600px;box-shadow:0 24px 64px rgba(0,0,0,.35);font-family:Inter,sans-serif;margin:auto 0}
+body.fa #pz-rv .rv-box,body.ar #pz-rv .rv-box{font-family:var(--R),Vazirmatn,Tahoma,sans-serif}
+#pz-rv .rv-hd{padding:24px 28px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+#pz-rv .rv-t{font-size:20px;font-weight:700;margin:0}
+#pz-rv .rv-st{font-size:12px;color:#888;margin-top:4px}
+#pz-rv .rv-x{background:none;border:none;font-size:26px;color:#999;cursor:pointer;line-height:1;padding:0 4px}
+#pz-rv .rv-bar{display:flex;gap:5px;padding:18px 28px 0}
+#pz-rv .rv-bar i{flex:1;height:3px;border-radius:2px;background:#eee}
+#pz-rv .rv-bar i.on{background:#d97706}
+#pz-rv .rv-bd{padding:22px 28px 28px}
+#pz-rv .rv-s{display:none}#pz-rv .rv-s.on{display:block}
+#pz-rv label{display:block;font-size:12px;font-weight:600;color:#444;margin:14px 0 6px}
+#pz-rv label .opt{font-weight:400;color:#999}
+#pz-rv input,#pz-rv select,#pz-rv textarea{width:100%;border:1px solid #d9d9d9;border-radius:5px;padding:11px 12px;font-size:14px;font-family:inherit;background:#fff;color:#111}
+#pz-rv input:focus,#pz-rv select:focus,#pz-rv textarea:focus{outline:none;border-color:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,.15)}
+#pz-rv .rv-row{display:flex;gap:8px}
+#pz-rv .rv-row select{width:120px;flex-shrink:0;direction:ltr}
+#pz-rv .rv-row input{direction:ltr}
+#pz-rv .rv-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#pz-rv .rv-units{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#pz-rv .rv-u{border:1.5px solid #e5e5e5;border-radius:8px;padding:13px 14px;cursor:pointer;text-align:start;background:#fff;font-family:inherit;transition:border-color .15s,background .15s}
+#pz-rv .rv-u:hover{border-color:#d97706}
+#pz-rv .rv-u.on{border-color:#d97706;background:#fffbeb}
+#pz-rv .rv-u b{display:block;font-size:14px;color:#111}
+#pz-rv .rv-u em{display:block;font-style:normal;font-size:13px;color:#d97706;font-weight:700;margin-top:4px;direction:ltr;text-align:start;font-family:Inter,sans-serif}
+#pz-rv .rv-u small{display:block;font-size:11px;color:#888;margin-top:2px}
+#pz-rv .rv-opts{display:grid;gap:8px}
+#pz-rv .rv-opt{display:flex;align-items:center;gap:10px;border:1.5px solid #e5e5e5;border-radius:7px;padding:12px 14px;cursor:pointer;font-size:14px;margin:0;font-weight:500;color:#111}
+#pz-rv .rv-opt input{width:auto;margin:0}
+#pz-rv .rv-opt.on{border-color:#d97706;background:#fffbeb}
+#pz-rv .rv-info{background:#fff7e6;border:1px solid #f5d08a;border-radius:8px;padding:14px 16px;font-size:13px;line-height:1.75;color:#5b4210}
+#pz-rv .rv-info b{color:#111}
+#pz-rv .rv-no{display:flex;gap:8px;align-items:flex-start;background:#fdecec;border:1px solid #f3b4b4;color:#8a1c1c;border-radius:8px;padding:10px 14px;font-size:13px;margin-top:10px;line-height:1.6}
+#pz-rv .rv-sum{border:1px solid #eee;border-radius:8px;overflow:hidden}
+#pz-rv .rv-sum div{display:flex;justify-content:space-between;gap:14px;padding:10px 14px;font-size:13px;border-bottom:1px solid #f2f2f2}
+#pz-rv .rv-sum div:last-child{border-bottom:none}
+#pz-rv .rv-sum span{color:#777}
+#pz-rv .rv-sum b{text-align:end;color:#111;word-break:break-word}
+#pz-rv .rv-ack{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.6;color:#444;margin-top:16px;font-weight:400}
+#pz-rv .rv-ack input{width:auto;margin-top:3px;flex-shrink:0}
+#pz-rv .rv-nav{display:flex;justify-content:space-between;gap:10px;margin-top:24px}
+#pz-rv .rv-b{border:none;border-radius:5px;padding:13px 22px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+#pz-rv .rv-go{background:#111;color:#fff;flex:1}
+#pz-rv .rv-go:disabled{opacity:.4;cursor:not-allowed}
+#pz-rv .rv-bk{background:#f2f2f2;color:#333}
+#pz-rv .rv-err{color:#c0392b;font-size:13px;margin-top:12px;display:none}
+#pz-rv .rv-ok{text-align:center;padding:10px 0}
+#pz-rv .rv-ok .ic{width:64px;height:64px;border-radius:50%;background:#e8f7ee;color:#1a7a4a;font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+#pz-rv .rv-ref{display:inline-block;font-family:Inter,monospace;font-weight:700;background:#f4f4f4;border-radius:5px;padding:8px 14px;margin:10px 0;letter-spacing:1px;direction:ltr}
+#pz-rv .rv-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;padding:13px 22px;border-radius:5px;font-weight:700;font-size:14px;margin-top:14px}
+#pz-rv .rv-fok{font-size:12px;color:#1a7a4a;margin-top:6px;display:none}
+@media(max-width:900px){
+#pcf .pz-facts{grid-template-columns:repeat(3,1fr)}
+#pcf .pz-fact:nth-child(3n){border-inline-end:none}
+#pcf .pz-fact:nth-child(-n+3){border-bottom:1px solid var(--pz-line)}
+#pcf .pz-gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px}
+#pcf .pz-plans,#pcf .pz-loc-g{grid-template-columns:1fr}
+#pcf .pz-fps{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+#pcf .pz-hero{padding:96px 20px 40px;min-height:auto}
+#pcf .pz-wrap{padding:52px 20px}
+#pcf .pz-cd>div{min-width:62px;padding:10px 4px}
+#pcf .pz-cd b{font-size:24px}
+#pcf .pz-fact{padding:18px 8px}
+#pcf .pz-fact b{font-size:16px}
+#pcf .pz-fps{grid-template-columns:1fr}
+#pcf .pz-tab{padding:12px 10px;font-size:11px}
+#pcf .pz-tbl thead{display:none}
+#pcf .pz-tbl tr{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--pz-line)}
+#pcf .pz-tbl td{border:none;padding:0}
+#pcf .pz-tbl td:nth-child(1){font-weight:700;color:#fff}
+#pcf .pz-tbl td:nth-child(5){grid-row:1/span 3;grid-column:2;align-self:center}
+#pcf .pz-tbl td:nth-child(2),#pcf .pz-tbl td:nth-child(3),#pcf .pz-tbl td:nth-child(4){grid-column:1}
+#pcf .pz-calc select{min-width:0;width:100%}
+#pcf .pz-cta{padding:24px}
+#pz-rv{padding:0}
+#pz-rv .rv-box{border-radius:0;min-height:100vh}
+#pz-rv .rv-hd,#pz-rv .rv-bd{padding-left:18px;padding-right:18px}
+#pz-rv .rv-bar{padding-left:18px;padding-right:18px}
+#pz-rv .rv-units,#pz-rv .rv-2{grid-template-columns:1fr}
+#pz-lb .lb-p,#pz-lb .lb-nx{top:auto;bottom:22px;margin-top:0}
+}
 </style>
-<div id="lnch-teaser">
-<div class="lt-glow"></div>
-<div style="position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center">
-<div style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(245,158,11,.4);color:#f59e0b;padding:6px 16px;border-radius:2px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-family:Inter,sans-serif;margin-bottom:28px"><span style="width:7px;height:7px;background:#f59e0b;border-radius:50%;display:inline-block;animation:blink 1.2s infinite"></span> <span id="lt-badge">Next Launch · Coming Soon</span></div>
-<h2 id="lt-h" style="font-size:clamp(30px,4.2vw,56px);font-weight:800;color:#f3f1ec;line-height:1.08;letter-spacing:-1px;margin-bottom:20px">The next address everyone in Dubai will be talking about is almost ready.</h2>
-<p id="lt-p" style="font-size:15px;color:rgba(243,241,236,.62);line-height:1.7;max-width:560px;margin:0 auto 36px">We can't say what it is yet — or where. Only that early access goes first to the people already on the list.</p>
-<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-<a class="lt-btn" href="https://t.me/amirrez_realtor" target="_blank" rel="noopener" style="background:#f59e0b;color:#111"><span id="lt-tg">Get Early Access on Telegram</span> →</a>
-<a class="lt-btn" href="https://wa.me/971542347774?text=Hi%20AmirReza%2C%20I%20want%20early%20access%20to%20your%20next%20launch." target="_blank" rel="noopener" style="background:transparent;color:#f3f1ec;border:1px solid rgba(243,241,236,.25)"><span id="lt-wa">Ask Me on WhatsApp</span></a>
+
+<div id="pcf">
+  <!-- HERO -->
+  <div class="pz-hero">
+    <div class="pz-hin">
+      <div class="pz-badge"><span class="pz-dot"></span><span data-pcf="badge">New Launch · Nakheel</span></div>
+      <h2 class="pz-title pz-serif">Palm Central</h2>
+      <div class="pz-sub" data-pcf="sub">Private Residences</div>
+      <p class="pz-loc" data-pcf="loc">Frond D · Palm Jebel Ali</p>
+      <p class="pz-lead" data-pcf="lead">216 beachfront residences across three buildings at the centre of Palm Jebel Ali — 1 to 5 bedrooms, townhouses and penthouses, with a private beach and an infinity pool overlooking the cove.</p>
+      <div class="pz-cdw">
+        <div id="pz-cdbox">
+          <div class="pz-cdl" data-pcf="cdl">Reservations close in</div>
+          <div class="pz-cd" id="pz-cd">
+            <div><b id="pz-d">--</b><span data-pcf="dd">Days</span></div>
+            <div><b id="pz-h">--</b><span data-pcf="hh">Hours</span></div>
+            <div><b id="pz-m">--</b><span data-pcf="mm">Min</span></div>
+            <div><b id="pz-s">--</b><span data-pcf="ss">Sec</span></div>
+          </div>
+          <div class="pz-cdd" data-pcf="cdd">Monday 7 December · 11:59 PM Dubai time</div>
+        </div>
+        <div class="pz-closed" id="pz-closed" data-pcf="closed">Reservations for this launch are now closed</div>
+      </div>
+      <div class="pz-btns">
+        <button type="button" class="pz-btn pz-pri pz-open-rv" onclick="pcfOpen()"><span data-pcf="b-rsv">Reserve a Unit</span> →</button>
+        <button type="button" class="pz-btn pz-sec" onclick="pcfTab('prices',true)"><span data-pcf="b-prc">Prices &amp; Payment Plan</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY FACTS -->
+  <div class="pz-facts">
+    <div class="pz-fact"><b>AED 2.5M</b><span data-pcf="f1">Starting price</span></div>
+    <div class="pz-fact"><b>216</b><span data-pcf="f2">Residences · 3 buildings</span></div>
+    <div class="pz-fact"><b>20%</b><span data-pcf="f3">Down payment on booking</span></div>
+    <div class="pz-fact"><b>Oct 2030</b><span data-pcf="f4">Estimated completion</span></div>
+    <div class="pz-fact"><b>AED 100K</b><span data-pcf="f5">Reservation amount</span></div>
+    <div class="pz-fact"><b data-pcf="f6b">Golden Visa</b><span data-pcf="f6">Every unit qualifies (AED 2M+)</span></div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="pz-wrap" style="padding-bottom:24px">
+    <h2 class="pz-h2 pz-serif" data-pcf="g-h">A calm called home</h2>
+    <p class="pz-hint" data-pcf="g-hint">Tap any image to view it full size.</p>
+    <div class="pz-gal" id="pz-gal"></div>
+  </div>
+
+  <!-- DETAILS TABS -->
+  <div class="pz-wrap" id="pz-details" style="padding-top:40px">
+    <div class="pz-tabs" role="tablist">
+      <button type="button" class="pz-tab on" data-t="prices" onclick="pcfTab('prices')"><span data-pcf="t1">Prices</span></button>
+      <button type="button" class="pz-tab" data-t="plan" onclick="pcfTab('plan')"><span data-pcf="t2">Payment Plan</span></button>
+      <button type="button" class="pz-tab" data-t="floor" onclick="pcfTab('floor')"><span data-pcf="t3">Floor Plans</span></button>
+      <button type="button" class="pz-tab" data-t="loc" onclick="pcfTab('loc')"><span data-pcf="t4">Location &amp; Amenities</span></button>
+    </div>
+
+    <!-- PRICES -->
+    <div class="pz-pane on" id="pcp-prices">
+      <table class="pz-tbl">
+        <thead><tr><th data-pcf="th1">Unit type</th><th data-pcf="th2">Average area</th><th data-pcf="th3">Starting price</th><th data-pcf="th4">Payment plan</th><th></th></tr></thead>
+        <tbody>
+          <tr><td data-pcf="u-1br">1-Bedroom</td><td class="pz-ar">799 sq.ft · 74 m²</td><td class="pz-pr">AED 2,500,000</td><td><span class="pz-tag">70/30</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('1br','1-Bedroom','2,500,000','100,000','70/30 — 20% on booking, 50% during construction (Apr 2027 to Aug 2029), 30% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+          <tr><td data-pcf="u-2br">2-Bedroom</td><td class="pz-ar">1,255 sq.ft · 117 m²</td><td class="pz-pr">AED 4,400,000</td><td><span class="pz-tag">70/30</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('2br','2-Bedroom','4,400,000','100,000','70/30 — 20% on booking, 50% during construction (Apr 2027 to Aug 2029), 30% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+          <tr><td data-pcf="u-2bm">2-Bedroom + Maid</td><td class="pz-ar">1,549 sq.ft · 144 m²</td><td class="pz-pr">AED 5,400,000</td><td><span class="pz-tag">70/30</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('2bm','2-Bedroom + Maid','5,400,000','100,000','70/30 — 20% on booking, 50% during construction (Apr 2027 to Aug 2029), 30% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+          <tr><td data-pcf="u-3br">3-Bedroom</td><td class="pz-ar">2,360 sq.ft · 219 m²</td><td class="pz-pr">AED 7,800,000</td><td><span class="pz-tag">60/40</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('3br','3-Bedroom','7,800,000','100,000','60/40 — 20% on booking, 40% during construction (Apr 2027 to Aug 2029), 40% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+          <tr><td data-pcf="u-4br">4-Bedroom</td><td class="pz-ar">4,052 sq.ft · 376 m²</td><td class="pz-pr">AED 13,500,000</td><td><span class="pz-tag">60/40</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('4br','4-Bedroom','13,500,000','100,000','60/40 — 20% on booking, 40% during construction (Apr 2027 to Aug 2029), 40% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+          <tr><td data-pcf="u-4th">4-Bedroom Townhouse</td><td class="pz-ar">4,018 sq.ft · 373 m²</td><td class="pz-pr">AED 14,300,000</td><td><span class="pz-tag">60/40</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('4th','4-Bedroom Townhouse','14,300,000','100,000','60/40 — 20% on booking, 40% during construction (Apr 2027 to Aug 2029), 40% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+          <tr><td data-pcf="u-5br">5-Bedroom</td><td class="pz-ar">4,802 sq.ft · 446 m²</td><td class="pz-pr">AED 18,800,000</td><td><span class="pz-tag">60/40</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('5br','5-Bedroom','18,800,000','100,000','60/40 — 20% on booking, 40% during construction (Apr 2027 to Aug 2029), 40% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+          <tr><td data-pcf="u-5ph">5-Bedroom Penthouse</td><td class="pz-ar">9,682 sq.ft · 899 m²</td><td class="pz-pr">AED 35,200,000</td><td><span class="pz-tag">60/40</span></td><td><button type="button" class="pz-rsv" onclick="pcfSelect('5ph','5-Bedroom Penthouse','35,200,000','100,000','60/40 — 20% on booking, 40% during construction (Apr 2027 to Aug 2029), 40% on completion (est. Oct 2030)')" data-pcf="rsv">Reserve</button></td></tr>
+        </tbody>
+      </table>
+      <p class="pz-note" data-pcf="prc-note">Starting prices from Nakheel's official price list, in AED. The final price depends on the building, floor, view and availability at the time of booking. A 4% Dubai Land Department (DLD) registration fee applies on top of the price.</p>
+    </div>
+
+    <!-- PAYMENT PLAN -->
+    <div class="pz-pane" id="pcp-plan">
+      <div class="pz-calc"><span data-pcf="calc-l">See the payment amounts for:</span>
+        <select id="pz-calc" onchange="pcfCalc()"></select>
+      </div>
+      <div class="pz-plans">
+        <div class="pz-plan" id="pz-planA">
+          <h3 class="pz-serif">70 / 30</h3>
+          <p class="pz-for" data-pcf="pa-for">1-Bedroom, 2-Bedroom &amp; 2-Bedroom + Maid</p>
+          <table id="pz-tA"></table>
+        </div>
+        <div class="pz-plan" id="pz-planB">
+          <h3 class="pz-serif">60 / 40</h3>
+          <p class="pz-for" data-pcf="pb-for">3-, 4- &amp; 5-Bedroom, Townhouse &amp; Penthouse</p>
+          <table id="pz-tB"></table>
+        </div>
+      </div>
+      <p class="pz-note" data-pcf="plan-note">Estimated construction completion: October 2030. The 4% DLD registration fee is paid at booking together with the 20% down payment.</p>
+    </div>
+
+    <!-- FLOOR PLANS -->
+    <div class="pz-pane" id="pcp-floor">
+      <div class="pz-fps" id="pz-fps"></div>
+      <p class="pz-note" data-pcf="fp-note">Representative layouts from Nakheel's floor-plan book. Sizes and layouts vary by unit; your exact unit plan is shared before booking.</p>
+    </div>
+
+    <!-- LOCATION & AMENITIES -->
+    <div class="pz-pane" id="pcp-loc">
+      <div class="pz-loc-g">
+        <div>
+          <div class="pz-h3" data-pcf="l-h">Driving distances</div>
+          <ul class="pz-list">
+            <li><span data-pcf="l1">Bluewaters Island</span><b data-pcf="m23">23 min</b></li>
+            <li><span data-pcf="l2">Al Maktoum Int'l Airport (DWC)</span><b data-pcf="m25">25 min</b></li>
+            <li><span data-pcf="l3">Mall of the Emirates</span><b data-pcf="m27">27 min</b></li>
+            <li><span data-pcf="l4">Palm Jumeirah</span><b data-pcf="m28">28 min</b></li>
+            <li><span data-pcf="l5">Burj Al Arab</span><b data-pcf="m30">30 min</b></li>
+            <li><span data-pcf="l6">Dubai International Airport (DXB)</span><b data-pcf="m40">40 min</b></li>
+          </ul>
+          <p class="pz-note" data-pcf="l-note">Direct access to Sheikh Zayed Road via a dedicated 5 km highway. Palm Jebel Ali is one of only two Palm islands in the world — twice the size of Palm Jumeirah.</p>
+        </div>
+        <div>
+          <div class="pz-h3" data-pcf="a-h">Amenities</div>
+          <div class="pz-chips" id="pz-amen"></div>
+          <div class="pz-h3" style="margin-top:26px" data-pcf="w-h">Why Palm Central</div>
+          <ul class="pz-list" id="pz-why"></ul>
+          <p class="pz-note" data-pcf="w-src">Source: Nakheel, Palm Central Frond D project briefing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="pz-cta">
+      <div>
+        <div class="pz-h3" style="margin:0" data-pcf="c-h">Reserve with AED 100,000</div>
+        <p data-pcf="c-p">Choose your unit, tell us when and where the reservation amount will be delivered in Dubai (cash or manager's cheque to Nakheel), and AmirReza will confirm everything with you personally.</p>
+      </div>
+      <button type="button" class="pz-btn pz-pri pz-open-rv" onclick="pcfOpen()"><span data-pcf="b-rsv">Reserve a Unit</span> →</button>
+    </div>
+  </div>
 </div>
-<p id="lt-note" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(243,241,236,.35);margin-top:22px">Details are released to the list first</p>
+
+<!-- LIGHTBOX -->
+<div id="pz-lb" onclick="if(event.target===this)pcfLbClose()">
+  <button type="button" class="lb-x" onclick="pcfLbClose()" aria-label="Close">×</button>
+  <button type="button" class="lb-p" onclick="pcfLbGo(-1)" aria-label="Previous">‹</button>
+  <img id="pz-lbi" alt="">
+  <div class="lb-cap" id="pz-lbc"></div>
+  <div class="lb-n" id="pz-lbn"></div>
+  <button type="button" class="lb-nx" onclick="pcfLbGo(1)" aria-label="Next">›</button>
 </div>
+
+<!-- RESERVATION MODAL (v2, 2026-11-24): unit -> details -> instalments (accept) -> passport + ID card (required) -> appointment for AED 100K -->
+<style>
+#pz-rv .rv-plh{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border:1px solid #eee;border-radius:8px;padding:14px 16px;margin-bottom:14px;background:#fafafa}
+#pz-rv .rv-plh b{display:block;font-size:16px;color:#111}
+#pz-rv .rv-plh small{display:block;font-size:12px;color:#888;margin-top:3px}
+#pz-rv .rv-plh em{font-style:normal;font-weight:700;color:#d97706;font-size:15px;direction:ltr;white-space:nowrap;font-family:Inter,sans-serif}
+#pz-rv table.rv-inst{width:100%;border-collapse:collapse;font-size:13px}
+#pz-rv .rv-inst td{padding:9px 6px;border-bottom:1px solid #f0f0f0}
+#pz-rv .rv-inst td.p{text-align:end;font-weight:700;width:52px;font-family:Inter,sans-serif}
+#pz-rv .rv-inst td.a{text-align:end;white-space:nowrap;direction:ltr;width:130px;font-family:Inter,sans-serif;color:#111}
+#pz-rv .rv-inst tr.hl td{color:#b45309;font-weight:600}
+#pz-rv .rv-inst tr.dld td{color:#666;font-style:italic}
+#pz-rv .rv-inst tr.tot td{border-bottom:none;border-top:2px solid #111;font-weight:700;color:#111}
+#pz-rv .rv-up{border:1.5px dashed #d9d9d9;border-radius:8px;padding:14px;margin-top:12px}
+#pz-rv .rv-up.ok{border-style:solid;border-color:#1a7a4a;background:#f3fbf6}
+#pz-rv .rv-up .h{font-size:14px;font-weight:700;color:#111}
+#pz-rv .rv-up .h i{font-style:normal;color:#c0392b}
+#pz-rv .rv-up .s{font-size:12px;color:#888;margin:3px 0 10px}
+#pz-rv .rv-up input{padding:8px}
+#pz-rv .rv-up .st{font-size:12px;margin-top:8px;color:#1a7a4a;display:none;align-items:center;gap:10px}
+#pz-rv .rv-up .st img{width:54px;height:38px;object-fit:cover;border-radius:4px;border:1px solid #ddd}
+</style>
+<div id="pz-rv" onclick="if(event.target===this)pcfClose()">
+  <div class="rv-box" role="dialog" aria-modal="true">
+    <div class="rv-hd">
+      <div><p class="rv-t" data-pcf="rv-t">Reserve at Palm Central</p><div class="rv-st" id="pz-rvst"></div></div>
+      <button type="button" class="rv-x" onclick="pcfClose()" aria-label="Close">×</button>
+    </div>
+    <div class="rv-bar" id="pz-bar"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="rv-bd">
+      <!-- 1: unit -->
+      <div class="rv-s on" id="pcs1">
+        <div class="rv-units" id="pz-units"></div>
+        <div class="rv-err" id="pce1"></div>
+        <div class="rv-nav"><button type="button" class="rv-b rv-go" onclick="pcfNext(1)" data-pcf="next">Next →</button></div>
+      </div>
+      <!-- 2: details -->
+      <div class="rv-s" id="pcs2">
+        <label for="pz-name" data-pcf="l-name">Full name (as in passport)</label>
+        <input id="pz-name" autocomplete="name">
+        <label for="pz-email" data-pcf="l-email">Email</label>
+        <input id="pz-email" type="email" autocomplete="email" style="direction:ltr">
+        <label for="pz-ph" data-pcf="l-wa">WhatsApp number</label>
+        <div class="rv-row">
+          <select id="pz-cc">
+            <option value="+98">🇮🇷 +98</option><option value="+971">🇦🇪 +971</option><option value="+966">🇸🇦 +966</option><option value="+974">🇶🇦 +974</option><option value="+965">🇰🇼 +965</option><option value="+968">🇴🇲 +968</option><option value="+973">🇧🇭 +973</option><option value="+90">🇹🇷 +90</option><option value="+44">🇬🇧 +44</option><option value="+49">🇩🇪 +49</option><option value="+33">🇫🇷 +33</option><option value="+7">🇷🇺 +7</option><option value="+1">🇺🇸 +1</option><option value="+91">🇮🇳 +91</option><option value="+86">🇨🇳 +86</option><option value="+">🌐 Other</option>
+          </select>
+          <input id="pz-ph" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="50 123 4567">
+        </div>
+        <div class="rv-2">
+          <div><label for="pz-nat" data-pcf="l-nat">Nationality</label><input id="pz-nat"></div>
+          <div><label for="pz-res" data-pcf="l-res">Country of residence</label><input id="pz-res"></div>
+        </div>
+        <div class="rv-err" id="pce2"></div>
+        <div class="rv-nav"><button type="button" class="rv-b rv-bk" onclick="pcfStep(1)" data-pcf="back">← Back</button><button type="button" class="rv-b rv-go" onclick="pcfNext(2)" data-pcf="next">Next →</button></div>
+      </div>
+      <!-- 3: instalments -->
+      <div class="rv-s" id="pcs3">
+        <div class="rv-plh" id="pz-plh"></div>
+        <table class="rv-inst" id="pz-inst"></table>
+        <p style="font-size:12px;color:#888;line-height:1.7;margin:12px 0 0" data-pcf="inst-note">Amounts are calculated on the starting price. The final price depends on the building, floor, view and availability.</p>
+        <label class="rv-ack"><input type="checkbox" id="pz-planok"><span data-pcf="plan-ok">I have reviewed this payment plan and I accept it.</span></label>
+        <div class="rv-err" id="pce3"></div>
+        <div class="rv-nav"><button type="button" class="rv-b rv-bk" onclick="pcfStep(2)" data-pcf="back">← Back</button><button type="button" class="rv-b rv-go" onclick="pcfNext(3)" data-pcf="next">Next →</button></div>
+      </div>
+      <!-- 4: documents -->
+      <div class="rv-s" id="pcs4">
+        <div class="rv-info" data-pcf="doc-info">To take part in the launch, a copy of your <b>passport</b> and your <b>ID card</b> is required. Both are needed to register your reservation.</div>
+        <div class="rv-up" id="pz-up-passport">
+          <div class="h"><span data-pcf="d-pass">Passport (photo page)</span> <i>*</i></div>
+          <div class="s" data-pcf="d-fmt">Photo or scan · JPG, PNG or PDF</div>
+          <input type="file" accept="image/*,application/pdf" onchange="pcfDoc(this,'passport')">
+          <div class="st" id="pz-st-passport"></div>
+        </div>
+        <div class="rv-up" id="pz-up-idcard">
+          <div class="h"><span data-pcf="d-id">ID card (Emirates ID or national ID card)</span> <i>*</i></div>
+          <div class="s" data-pcf="d-fmt">Photo or scan · JPG, PNG or PDF</div>
+          <input type="file" accept="image/*,application/pdf" onchange="pcfDoc(this,'idcard')">
+          <div class="st" id="pz-st-idcard"></div>
+        </div>
+        <div class="rv-err" id="pce4"></div>
+        <div class="rv-nav"><button type="button" class="rv-b rv-bk" onclick="pcfStep(3)" data-pcf="back">← Back</button><button type="button" class="rv-b rv-go" onclick="pcfNext(4)" data-pcf="next">Next →</button></div>
+      </div>
+      <!-- 5: appointment for AED 100K -->
+      <div class="rv-s" id="pcs5">
+        <div class="rv-info" data-pcf="pay-info"></div>
+        <div class="rv-no">⛔ <span data-pcf="pay-no">Bank or account-to-account transfers are not accepted for this reservation.</span></div>
+        <label data-pcf="l-meth">How will you pay?</label>
+        <div class="rv-opts">
+          <label class="rv-opt"><input type="radio" name="pz-meth" value="cash"><span data-pcf="m-cash">Cash (AED 100,000)</span></label>
+          <label class="rv-opt"><input type="radio" name="pz-meth" value="cheque"><span data-pcf="m-chq">Manager's cheque payable to Nakheel</span></label>
+        </div>
+        <label data-pcf="l-who">Who will deliver it in Dubai?</label>
+        <div class="rv-opts">
+          <label class="rv-opt"><input type="radio" name="pz-who" value="self"><span data-pcf="w-self">Myself — I will be in Dubai</span></label>
+          <label class="rv-opt"><input type="radio" name="pz-who" value="exchange"><span data-pcf="w-exch">My exchange house (sarraf)</span></label>
+          <label class="rv-opt"><input type="radio" name="pz-who" value="rep"><span data-pcf="w-rep">A representative on my behalf</span></label>
+        </div>
+        <div id="pz-whob" style="display:none">
+          <label for="pz-whon" data-pcf="l-whon">Exchange house / representative — name &amp; phone</label>
+          <input id="pz-whon">
+        </div>
+        <div class="rv-2">
+          <div><label for="pz-date" data-pcf="l-date2">Which day can you deliver it?</label><input id="pz-date" type="date" style="direction:ltr"></div>
+          <div><label for="pz-time" data-pcf="l-time">Preferred time</label>
+            <select id="pz-time">
+              <option value="" data-pcf="o-sel">— Select —</option>
+              <option value="morning" data-pcf="o-mor">Morning (9–12)</option>
+              <option value="afternoon" data-pcf="o-aft">Afternoon (12–5 PM)</option>
+              <option value="evening" data-pcf="o-eve">Evening (5–9 PM)</option>
+            </select></div>
+        </div>
+        <div style="color:#888;font-size:12px;margin-top:6px;line-height:1.6" data-pcf="call-h">Latest date: Monday 7 December. AmirReza will call you to confirm the exact time and place for that day.</div>
+        <label for="pz-notes"><span data-pcf="l-notes">Anything else?</span> <span class="opt" data-pcf="opt">(optional)</span></label>
+        <textarea id="pz-notes" rows="2"></textarea>
+        <label class="rv-ack"><input type="checkbox" id="pz-ack"><span data-pcf="ack">I understand that this request holds my place in the queue. The unit is confirmed only after AmirReza confirms availability and the AED 100,000 reservation amount is received.</span></label>
+        <div class="rv-err" id="pce5"></div>
+        <div class="rv-nav"><button type="button" class="rv-b rv-bk" onclick="pcfStep(4)" data-pcf="back">← Back</button><button type="button" class="rv-b rv-go" id="pz-submit" onclick="pcfSubmit()" data-pcf="submit">Submit Reservation</button></div>
+      </div>
+      <!-- 6: done -->
+      <div class="rv-s" id="pcs6">
+        <div class="rv-ok">
+          <div class="ic" id="pz-okic">✓</div>
+          <p class="rv-t" id="pz-okh" data-pcf="ok-h">Reservation request received</p>
+          <div style="font-size:13px;color:#777;margin-top:8px" data-pcf="ok-ref">Your reference</div>
+          <div class="rv-ref" id="pz-ref"></div>
+          <p style="font-size:14px;line-height:1.75;color:#444;margin:8px 0 0" id="pz-okp" data-pcf="ok-p"></p>
+          <a class="rv-wa" id="pz-wa" href="#" target="_blank" rel="noopener"><span data-pcf="ok-wa">Message AmirReza on WhatsApp</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+(function(){
+var DEADLINE=new Date('2026-12-07T23:59:59+04:00').getTime();
+var LATEST_DELIVERY='2026-12-07';
+var WA_MAIN='971542347774', WA_FA='971508077876';
+var IMG='/img/palm-central-d/';
+
+var UNITS=[
+ {id:'1br',k:'u-1br',en:'1-Bedroom',price:2500000,sqft:799,plan:'A'},
+ {id:'2br',k:'u-2br',en:'2-Bedroom',price:4400000,sqft:1255,plan:'A'},
+ {id:'2bm',k:'u-2bm',en:'2-Bedroom + Maid',price:5400000,sqft:1549,plan:'A'},
+ {id:'3br',k:'u-3br',en:'3-Bedroom',price:7800000,sqft:2360,plan:'B'},
+ {id:'4br',k:'u-4br',en:'4-Bedroom',price:13500000,sqft:4052,plan:'B'},
+ {id:'4th',k:'u-4th',en:'4-Bedroom Townhouse',price:14300000,sqft:4018,plan:'B'},
+ {id:'5br',k:'u-5br',en:'5-Bedroom',price:18800000,sqft:4802,plan:'B'},
+ {id:'5ph',k:'u-5ph',en:'5-Bedroom Penthouse',price:35200000,sqft:9682,plan:'B'}
+];
+/* [month index 0-11, year, percent] — last row = completion */
+var PLANS={
+ A:[['bk',0,20],[3,2027,5],[8,2027,5],[1,2028,10],[6,2028,10],[11,2028,10],[3,2029,5],[7,2029,5],[9,2030,30]],
+ B:[['bk',0,20],[3,2027,5],[8,2027,5],[1,2028,10],[6,2028,5],[11,2028,5],[3,2029,5],[7,2029,5],[9,2030,40]]
+};
+var GAL=[
+ ['aerial-1','g1',1],['infinity-pool','g2',0],['private-beach','g3',0],['beach-aerial','g4',0],['cove-sunset','g5',0],
+ ['penthouse-living','g6',1],['buildings-sea','g7',0],['pool-dusk','g8',0],['masterplan','g9',0],['aerial-2','g10',0],
+ ['arrival','g11',0],['lobby','g12',0],['podium-terrace','g13',0],['penthouse-bedroom','g14',0],['penthouse-bath','g15',0],
+ ['townhouse-terrace','g16',0],['5br-living','g17',0],['5br-terrace','g18',0],['3br-living','g19',0],['3br-bedroom','g20',0]
+];
+var GAL_SHOW=12;
+var FPS=[['fp-1br-1d','fp1'],['fp-2br-2e','fp2'],['fp-2br-2g','fp3'],['fp-3br-3a','fp4'],['fp-3br-3d','fp5'],['fp-4br-4a','fp6'],['fp-4br-townhouse','fp7'],['fp-5br-5a','fp8'],['fp-5br-penthouse','fp9']];
+var AMEN=['am1','am2','am3','am4','am5','am6','am7','am8','am9','am10','am11','am12','am13'];
+var WHY=['y1','y2','y3','y4'];
+
+var T={
+en:{
+badge:'New Launch · Nakheel',sub:'Private Residences',loc:'Frond D · Palm Jebel Ali',
+lead:'216 beachfront residences across three buildings at the centre of Palm Jebel Ali — 1 to 5 bedrooms, townhouses and penthouses, with a private beach and an infinity pool overlooking the cove.',
+cdl:'Reservations close in',dd:'Days',hh:'Hours',mm:'Min',ss:'Sec',cdd:'Monday 7 December · 11:59 PM Dubai time',closed:'Reservations for this launch are now closed',
+'b-rsv':'Reserve a Unit','b-prc':'Prices & Payment Plan',
+f1:'Starting price',f2:'Residences · 3 buildings',f3:'Down payment on booking',f4:'Estimated completion',f5:'Reservation amount',f6b:'Golden Visa',f6:'Every unit qualifies (AED 2M+)',
+'g-h':'A calm called home','g-hint':'Tap any image to view it full size.',
+t1:'Prices',t2:'Payment Plan',t3:'Floor Plans',t4:'Location & Amenities',
+th1:'Unit type',th2:'Average area',th3:'Starting price',th4:'Payment plan',rsv:'Reserve',
+'u-1br':'1-Bedroom','u-2br':'2-Bedroom','u-2bm':'2-Bedroom + Maid','u-3br':'3-Bedroom','u-4br':'4-Bedroom','u-4th':'4-Bedroom Townhouse','u-5br':'5-Bedroom','u-5ph':'5-Bedroom Penthouse',
+'prc-note':"Starting prices from Nakheel's official price list, in AED. The final price depends on the building, floor, view and availability at the time of booking. A 4% Dubai Land Department (DLD) registration fee applies on top of the price.",
+'calc-l':'See the payment amounts for:','calc-0':'Percentages only','pa-for':'1-Bedroom, 2-Bedroom & 2-Bedroom + Maid','pb-for':'3-, 4- & 5-Bedroom, Townhouse & Penthouse',
+bk:'Down payment on booking',comp:'On completion','plan-note':'Estimated construction completion: October 2030. The 4% DLD registration fee is paid at booking together with the 20% down payment.',
+'fp-note':"Representative layouts from Nakheel's floor-plan book. Sizes and layouts vary by unit; your exact unit plan is shared before booking.",
+fp1:'1-Bedroom · Type 1D',fp2:'2-Bedroom · Type 2E',fp3:'2-Bedroom · Type 2G',fp4:'3-Bedroom · Type 3A',fp5:'3-Bedroom · Type 3D',fp6:'4-Bedroom · Type 4A',fp7:'4-Bedroom Townhouse',fp8:'5-Bedroom · Type 5A',fp9:'5-Bedroom Penthouse',
+'l-h':'Driving distances',l1:'Bluewaters Island',l2:"Al Maktoum Int'l Airport (DWC)",l3:'Mall of the Emirates',l4:'Palm Jumeirah',l5:'Burj Al Arab',l6:'Dubai International Airport (DXB)',
+m23:'23 min',m25:'25 min',m27:'27 min',m28:'28 min',m30:'30 min',m40:'40 min',
+'l-note':'Direct access to Sheikh Zayed Road via a dedicated 5 km highway. Palm Jebel Ali is one of only two Palm islands in the world — twice the size of Palm Jumeirah.',
+'a-h':'Amenities',am1:'Private beach',am2:'Infinity pool',am3:'Padel court',am4:'Beach volleyball',am5:'Gym & fitness studio',am6:'Yoga studio',am7:'Outdoor fitness zone',am8:'Clubhouse',am9:'Games room',am10:"Indoor & outdoor kids' play",am11:'Outdoor BBQ',am12:'Event lawn',am13:'Lobby lounge',
+'w-h':'Why Palm Central',y1:'Beachfront homes are only about 5% of Dubai’s existing and upcoming apartment supply',y2:'Stepped architecture — every key unit has panoramic sea views over the cove',y3:'Palm Jebel Ali villa prices: ~15% a year over the past 4 years',y4:'Early entry into a prime future beachfront destination','w-src':'Source: Nakheel, Palm Central Frond D project briefing.',
+'c-h':'Reserve with AED 100,000','c-p':"Choose your unit, tell us when and where the reservation amount will be delivered in Dubai (cash or manager's cheque to Nakheel), and AmirReza will confirm everything with you personally.",
+'rv-t':'Reserve at Palm Central',st1:'Step 1 of 4 · Choose your unit',st2:'Step 2 of 4 · Your details',st3:'Step 3 of 4 · Reservation payment',st4:'Step 4 of 4 · Review & confirm',st5:'Done',
+from:'from','e-unit':'Please choose a unit type.',next:'Next →',back:'← Back',
+'l-name':'Full name (as in passport)','l-email':'Email','l-wa':'WhatsApp number','l-nat':'Nationality','l-res':'Country of residence','l-id':'Passport or Emirates ID copy','l-idopt':'(optional · JPG, PNG or PDF · max 3 MB)',
+'pay-info':"<b>Reservation amount: AED 100,000.</b><br>Accepted only as <b>cash</b> or a <b>manager's cheque payable to Nakheel</b>. AmirReza will confirm the exact cheque payee name with you before you issue it.",
+'pay-no':'Bank or account-to-account transfers are not accepted for this reservation.',
+'l-meth':'How will you pay?','m-cash':'Cash (AED 100,000)','m-chq':"Manager's cheque payable to Nakheel",
+'l-who':'Who will deliver it in Dubai?','w-self':'Myself — I will be in Dubai','w-exch':'My exchange house (sarraf)','w-rep':'A representative on my behalf','l-whon':'Exchange house / representative — name & phone',
+'l-where':'Where in Dubai should we receive it?','o-sel':'— Select —','o-nak':'Nakheel Sales Centre','o-off':"AmirReza's office",'o-exc':"The exchange house's office in Dubai",'o-oth':'Another location (enter address)','l-addr':'Address / location details',
+'l-date':'Delivery date','l-time':'Preferred time','o-mor':'Morning (9–12)','o-aft':'Afternoon (12–5 PM)','o-eve':'Evening (5–9 PM)','date-h':'Latest date: Monday 7 December.','l-notes':'Anything else?',opt:'(optional)',
+ack:'I understand that this request holds my place in the queue. The unit is confirmed only after AmirReza confirms availability and the AED 100,000 reservation amount is received. The final price depends on the building, floor, view and availability.',
+submit:'Submit Reservation',sending:'Sending…',
+'e-req':'Please fill in all required fields.','e-mail':'Please enter a valid email address.','e-ph':'Please enter a valid WhatsApp number.','e-file':'File is too large — maximum 3 MB.','e-date':'Please choose a date between today and Monday 7 December.','e-ack':'Please tick the confirmation box.','e-net':"We couldn't send your request. Please send it to AmirReza on WhatsApp using the button below — your details are already filled in.",
+'ok-h':'Reservation request received','ok-ref':'Your reference','ok-p':'AmirReza will contact you on WhatsApp shortly to confirm your unit, the meeting point and the exact cheque payee.','ok-wa':'Message AmirReza on WhatsApp','fail-h':'Almost there',
+'s-unit':'Unit','s-price':'Starting price','s-plan':'Payment plan','s-rsv':'Reservation amount','s-name':'Name','s-email':'Email','s-wa':'WhatsApp','s-nat':'Nationality / residence','s-id':'ID copy','s-meth':'Payment','s-who':'Delivered by','s-where':'Location','s-when':'Date & time','s-notes':'Notes',yes:'Attached',no:'Not attached',
+mon:['January','February','March','April','May','June','July','August','September','October','November','December'],
+g1:'Palm Central — Frond D, Palm Jebel Ali',g2:'Infinity pool overlooking the cove',g3:'Direct access to a private beach',g4:'A private beachfront for days by the water',g5:'Stepped architecture across the cove',g6:'5-Bedroom Penthouse — living room',g7:'Terraces open to sweeping waterfront views',g8:'The pool deck at dusk',g9:'Masterplan — buildings A, B & C',g10:'At the centre of Palm Jebel Ali',g11:'Residential arrival',g12:'Lobby lounge',g13:'Landscaped podium terrace',g14:'5-Bedroom Penthouse — master bedroom',g15:'5-Bedroom Penthouse — master bathroom',g16:'4-Bedroom Townhouse — terrace',g17:'5-Bedroom — living room',g18:'5-Bedroom — terrace',g19:'3-Bedroom — living & dining',g20:'3-Bedroom — master bedroom'
+},
+fa:{
+badge:'لانچ جدید · نخیل',sub:'رزیدنس‌های خصوصی',loc:'فروند D · پالم جبل علی',
+lead:'۲۱۶ واحد ساحلی در سه ساختمان، در قلب پالم جبل علی — از یک تا پنج خوابه، تاون‌هاوس و پنت‌هاوس، با ساحل اختصاصی و استخر اینفینیتی رو به خلیج.',
+cdl:'زمان باقی‌مانده تا پایان رزرو',dd:'روز',hh:'ساعت',mm:'دقیقه',ss:'ثانیه',cdd:'دوشنبه ۷ دسامبر (۱۶ آذر) · ساعت ۲۳:۵۹ به وقت دبی',closed:'مهلت رزرو این لانچ به پایان رسیده است',
+'b-rsv':'رزرو واحد','b-prc':'قیمت‌ها و شرایط پرداخت',
+f1:'شروع قیمت',f2:'واحد · ۳ ساختمان',f3:'پیش‌پرداخت هنگام خرید',f4:'تحویل تخمینی',f5:'مبلغ رزرو',f6b:'ویزای طلایی',f6:'همه واحدها واجد شرایط (بالای ۲ میلیون درهم)',
+'g-h':'آرامشی به نام خانه','g-hint':'برای دیدن هر تصویر در اندازه کامل، روی آن بزنید.',
+t1:'قیمت‌ها',t2:'شرایط پرداخت',t3:'نقشه واحدها',t4:'موقعیت و امکانات',
+th1:'نوع واحد',th2:'متراژ میانگین',th3:'شروع قیمت',th4:'طرح پرداخت',rsv:'رزرو',
+'u-1br':'یک‌خوابه','u-2br':'دوخوابه','u-2bm':'دوخوابه + اتاق خدمه','u-3br':'سه‌خوابه','u-4br':'چهارخوابه','u-4th':'تاون‌هاوس چهارخوابه','u-5br':'پنج‌خوابه','u-5ph':'پنت‌هاوس پنج‌خوابه',
+'prc-note':'شروع قیمت‌ها طبق لیست رسمی نخیل و به درهم است. قیمت نهایی به ساختمان، طبقه، ویو و موجودی در زمان خرید بستگی دارد. ۴٪ هزینه ثبت اداره اراضی دبی (DLD) جدا از قیمت پرداخت می‌شود.',
+'calc-l':'نمایش مبالغ اقساط برای:','calc-0':'فقط درصدها','pa-for':'یک‌خوابه، دوخوابه و دوخوابه + اتاق خدمه','pb-for':'سه، چهار و پنج‌خوابه، تاون‌هاوس و پنت‌هاوس',
+bk:'پیش‌پرداخت هنگام خرید',comp:'هنگام تحویل','plan-note':'تاریخ تخمینی اتمام ساخت: اکتبر ۲۰۳۰. ۴٪ هزینه ثبت DLD همراه با ۲۰٪ پیش‌پرداخت در زمان خرید پرداخت می‌شود.',
+'fp-note':'نمونه نقشه‌ها از کتابچه رسمی نخیل. متراژ و چیدمان هر واحد متفاوت است؛ نقشه دقیق واحد شما پیش از خرید ارسال می‌شود.',
+fp1:'یک‌خوابه · تیپ 1D',fp2:'دوخوابه · تیپ 2E',fp3:'دوخوابه · تیپ 2G',fp4:'سه‌خوابه · تیپ 3A',fp5:'سه‌خوابه · تیپ 3D',fp6:'چهارخوابه · تیپ 4A',fp7:'تاون‌هاوس چهارخوابه',fp8:'پنج‌خوابه · تیپ 5A',fp9:'پنت‌هاوس پنج‌خوابه',
+'l-h':'فاصله با ماشین',l1:'جزیره بلوواترز',l2:'فرودگاه آل مکتوم (DWC)',l3:'مال امارات',l4:'پالم جمیرا',l5:'برج العرب',l6:'فرودگاه بین‌المللی دبی (DXB)',
+m23:'۲۳ دقیقه',m25:'۲۵ دقیقه',m27:'۲۷ دقیقه',m28:'۲۸ دقیقه',m30:'۳۰ دقیقه',m40:'۴۰ دقیقه',
+'l-note':'دسترسی مستقیم به شیخ زاید رود از طریق بزرگراه اختصاصی ۵ کیلومتری. پالم جبل علی یکی از تنها دو جزیره پالم دنیاست — دو برابر پالم جمیرا.',
+'a-h':'امکانات',am1:'ساحل اختصاصی',am2:'استخر اینفینیتی',am3:'زمین پدل',am4:'والیبال ساحلی',am5:'باشگاه و استودیو فیتنس',am6:'استودیو یوگا',am7:'فضای ورزشی روباز',am8:'کلاب‌هاوس',am9:'اتاق بازی',am10:'فضای بازی کودکان (سرپوشیده و روباز)',am11:'باربیکیو روباز',am12:'چمن مخصوص مراسم',am13:'لابی لانج',
+'w-h':'چرا پالم سنترال',y1:'واحدهای ساحلی فقط حدود ۵٪ از عرضه فعلی و آینده آپارتمان در دبی هستند',y2:'معماری پله‌ای — همه واحدهای اصلی ویوی کامل دریا رو به خلیج دارند',y3:'قیمت ویلاهای پالم جبل علی: رشد حدود ۱۵٪ در سال طی ۴ سال گذشته',y4:'ورود زودهنگام به یکی از مقاصد ساحلی ممتاز آینده دبی','w-src':'منبع: نخیل، بریفینگ پروژه پالم سنترال فروند D.',
+'c-h':'رزرو با ۱۰۰٬۰۰۰ درهم','c-p':'واحد خود را انتخاب کنید و بگویید مبلغ رزرو را چه زمانی و کجای دبی تحویل می‌دهید (نقد یا منیجر چک به نام نخیل)؛ امیررضا شخصاً همه‌چیز را با شما هماهنگ می‌کند.',
+'rv-t':'رزرو در پالم سنترال',st1:'مرحله ۱ از ۴ · انتخاب واحد',st2:'مرحله ۲ از ۴ · اطلاعات شما',st3:'مرحله ۳ از ۴ · پرداخت مبلغ رزرو',st4:'مرحله ۴ از ۴ · بررسی و تأیید',st5:'ثبت شد',
+from:'از','e-unit':'لطفاً نوع واحد را انتخاب کنید.',next:'بعدی ←',back:'→ قبلی',
+'l-name':'نام و نام خانوادگی (مطابق پاسپورت)','l-email':'ایمیل','l-wa':'شماره واتساپ','l-nat':'ملیت','l-res':'کشور محل اقامت','l-id':'تصویر پاسپورت یا امارات آیدی','l-idopt':'(اختیاری · JPG، PNG یا PDF · حداکثر ۳ مگابایت)',
+'pay-info':'<b>مبلغ رزرو: ۱۰۰٬۰۰۰ درهم.</b><br>فقط به صورت <b>نقد (کش)</b> یا <b>منیجر چک به نام شرکت نخیل</b> پذیرفته می‌شود. نام دقیق ذی‌نفع چک، پیش از صدور، توسط امیررضا با شما هماهنگ می‌شود.',
+'pay-no':'انتقال بانکی و حساب‌به‌حساب برای این رزرو پذیرفته نمی‌شود.',
+'l-meth':'روش پرداخت','m-cash':'نقد (۱۰۰٬۰۰۰ درهم)','m-chq':'منیجر چک به نام نخیل',
+'l-who':'چه کسی مبلغ را در دبی تحویل می‌دهد؟','w-self':'خودم — در دبی هستم','w-exch':'از طریق صرافی','w-rep':'نماینده من','l-whon':'نام و شماره تماس صرافی / نماینده',
+'l-where':'مبلغ را کجای دبی تحویل بگیریم؟','o-sel':'— انتخاب کنید —','o-nak':'دفتر فروش نخیل','o-off':'دفتر امیررضا','o-exc':'دفتر صرافی در دبی','o-oth':'مکان دیگر (آدرس را وارد کنید)','l-addr':'آدرس / توضیحات مکان',
+'l-date':'تاریخ تحویل','l-time':'زمان مناسب','o-mor':'صبح (۹ تا ۱۲)','o-aft':'بعدازظهر (۱۲ تا ۱۷)','o-eve':'عصر (۱۷ تا ۲۱)','date-h':'آخرین مهلت: دوشنبه ۷ دسامبر (۱۶ آذر).','l-notes':'توضیحات دیگر',opt:'(اختیاری)',
+ack:'می‌دانم که این درخواست، جای من را در صف رزرو نگه می‌دارد. واحد فقط پس از تأیید موجودی توسط امیررضا و دریافت مبلغ ۱۰۰٬۰۰۰ درهم رزرو قطعی می‌شود. قیمت نهایی به ساختمان، طبقه، ویو و موجودی بستگی دارد.',
+submit:'ثبت رزرو',sending:'در حال ارسال…',
+'e-req':'لطفاً همه فیلدهای ضروری را پر کنید.','e-mail':'لطفاً یک ایمیل معتبر وارد کنید.','e-ph':'لطفاً یک شماره واتساپ معتبر وارد کنید.','e-file':'حجم فایل زیاد است — حداکثر ۳ مگابایت.','e-date':'لطفاً تاریخی بین امروز تا دوشنبه ۷ دسامبر انتخاب کنید.','e-ack':'لطفاً گزینه تأیید را علامت بزنید.','e-net':'ارسال درخواست انجام نشد. لطفاً با دکمه زیر آن را در واتساپ برای امیررضا بفرستید — اطلاعات شما از قبل در پیام نوشته شده است.',
+'ok-h':'درخواست رزرو شما ثبت شد','ok-ref':'کد پیگیری شما','ok-p':'امیررضا به‌زودی در واتساپ با شما تماس می‌گیرد تا واحد، محل تحویل و نام دقیق ذی‌نفع چک را تأیید کند.','ok-wa':'پیام در واتساپ به امیررضا','fail-h':'یک قدم مانده',
+'s-unit':'واحد','s-price':'شروع قیمت','s-plan':'طرح پرداخت','s-rsv':'مبلغ رزرو','s-name':'نام','s-email':'ایمیل','s-wa':'واتساپ','s-nat':'ملیت / اقامت','s-id':'مدرک شناسایی','s-meth':'روش پرداخت','s-who':'تحویل‌دهنده','s-where':'محل تحویل','s-when':'تاریخ و زمان','s-notes':'توضیحات',yes:'پیوست شد',no:'پیوست نشده',
+mon:['ژانویه','فوریه','مارس','آوریل','مه','ژوئن','ژوئیه','اوت','سپتامبر','اکتبر','نوامبر','دسامبر'],
+g1:'پالم سنترال — فروند D، پالم جبل علی',g2:'استخر اینفینیتی رو به خلیج',g3:'دسترسی مستقیم به ساحل اختصاصی',g4:'ساحل اختصاصی برای روزهای کنار دریا',g5:'معماری پله‌ای در امتداد خلیج',g6:'پنت‌هاوس پنج‌خوابه — نشیمن',g7:'تراس‌ها رو به چشم‌انداز وسیع دریا',g8:'محوطه استخر هنگام غروب',g9:'مسترپلن — ساختمان‌های A، B و C',g10:'در قلب پالم جبل علی',g11:'ورودی مجموعه',g12:'لابی لانج',g13:'تراس پودیوم با فضای سبز',g14:'پنت‌هاوس پنج‌خوابه — اتاق خواب مستر',g15:'پنت‌هاوس پنج‌خوابه — حمام مستر',g16:'تاون‌هاوس چهارخوابه — تراس',g17:'پنج‌خوابه — نشیمن',g18:'پنج‌خوابه — تراس',g19:'سه‌خوابه — نشیمن و ناهارخوری',g20:'سه‌خوابه — اتاق خواب مستر'
+},
+ar:{
+badge:'إطلاق جديد · نخيل',sub:'مساكن خاصة',loc:'الفرع D · نخلة جبل علي',
+lead:'216 مسكناً على الشاطئ في ثلاثة مبانٍ في قلب نخلة جبل علي — من غرفة نوم واحدة إلى خمس غرف، وتاون هاوس وبنتهاوس، مع شاطئ خاص ومسبح لا متناهٍ يطل على الخليج.',
+cdl:'ينتهي الحجز خلال',dd:'يوم',hh:'ساعة',mm:'دقيقة',ss:'ثانية',cdd:'الاثنين 7 ديسمبر · 11:59 مساءً بتوقيت دبي',closed:'انتهت فترة الحجز لهذا الإطلاق',
+'b-rsv':'احجز وحدتك','b-prc':'الأسعار وخطة الدفع',
+f1:'السعر يبدأ من',f2:'وحدة · 3 مبانٍ',f3:'دفعة أولى عند الحجز',f4:'الإنجاز المتوقع',f5:'مبلغ الحجز',f6b:'الإقامة الذهبية',f6:'جميع الوحدات مؤهلة (2 مليون درهم+)',
+'g-h':'هدوء اسمه البيت','g-hint':'اضغط على أي صورة لعرضها بالحجم الكامل.',
+t1:'الأسعار',t2:'خطة الدفع',t3:'المخططات',t4:'الموقع والمرافق',
+th1:'نوع الوحدة',th2:'المساحة المتوسطة',th3:'السعر يبدأ من',th4:'خطة الدفع',rsv:'احجز',
+'u-1br':'غرفة نوم واحدة','u-2br':'غرفتا نوم','u-2bm':'غرفتا نوم + غرفة خادمة','u-3br':'3 غرف نوم','u-4br':'4 غرف نوم','u-4th':'تاون هاوس 4 غرف نوم','u-5br':'5 غرف نوم','u-5ph':'بنتهاوس 5 غرف نوم',
+'prc-note':'الأسعار الابتدائية من قائمة أسعار نخيل الرسمية بالدرهم. يعتمد السعر النهائي على المبنى والطابق والإطلالة والتوفر وقت الحجز. تُضاف رسوم تسجيل دائرة الأراضي والأملاك (DLD) بنسبة 4%.',
+'calc-l':'عرض مبالغ الدفعات لـ:','calc-0':'النسب فقط','pa-for':'غرفة نوم واحدة، غرفتا نوم، وغرفتا نوم + غرفة خادمة','pb-for':'3 و4 و5 غرف نوم، تاون هاوس وبنتهاوس',
+bk:'دفعة أولى عند الحجز',comp:'عند الإنجاز','plan-note':'الإنجاز المتوقع للبناء: أكتوبر 2030. تُدفع رسوم DLD بنسبة 4% عند الحجز مع الدفعة الأولى 20%.',
+'fp-note':'مخططات نموذجية من كتيّب نخيل الرسمي. تختلف المساحات والتصاميم حسب الوحدة، ونرسل لك مخطط وحدتك بالتحديد قبل الحجز.',
+fp1:'غرفة نوم واحدة · نوع 1D',fp2:'غرفتا نوم · نوع 2E',fp3:'غرفتا نوم · نوع 2G',fp4:'3 غرف نوم · نوع 3A',fp5:'3 غرف نوم · نوع 3D',fp6:'4 غرف نوم · نوع 4A',fp7:'تاون هاوس 4 غرف نوم',fp8:'5 غرف نوم · نوع 5A',fp9:'بنتهاوس 5 غرف نوم',
+'l-h':'المسافة بالسيارة',l1:'جزيرة بلوواترز',l2:'مطار آل مكتوم الدولي (DWC)',l3:'مول الإمارات',l4:'نخلة جميرا',l5:'برج العرب',l6:'مطار دبي الدولي (DXB)',
+m23:'23 دقيقة',m25:'25 دقيقة',m27:'27 دقيقة',m28:'28 دقيقة',m30:'30 دقيقة',m40:'40 دقيقة',
+'l-note':'وصول مباشر إلى شارع الشيخ زايد عبر طريق سريع مخصص بطول 5 كم. نخلة جبل علي واحدة من جزيرتين فقط على شكل نخلة في العالم — وضعف مساحة نخلة جميرا.',
+'a-h':'المرافق',am1:'شاطئ خاص',am2:'مسبح لا متناهٍ',am3:'ملعب بادل',am4:'كرة طائرة شاطئية',am5:'نادٍ رياضي واستوديو لياقة',am6:'استوديو يوغا',am7:'منطقة لياقة خارجية',am8:'نادي السكان',am9:'غرفة ألعاب',am10:'منطقة لعب للأطفال (داخلية وخارجية)',am11:'منطقة شواء خارجية',am12:'حديقة للمناسبات',am13:'صالة الردهة',
+'w-h':'لماذا بالم سنترال',y1:'الوحدات على الشاطئ تشكّل نحو 5% فقط من المعروض الحالي والقادم من الشقق في دبي',y2:'تصميم متدرّج — جميع الوحدات الرئيسية بإطلالات بانورامية على البحر',y3:'أسعار فلل نخلة جبل علي: نمو بنحو 15% سنوياً خلال السنوات الأربع الماضية',y4:'دخول مبكر إلى وجهة شاطئية مميزة في دبي المستقبل','w-src':'المصدر: نخيل، العرض التعريفي لمشروع بالم سنترال الفرع D.',
+'c-h':'احجز بمبلغ 100,000 درهم','c-p':'اختر وحدتك، وأخبرنا متى وأين في دبي سيتم تسليم مبلغ الحجز (نقداً أو بشيك مصرفي باسم نخيل)، وسيتواصل معك أمير رضا شخصياً لتأكيد كل التفاصيل.',
+'rv-t':'الحجز في بالم سنترال',st1:'الخطوة 1 من 4 · اختر وحدتك',st2:'الخطوة 2 من 4 · بياناتك',st3:'الخطوة 3 من 4 · دفع مبلغ الحجز',st4:'الخطوة 4 من 4 · المراجعة والتأكيد',st5:'تم',
+from:'من','e-unit':'يرجى اختيار نوع الوحدة.',next:'التالي ←',back:'→ السابق',
+'l-name':'الاسم الكامل (كما في جواز السفر)','l-email':'البريد الإلكتروني','l-wa':'رقم واتساب','l-nat':'الجنسية','l-res':'بلد الإقامة','l-id':'نسخة جواز السفر أو الهوية الإماراتية','l-idopt':'(اختياري · JPG أو PNG أو PDF · بحد أقصى 3 ميغابايت)',
+'pay-info':'<b>مبلغ الحجز: 100,000 درهم.</b><br>يُقبل فقط <b>نقداً</b> أو <b>بشيك مصرفي (مانجر شيك) باسم نخيل</b>. سيؤكد معك أمير رضا اسم المستفيد الدقيق للشيك قبل إصداره.',
+'pay-no':'لا تُقبل التحويلات البنكية أو من حساب إلى حساب لهذا الحجز.',
+'l-meth':'طريقة الدفع','m-cash':'نقداً (100,000 درهم)','m-chq':'شيك مصرفي باسم نخيل',
+'l-who':'من سيسلّم المبلغ في دبي؟','w-self':'أنا بنفسي — سأكون في دبي','w-exch':'عن طريق شركة الصرافة','w-rep':'ممثل ينوب عني','l-whon':'اسم ورقم هاتف الصرافة / الممثل',
+'l-where':'أين نستلم المبلغ في دبي؟','o-sel':'— اختر —','o-nak':'مركز مبيعات نخيل','o-off':'مكتب أمير رضا','o-exc':'مكتب الصرافة في دبي','o-oth':'موقع آخر (أدخل العنوان)','l-addr':'العنوان / تفاصيل الموقع',
+'l-date':'تاريخ التسليم','l-time':'الوقت المفضل','o-mor':'صباحاً (9–12)','o-aft':'بعد الظهر (12–5)','o-eve':'مساءً (5–9)','date-h':'آخر موعد: الاثنين 7 ديسمبر.','l-notes':'ملاحظات أخرى',opt:'(اختياري)',
+ack:'أفهم أن هذا الطلب يحجز مكاني في قائمة الانتظار، وأن الوحدة لا تُثبَّت إلا بعد تأكيد أمير رضا لتوفرها واستلام مبلغ الحجز 100,000 درهم. يعتمد السعر النهائي على المبنى والطابق والإطلالة والتوفر.',
+submit:'إرسال الحجز',sending:'جارٍ الإرسال…',
+'e-req':'يرجى تعبئة جميع الحقول المطلوبة.','e-mail':'يرجى إدخال بريد إلكتروني صحيح.','e-ph':'يرجى إدخال رقم واتساب صحيح.','e-file':'حجم الملف كبير — الحد الأقصى 3 ميغابايت.','e-date':'يرجى اختيار تاريخ بين اليوم والاثنين 7 ديسمبر.','e-ack':'يرجى وضع علامة على مربع التأكيد.','e-net':'تعذّر إرسال طلبك. يرجى إرساله إلى أمير رضا عبر واتساب باستخدام الزر أدناه — بياناتك مكتوبة مسبقاً في الرسالة.',
+'ok-h':'تم استلام طلب الحجز','ok-ref':'رقمك المرجعي','ok-p':'سيتواصل معك أمير رضا قريباً عبر واتساب لتأكيد الوحدة ومكان التسليم واسم المستفيد الدقيق للشيك.','ok-wa':'راسل أمير رضا على واتساب','fail-h':'خطوة أخيرة',
+'s-unit':'الوحدة','s-price':'السعر يبدأ من','s-plan':'خطة الدفع','s-rsv':'مبلغ الحجز','s-name':'الاسم','s-email':'البريد الإلكتروني','s-wa':'واتساب','s-nat':'الجنسية / الإقامة','s-id':'نسخة الهوية','s-meth':'طريقة الدفع','s-who':'المسلِّم','s-where':'المكان','s-when':'التاريخ والوقت','s-notes':'ملاحظات',yes:'مرفقة',no:'غير مرفقة',
+mon:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
+g1:'بالم سنترال — الفرع D، نخلة جبل علي',g2:'مسبح لا متناهٍ يطل على الخليج',g3:'وصول مباشر إلى شاطئ خاص',g4:'واجهة شاطئية خاصة لأيام على البحر',g5:'تصميم متدرّج على امتداد الخليج',g6:'بنتهاوس 5 غرف — غرفة المعيشة',g7:'شرفات بإطلالات واسعة على البحر',g8:'منطقة المسبح عند الغروب',g9:'المخطط العام — المباني A وB وC',g10:'في قلب نخلة جبل علي',g11:'مدخل المجمّع',g12:'صالة الردهة',g13:'تراس منسّق بالمساحات الخضراء',g14:'بنتهاوس 5 غرف — غرفة النوم الرئيسية',g15:'بنتهاوس 5 غرف — الحمام الرئيسي',g16:'تاون هاوس 4 غرف — التراس',g17:'5 غرف نوم — غرفة المعيشة',g18:'5 غرف نوم — التراس',g19:'3 غرف نوم — المعيشة والطعام',g20:'3 غرف نوم — غرفة النوم الرئيسية'
+}
+};
+
+function L(){var c=document.body.className||'';return /(^|\s)fa(\s|$)/.test(c)?'fa':(/(^|\s)ar(\s|$)/.test(c)?'ar':'en');}
+function t(k){var l=L();return (T[l]&&T[l][k]!=null)?T[l][k]:T.en[k];}
+function fmt(n){return 'AED '+Math.round(n).toLocaleString('en-US');}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function unit(id){for(var i=0;i<UNITS.length;i++)if(UNITS[i].id===id)return UNITS[i];return null;}
+function wa(){return L()==='fa'?WA_FA:WA_MAIN;}
+function closedNow(){return Date.now()>DEADLINE;}
+
+var sel=null, step=1, idFile=null, lbList=[], lbI=0;
+
+/* ---------- render pieces ---------- */
+function renderGallery(){
+ var g=document.getElementById('pz-gal'); if(!g)return; var h='';
+ for(var i=0;i<GAL_SHOW&&i<GAL.length;i++){
+  var it=GAL[i], last=(i===GAL_SHOW-1&&GAL.length>GAL_SHOW);
+  h+='<button type="button" class="'+(it[2]?'w2':'')+'" onclick="pcfLb(\'gal\','+i+')" aria-label="'+esc(t(it[1]))+'"><img loading="lazy" decoding="async" src="'+IMG+it[0]+'-t.webp" alt="'+esc(t(it[1]))+'">'+(last?'<span class="pz-more">+'+(GAL.length-GAL_SHOW+1)+'</span>':'')+'</button>';
+ }
+ g.innerHTML=h;
+}
+function renderFps(){
+ var g=document.getElementById('pz-fps'); if(!g)return; var h='';
+ FPS.forEach(function(f,i){h+='<button type="button" onclick="pcfLb(\'fp\','+i+')"><img loading="lazy" decoding="async" src="'+IMG+f[0]+'-t.webp" alt="'+esc(t(f[1]))+'"><span>'+esc(t(f[1]))+'</span></button>';});
+ g.innerHTML=h;
+}
+function renderLists(){
+ var a=document.getElementById('pz-amen'); if(a)a.innerHTML=AMEN.map(function(k){return '<span>'+esc(t(k))+'</span>';}).join('');
+ var w=document.getElementById('pz-why'); if(w)w.innerHTML=WHY.map(function(k){return '<li><span>'+esc(t(k))+'</span></li>';}).join('');
+}
+function planRows(p,u){
+ var rows=PLANS[p], mon=t('mon'), h='';
+ rows.forEach(function(r,i){
+  var lbl=r[0]==='bk'?t('bk'):(mon[r[0]]+' '+r[1]+(i===rows.length-1?' · '+t('comp'):''));
+  h+='<tr class="'+(i===0||i===rows.length-1?'hl':'')+'"><td>'+esc(lbl)+'</td><td class="p">'+r[2]+'%</td>'+(u?'<td class="a">'+fmt(u.price*r[2]/100)+'</td>':'')+'</tr>';
+ });
+ return h;
+}
+window.pcfCalc=function(){
+ var s=document.getElementById('pz-calc'), u=s?unit(s.value):null;
+ document.getElementById('pz-tA').innerHTML=planRows('A',u&&u.plan==='A'?u:null);
+ document.getElementById('pz-tB').innerHTML=planRows('B',u&&u.plan==='B'?u:null);
+ document.getElementById('pz-planA').style.opacity=(u&&u.plan!=='A')?'.45':'1';
+ document.getElementById('pz-planB').style.opacity=(u&&u.plan!=='B')?'.45':'1';
+};
+function renderCalcSelect(){
+ var s=document.getElementById('pz-calc'); if(!s)return; var v=s.value;
+ s.innerHTML='<option value="">'+esc(t('calc-0'))+'</option>'+UNITS.map(function(u){return '<option value="'+u.id+'">'+esc(t(u.k))+' — '+fmt(u.price)+'</option>';}).join('');
+ s.value=v; pcfCalc();
+}
+function renderUnits(){
+ var g=document.getElementById('pz-units'); if(!g)return;
+ g.innerHTML=UNITS.map(function(u){return '<button type="button" class="rv-u'+(sel&&sel.id===u.id?' on':'')+'" onclick="pcfPick(\''+u.id+'\')"><b>'+esc(t(u.k))+'</b><em>'+esc(t('from'))+' '+fmt(u.price)+'</em><small>'+u.sqft.toLocaleString('en-US')+' sq.ft · '+(u.plan==='A'?'70/30':'60/40')+'</small></button>';}).join('');
+}
+function applyLang(){
+ var root=[document.getElementById('pcf'),document.getElementById('pz-rv')];
+ root.forEach(function(r){ if(!r)return; r.querySelectorAll('[data-pcf]').forEach(function(el){var v=t(el.getAttribute('data-pcf')); if(typeof v==='string')el.innerHTML=v;}); });
+ var rv=document.getElementById('pz-rv'); if(rv)rv.setAttribute('dir',L()==='en'?'ltr':'rtl');
+ renderGallery();renderFps();renderLists();renderCalcSelect();renderUnits();
+ var st=document.getElementById('pz-rvst'); if(st)st.textContent=t('st'+step);
+ if(step===3)renderInst();
+ var cc=document.getElementById('pz-cc'); if(cc&&!cc._touched)cc.value=L()==='fa'?'+98':'+971'; var ph=document.getElementById('pz-ph'); if(ph)ph.placeholder=L()==='fa'?'912 345 6789':'50 123 4567';
+}
+
+/* ---------- countdown ---------- */
+function tick(){
+ var d=DEADLINE-Date.now();
+ if(d<=0){
+  var b=document.getElementById('pz-cdbox'); if(b)b.style.display='none';
+  var c=document.getElementById('pz-closed'); if(c)c.style.display='block';
+  document.querySelectorAll('#pcf .pz-open-rv,#pcf .pz-rsv').forEach(function(x){x.style.display='none';});
+  return false;
+ }
+ var v=[Math.floor(d/864e5),Math.floor(d%864e5/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)];
+ ['pz-d','pz-h','pz-m','pz-s'].forEach(function(id,i){var e=document.getElementById(id); if(e)e.textContent=String(v[i]).padStart(2,'0');});
+ return true;
+}
+
+/* ---------- tabs ---------- */
+window.pcfTab=function(name,scroll){
+ document.querySelectorAll('#pcf .pz-tab').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-t')===name);});
+ document.querySelectorAll('#pcf .pz-pane').forEach(function(p){p.classList.toggle('on',p.id==='pcp-'+name);});
+ if(scroll){var el=document.getElementById('pz-details'); if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-70,behavior:'smooth'});}
+};
+
+/* ---------- lightbox ---------- */
+window.pcfLb=function(kind,i){
+ lbList=kind==='fp'?FPS.map(function(f){return [f[0],f[1]];}):GAL.map(function(g){return [g[0],g[1]];});
+ lbI=i; showLb(); document.getElementById('pz-lb').classList.add('on'); document.body.style.overflow='hidden';
+};
+function showLb(){var it=lbList[lbI]; var im=document.getElementById('pz-lbi'); im.src=IMG+it[0]+'.webp'; im.alt=t(it[1]); document.getElementById('pz-lbc').textContent=t(it[1]); document.getElementById('pz-lbn').textContent=(lbI+1)+' / '+lbList.length;}
+window.pcfLbGo=function(d){lbI=(lbI+d+lbList.length)%lbList.length; showLb();};
+window.pcfLbClose=function(){document.getElementById('pz-lb').classList.remove('on'); if(!document.getElementById('pz-rv').classList.contains('on'))document.body.style.overflow='';};
+document.addEventListener('keydown',function(e){
+ if(!document.getElementById('pz-lb').classList.contains('on'))return;
+ if(e.key==='Escape')pcfLbClose(); else if(e.key==='ArrowRight')pcfLbGo(L()==='en'?1:-1); else if(e.key==='ArrowLeft')pcfLbGo(L()==='en'?-1:1);
+});
+(function(){var x0=null; var lb=document.getElementById('pz-lb');
+ lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+ lb.addEventListener('touchend',function(e){if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50)pcfLbGo(dx<0?1:-1); x0=null;});
+})();
+
+/* ---------- reservation wizard (v2) ---------- */
+var T2={
+en:{st1:'Step 1 of 5 · Choose your unit',st2:'Step 2 of 5 · Your details',st3:'Step 3 of 5 · Payment plan',st4:'Step 4 of 5 · Passport & ID card',st5:'Step 5 of 5 · Reservation appointment',st6:'Done',
+ 'inst-note':'Amounts are calculated on the starting price. The final price depends on the building, floor, view and availability.',
+ 'plan-ok':'I have reviewed this payment plan and I accept it.','e-plan':'Please confirm that you accept the payment plan.',
+ dld:'DLD registration fee (4%) — paid at booking',tot:'Total incl. DLD',
+ 'doc-info':'To take part in the launch, a copy of your <b>passport</b> and your <b>ID card</b> is required. Both are needed to register your reservation.',
+ 'd-pass':'Passport (photo page)','d-id':'ID card (Emirates ID or national ID card)','d-fmt':'Photo or scan · JPG, PNG or PDF',
+ 'e-docs':'Please upload both your passport and your ID card.','e-ftype':'Please upload a JPG, PNG or PDF file.','e-fbig':'This file is too large. Please upload a smaller photo or a PDF under 1.8 MB.','proc':'Processing…',
+ 'pay-info':"<b>Reservation amount: AED 100,000.</b><br>Paid only in <b>cash</b> or by <b>manager's cheque payable to Nakheel</b>. Tell us which day and time suits you, and AmirReza will call you to arrange the handover.",
+ 'l-date2':'Which day can you deliver it?','call-h':'Latest date: Monday 7 December. AmirReza will call you to confirm the exact time and place for that day.',
+ ack:'I understand that this request holds my place in the queue. The unit is confirmed only after AmirReza confirms availability and the AED 100,000 reservation amount is received.',
+ 'e-ack':'Please tick the confirmation box.','ok-p':'AmirReza will call you to confirm your unit and arrange the day and place to receive the AED 100,000.'},
+fa:{st1:'مرحله ۱ از ۵ · انتخاب واحد',st2:'مرحله ۲ از ۵ · اطلاعات شما',st3:'مرحله ۳ از ۵ · اقساط',st4:'مرحله ۴ از ۵ · پاسپورت و کارت شناسایی',st5:'مرحله ۵ از ۵ · زمان تحویل مبلغ رزرو',st6:'ثبت شد',
+ 'inst-note':'مبالغ بر اساس شروع قیمت محاسبه شده است. قیمت نهایی به ساختمان، طبقه، ویو و موجودی بستگی دارد.',
+ 'plan-ok':'اقساط این واحد را بررسی کردم و مورد تأیید من است.','e-plan':'لطفاً تأیید کنید که شرایط اقساط را قبول دارید.',
+ dld:'هزینه ثبت DLD (۴٪) — هنگام خرید',tot:'جمع کل با DLD',
+ 'doc-info':'برای شرکت در لانچ، تصویر <b>پاسپورت</b> و <b>کارت شناسایی</b> شما الزامی است. هر دو برای ثبت رزرو لازم هستند.',
+ 'd-pass':'پاسپورت (صفحه عکس‌دار)','d-id':'کارت شناسایی (امارات آیدی یا کارت ملی)','d-fmt':'عکس یا اسکن · JPG، PNG یا PDF',
+ 'e-docs':'لطفاً هم پاسپورت و هم کارت شناسایی را آپلود کنید.','e-ftype':'لطفاً فایل JPG، PNG یا PDF آپلود کنید.','e-fbig':'حجم فایل زیاد است. لطفاً عکس کوچک‌تر یا PDF زیر ۱٫۸ مگابایت آپلود کنید.','proc':'در حال پردازش…',
+ 'pay-info':'<b>مبلغ رزرو: ۱۰۰٬۰۰۰ درهم.</b><br>فقط به صورت <b>نقد (کش)</b> یا <b>منیجر چک به نام شرکت نخیل</b>. روز و ساعتی که برایتان مناسب است را مشخص کنید؛ امیررضا با شما تماس می‌گیرد و قرار تحویل را هماهنگ می‌کند.',
+ 'l-date2':'چه روزی می‌توانید مبلغ را تحویل دهید؟','call-h':'آخرین مهلت: دوشنبه ۷ دسامبر (۱۶ آذر). امیررضا با شما تماس می‌گیرد تا ساعت و محل دقیق همان روز را هماهنگ کند.',
+ ack:'می‌دانم که این درخواست، جای من را در صف رزرو نگه می‌دارد. واحد فقط پس از تأیید موجودی توسط امیررضا و دریافت مبلغ ۱۰۰٬۰۰۰ درهم رزرو قطعی می‌شود.',
+ 'e-ack':'لطفاً گزینه تأیید را علامت بزنید.','ok-p':'امیررضا با شما تماس می‌گیرد تا واحد را تأیید کند و روز و محل تحویل ۱۰۰٬۰۰۰ درهم را هماهنگ کند.'},
+ar:{st1:'الخطوة 1 من 5 · اختر وحدتك',st2:'الخطوة 2 من 5 · بياناتك',st3:'الخطوة 3 من 5 · خطة الدفع',st4:'الخطوة 4 من 5 · جواز السفر والهوية',st5:'الخطوة 5 من 5 · موعد تسليم مبلغ الحجز',st6:'تم',
+ 'inst-note':'المبالغ محسوبة على السعر الابتدائي. يعتمد السعر النهائي على المبنى والطابق والإطلالة والتوفر.',
+ 'plan-ok':'راجعت خطة الدفع هذه وأوافق عليها.','e-plan':'يرجى تأكيد موافقتك على خطة الدفع.',
+ dld:'رسوم تسجيل DLD (4%) — عند الحجز',tot:'الإجمالي شامل DLD',
+ 'doc-info':'للمشاركة في الإطلاق، يلزم تقديم نسخة من <b>جواز السفر</b> و<b>بطاقة الهوية</b>. كلاهما مطلوب لتسجيل حجزك.',
+ 'd-pass':'جواز السفر (صفحة الصورة)','d-id':'بطاقة الهوية (الهوية الإماراتية أو الهوية الوطنية)','d-fmt':'صورة أو مسح ضوئي · JPG أو PNG أو PDF',
+ 'e-docs':'يرجى تحميل جواز السفر وبطاقة الهوية معاً.','e-ftype':'يرجى تحميل ملف JPG أو PNG أو PDF.','e-fbig':'حجم الملف كبير. يرجى تحميل صورة أصغر أو ملف PDF أقل من 1.8 ميغابايت.','proc':'جارٍ المعالجة…',
+ 'pay-info':'<b>مبلغ الحجز: 100,000 درهم.</b><br>يُدفع فقط <b>نقداً</b> أو <b>بشيك مصرفي (مانجر شيك) باسم نخيل</b>. أخبرنا باليوم والوقت المناسبين لك، وسيتصل بك أمير رضا لترتيب التسليم.',
+ 'l-date2':'في أي يوم يمكنك تسليم المبلغ؟','call-h':'آخر موعد: الاثنين 7 ديسمبر. سيتصل بك أمير رضا لتأكيد الوقت والمكان بالتحديد في ذلك اليوم.',
+ ack:'أفهم أن هذا الطلب يحجز مكاني في قائمة الانتظار، وأن الوحدة لا تُثبَّت إلا بعد تأكيد أمير رضا لتوفرها واستلام مبلغ الحجز 100,000 درهم.',
+ 'e-ack':'يرجى وضع علامة على مربع التأكيد.','ok-p':'سيتصل بك أمير رضا لتأكيد الوحدة وترتيب يوم ومكان استلام مبلغ 100,000 درهم.'}
+};
+for(var l2 in T2){for(var k2 in T2[l2]){T[l2][k2]=T2[l2][k2];}}
+
+var docs={passport:null,idcard:null};
+window.pcfSelect=function(id){ if(closedNow())return; sel=unit(id); pcfOpen(2); };
+window.pcfOpen=function(s){
+ if(closedNow())return;
+ document.getElementById('pz-rv').classList.add('on'); document.body.style.overflow='hidden';
+ pcfStep(typeof s==='number'?s:1);
+};
+window.pcfClose=function(){document.getElementById('pz-rv').classList.remove('on'); document.body.style.overflow=''; if(step===6){step=1;}};
+window.pcfPick=function(id){sel=unit(id); renderUnits(); err(1,'');};
+window.pcfStep=function(n){
+ if(n>1&&!sel)n=1;
+ step=n;
+ for(var i=1;i<=6;i++){var s=document.getElementById('pcs'+i); if(s)s.classList.toggle('on',i===n);}
+ document.querySelectorAll('#pz-bar i').forEach(function(b,i){b.classList.toggle('on',i<n);});
+ document.getElementById('pz-bar').style.display=n===6?'none':'flex';
+ document.getElementById('pz-rvst').textContent=t('st'+n);
+ if(n===1)renderUnits();
+ if(n===3)renderInst();
+ if(n===5)setDateBounds();
+ document.getElementById('pz-rv').scrollTop=0;
+};
+function err(n,m){var e=document.getElementById('pce'+n); if(!e)return; e.textContent=m; e.style.display=m?'block':'none';}
+function val(id){var e=document.getElementById(id); return e?String(e.value||'').trim():'';}
+function radio(name){var r=document.querySelector('input[name="'+name+'"]:checked'); return r?r.value:'';}
+function phone(){var cc=val('pz-cc'), p=val('pz-ph').replace(/[^\d+]/g,''); if(!p)return '';
+ if(p.charAt(0)==='+')return p; if(p.indexOf('00')===0)return '+'+p.slice(2);
+ if(cc==='+')return '+'+p; return cc+p.replace(/^0+/,'');}
+function todayDubai(){var d=new Date(Date.now()+4*36e5); return d.toISOString().slice(0,10);}
+function setDateBounds(){var d=document.getElementById('pz-date'); if(!d)return; d.min=todayDubai(); d.max=LATEST_DELIVERY;}
+function renderInst(){
+ if(!sel)return;
+ var u=sel, rows=PLANS[u.plan], mon=t('mon'), h='';
+ document.getElementById('pz-plh').innerHTML='<div><b>'+esc(t(u.k))+'</b><small>'+u.sqft.toLocaleString('en-US')+' sq.ft · '+(u.plan==='A'?'70/30':'60/40')+'</small></div><em>'+esc(t('from'))+' '+fmt(u.price)+'</em>';
+ rows.forEach(function(r,i){
+  var lbl=r[0]==='bk'?t('bk'):(mon[r[0]]+' '+r[1]+(i===rows.length-1?' · '+t('comp'):''));
+  h+='<tr class="'+(i===0||i===rows.length-1?'hl':'')+'"><td>'+esc(lbl)+'</td><td class="p">'+r[2]+'%</td><td class="a">'+fmt(u.price*r[2]/100)+'</td></tr>';
+  if(i===0)h+='<tr class="dld"><td>'+esc(t('dld'))+'</td><td class="p">4%</td><td class="a">'+fmt(u.price*0.04)+'</td></tr>';
+ });
+ h+='<tr class="tot"><td>'+esc(t('tot'))+'</td><td class="p">104%</td><td class="a">'+fmt(u.price*1.04)+'</td></tr>';
+ document.getElementById('pz-inst').innerHTML=h;
+}
+document.addEventListener('change',function(e){
+ var tg=e.target; if(!tg)return;
+ if(tg.name==='pz-who'){document.getElementById('pz-whob').style.display=(tg.value==='self')?'none':'block';}
+ if(tg.name==='pz-who'||tg.name==='pz-meth'){document.querySelectorAll('#pz-rv .rv-opt').forEach(function(l){var i=l.querySelector('input'); l.classList.toggle('on',!!(i&&i.checked));});}
+ if(tg.id==='pz-cc')tg._touched=true;
+});
+/* documents: images are resized in the browser (max 1800px JPEG) so both files fit in one submission */
+function showDoc(kind,name,thumb){
+ var st=document.getElementById('pz-st-'+kind), box=document.getElementById('pz-up-'+kind);
+ if(!name){st.style.display='none'; box.classList.remove('ok'); return;}
+ st.innerHTML=(thumb?'<img src="'+thumb+'" alt="">':'📄')+'<span>✓ '+esc(name)+'</span>'; st.style.display='flex'; box.classList.add('ok');
+}
+window.pcfDoc=function(inp,kind){
+ var f=inp.files&&inp.files[0]; docs[kind]=null; showDoc(kind,''); err(4,'');
+ if(!f)return;
+ var isPdf=/pdf$/i.test(f.type)||/\.pdf$/i.test(f.name), isImg=/^image\//i.test(f.type)||/\.(jpe?g|png|webp|heic|heif)$/i.test(f.name);
+ if(!isPdf&&!isImg){err(4,t('e-ftype')); inp.value=''; return;}
+ if(isPdf){
+  if(f.size>1.8*1024*1024){err(4,t('e-fbig')); inp.value=''; return;}
+  var r=new FileReader(); r.onload=function(ev){var s=String(ev.target.result); docs[kind]={name:f.name,type:'application/pdf',data:s.slice(s.indexOf(',')+1)}; showDoc(kind,f.name,null);}; r.readAsDataURL(f); return;
+ }
+ var st=document.getElementById('pz-st-'+kind); st.textContent=t('proc'); st.style.display='flex';
+ var url=URL.createObjectURL(f), im=new Image();
+ im.onload=function(){
+  var w=im.naturalWidth,h=im.naturalHeight,sc=Math.min(1,1800/Math.max(w,h)),c=document.createElement('canvas');
+  c.width=Math.round(w*sc); c.height=Math.round(h*sc); var cx=c.getContext('2d'); cx.fillStyle='#fff'; cx.fillRect(0,0,c.width,c.height); cx.drawImage(im,0,0,c.width,c.height);
+  URL.revokeObjectURL(url);
+  var d=c.toDataURL('image/jpeg',0.82), b64=d.slice(d.indexOf(',')+1);
+  if(b64.length>2400000){d=c.toDataURL('image/jpeg',0.6); b64=d.slice(d.indexOf(',')+1);}
+  var nm=f.name.replace(/\.[^.]+$/,'')+'.jpg';
+  docs[kind]={name:nm,type:'image/jpeg',data:b64}; showDoc(kind,f.name,d);
+ };
+ im.onerror=function(){URL.revokeObjectURL(url); st.style.display='none'; err(4,t('e-ftype')); inp.value='';};
+ im.src=url;
+};
+window.pcfNext=function(n){
+ if(n===1){ if(!sel){err(1,t('e-unit'));return;} err(1,''); pcfStep(2); return; }
+ if(n===2){
+  if(!val('pz-name')||!val('pz-email')||!val('pz-ph')||!val('pz-nat')||!val('pz-res')){err(2,t('e-req'));return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val('pz-email'))){err(2,t('e-mail'));return;}
+  if(phone().replace(/\D/g,'').length<8){err(2,t('e-ph'));return;}
+  err(2,''); pcfStep(3); return;
+ }
+ if(n===3){ if(!document.getElementById('pz-planok').checked){err(3,t('e-plan'));return;} err(3,''); pcfStep(4); return; }
+ if(n===4){ if(!docs.passport||!docs.idcard){err(4,t('e-docs'));return;} err(4,''); pcfStep(5); return; }
+};
+function waText(ref){
+ var u=sel, ENL={cash:'Cash',cheque:"Manager's cheque to Nakheel",self:'Myself',exchange:'Exchange house',rep:'Representative',morning:'Morning',afternoon:'Afternoon',evening:'Evening'};
+ var who=radio('pz-who');
+ return 'Hi AmirReza, I want to reserve at Palm Central (Frond D, Palm Jebel Ali).\n'+
+  'Ref: '+ref+'\nUnit: '+u.en+' (from AED '+u.price.toLocaleString('en-US')+', '+(u.plan==='A'?'70/30':'60/40')+')\n'+
+  'Name: '+val('pz-name')+'\nEmail: '+val('pz-email')+'\n'+
+  'Reservation AED 100,000 by: '+(ENL[radio('pz-meth')]||'')+' — delivered by: '+(ENL[who]||'')+(who&&who!=='self'?' ('+val('pz-whon')+')':'')+'\n'+
+  'Day: '+val('pz-date')+' '+(ENL[val('pz-time')]||'');
+}
+window.pcfSubmit=function(){
+ var who=radio('pz-who'), d=val('pz-date');
+ if(!radio('pz-meth')||!who||!d||!val('pz-time')){err(5,t('e-req'));return;}
+ if(who!=='self'&&!val('pz-whon')){err(5,t('e-req'));return;}
+ if(d<todayDubai()||d>LATEST_DELIVERY){err(5,t('e-date'));return;}
+ if(!document.getElementById('pz-ack').checked){err(5,t('e-ack'));return;}
+ if(!docs.passport||!docs.idcard){pcfStep(4); err(4,t('e-docs')); return;}
+ if(closedNow()){err(5,t('closed'));return;}
+ err(5,'');
+ var btn=document.getElementById('pz-submit'); btn.disabled=true; btn.textContent=t('sending');
+ var ref='PCD-'+Date.now().toString(36).toUpperCase().slice(-6), u=sel;
+ var payload={
+  name:val('pz-name'),email:val('pz-email'),phone:phone(),
+  budget:'AED '+u.price.toLocaleString('en-US'),
+  goal:'Palm Central Frond D reservation — '+u.en+' ('+(u.plan==='A'?'70/30':'60/40')+') — ref '+ref,
+  role:'buyer',emailSequence:'full-5-sequence',source:'launch-palm-central-frond-d',
+  reservation:{
+   ref:ref,project:'Palm Central Private Residences — Frond D, Palm Jebel Ali (Nakheel)',
+   unit:u.en,startingPrice:'AED '+u.price.toLocaleString('en-US'),plan:u.plan==='A'?'70/30':'60/40',planAccepted:true,
+   amount:'AED 100,000',method:radio('pz-meth'),deliveredBy:who,deliveredByDetails:who==='self'?'':val('pz-whon'),
+   location:'',locationDetails:'',date:d,time:val('pz-time'),
+   nationality:val('pz-nat'),residence:val('pz-res'),notes:val('pz-notes'),lang:L(),idAttached:true
+  },
+  idFiles:[{label:'Passport',name:docs.passport.name,type:docs.passport.type,data:docs.passport.data},{label:'ID card',name:docs.idcard.name,type:docs.idcard.type,data:docs.idcard.data}]
+ };
+ var waHref='https://wa.me/'+wa()+'?text='+encodeURIComponent(waText(ref));
+ function done(ok){
+  document.getElementById('pz-ref').textContent=ref;
+  document.getElementById('pz-wa').href=waHref;
+  document.getElementById('pz-okic').textContent=ok?'✓':'!';
+  document.getElementById('pz-okic').style.cssText=ok?'':'background:#fff4e0;color:#b45309';
+  document.getElementById('pz-okh').textContent=ok?t('ok-h'):t('fail-h');
+  document.getElementById('pz-okp').textContent=ok?t('ok-p'):t('e-net');
+  btn.disabled=false; btn.textContent=t('submit');
+  pcfStep(6);
+ }
+ var ctl=('AbortController' in window)?new AbortController():null, to=setTimeout(function(){if(ctl)ctl.abort();},45000);
+ fetch('/.netlify/functions/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctl?ctl.signal:undefined})
+  .then(function(r){clearTimeout(to); done(r.ok);})
+  .catch(function(){clearTimeout(to); done(false);});
+};
+
+/* ---------- init ---------- */
+applyLang();
+if(tick()){var iv=setInterval(function(){if(!tick())clearInterval(iv);},1000);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('pz-rv').classList.contains('on')&&!document.getElementById('pz-lb').classList.contains('on'))pcfClose();});
+/* re-render when the site language switcher changes body class (EN reloads the page) */
+var lastL=L();
+try{new MutationObserver(function(){if(L()!==lastL){lastL=L();applyLang();}}).observe(document.body,{attributes:true,attributeFilter:['class']});}catch(e){}
+})();
+</script>
 </section>
 <section id="visa" style="background:#f9f9f7;padding:80px 48px;border-top:1px solid rgba(0,0,0,.07)">
 <div style="max-width:1160px;margin:0 auto">
