@@ -139,11 +139,31 @@ async function fetchLiveData() {
     });
   }
 
+  // Launch 3: Palm Central Private Residences — Frond D, Palm Jebel Ali (Nakheel) — pcfSelect(...)
+  // Two plans: 70/30 for 1BR/2BR/2BR+Maid, 60/40 for 3BR and up. Reservation AED 100K, cash or
+  // manager's cheque to Nakheel only (no bank transfer). Closes Mon 7 Dec 2026 23:59 Dubai.
+  const palmCentralUnits = [];
+  const pcfRegex = /pcfSelect\('(\w+)','([^']+)','([\d,]+)','([\d,]+)','([^']+)'\)/g;
+  while ((m = pcfRegex.exec(html)) !== null) {
+    palmCentralUnits.push({
+      type: m[2],
+      priceAED: parseInt(m[3].replace(/,/g, ''), 10),
+      eoiAED: parseInt(m[4].replace(/,/g, ''), 10),
+      plan: m[5]
+    });
+  }
+  const PCF_DEADLINE = Date.parse('2026-12-07T23:59:59+04:00');
+  const pcfOpen = Date.now() <= PCF_DEADLINE;
+
   const liveData = {
     aedToUsdDivisor, aedToTomanRate,
     launches: [
       { name: 'Raw District II (Imtiaz Developments)', units: rawDistrictUnits },
-      { name: 'Arancia Yards (City of Arabia) — Phase 2', units: aranciaUnits }
+      { name: 'Arancia Yards (City of Arabia) — Phase 2', units: aranciaUnits },
+      {
+        name: 'Palm Central Private Residences — Frond D, Palm Jebel Ali (developer: Nakheel). 216 beachfront homes in 3 buildings, private beach, infinity pool. Estimated completion October 2030. RESERVATIONS CLOSE MONDAY 7 DECEMBER 2026, 11:59 PM DUBAI TIME. Reservation amount is AED 100,000 for every unit type, paid ONLY as cash or a manager\'s cheque payable to Nakheel, delivered in person in Dubai (by the client, their exchange house/sarraf, or a representative) — bank/account-to-account transfers are NOT accepted. Visitors reserve through the "Reserve a Unit" button in the Launches section, where they pick the unit, enter their details and choose the delivery date, time and place. A 4% DLD fee applies on top of the price. Prices are starting prices; final price depends on building, floor and view',
+        units: pcfOpen ? palmCentralUnits : []
+      }
     ],
     fetchedAt: new Date().toISOString()
   };
@@ -159,9 +179,9 @@ async function fetchLiveData() {
 function buildSystemPrompt(liveData) {
   const openLaunches = liveData.launches.filter(l => l.units.length);
   const launchBlock = !openLaunches.length
-    ? `NO LAUNCH IS OPEN FOR REGISTRATION RIGHT NOW. The previous launches (including Palm Jebel Ali Frond F, Raw District II and Arancia Yards) are closed. The site's Launches section is a "Next Launch · Coming Soon" teaser. AmirReza is deliberately keeping the next project secret — do NOT guess or hint at its name, location, developer, price, or whether it is residential or commercial. If a visitor asks about launches, build curiosity, say details go to the list first, and invite them to join the Telegram channel (t.me/amirrez_realtor) or message AmirReza on WhatsApp for early access; you may also offer to note their interest with submit_qualified_lead once you have name, email and WhatsApp.`
+    ? `NO LAUNCH IS OPEN FOR REGISTRATION RIGHT NOW. The previous launches (including Palm Central Frond D — which closed on 7 December 2026 — Palm Jebel Ali Frond F, Raw District II and Arancia Yards) are closed. The site's Launches section shows no open registration. AmirReza is deliberately keeping the next project secret — do NOT guess or hint at its name, location, developer, price, or whether it is residential or commercial. If a visitor asks about launches, build curiosity, say details go to the list first, and invite them to join the Telegram channel (t.me/amirrez_realtor) or message AmirReza on WhatsApp for early access; you may also offer to note their interest with submit_qualified_lead once you have name, email and WhatsApp.`
     : openLaunches.map(l => {
-    const lines = l.units.map(u => `  - ${u.type}: AED ${u.priceAED.toLocaleString()} | EOI: AED ${u.eoiAED.toLocaleString()} cash | ${u.plan}`).join('\n');
+    const lines = l.units.map(u => `  - ${u.type}: from AED ${u.priceAED.toLocaleString()} | reservation/EOI: AED ${u.eoiAED.toLocaleString()} (cash or manager's cheque) | ${u.plan}`).join('\n');
     return `${l.name}:\n${lines}`;
   }).join('\n\n');
 
