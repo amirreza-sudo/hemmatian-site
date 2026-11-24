@@ -1601,15 +1601,15 @@ body.fa #pz-rv .rv-box,body.ar #pz-rv .rv-box{font-family:var(--R),Vazirmatn,Tah
       </div>
       <!-- 4: documents -->
       <div class="rv-s" id="pcs4">
-        <div class="rv-info" data-pcf="doc-info">To take part in the launch, a copy of your <b>passport</b> and your <b>ID card</b> is required. Both are needed to register your reservation.</div>
+        <div class="rv-info" data-pcf="doc-info">To take part in the launch, upload a copy of your <b>passport</b> or your <b>ID card</b> (Emirates ID or national ID card). <b>One of them is enough.</b></div>
         <div class="rv-up" id="pz-up-passport">
-          <div class="h"><span data-pcf="d-pass">Passport (photo page)</span> <i>*</i></div>
+          <div class="h"><span data-pcf="d-pass">Passport (photo page)</span></div>
           <div class="s" data-pcf="d-fmt">Photo or scan · JPG, PNG or PDF</div>
           <input type="file" accept="image/*,application/pdf" onchange="pcfDoc(this,'passport')">
           <div class="st" id="pz-st-passport"></div>
         </div>
         <div class="rv-up" id="pz-up-idcard">
-          <div class="h"><span data-pcf="d-id">ID card (Emirates ID or national ID card)</span> <i>*</i></div>
+          <div class="h"><span data-pcf="d-id">ID card (Emirates ID or national ID card)</span></div>
           <div class="s" data-pcf="d-fmt">Photo or scan · JPG, PNG or PDF</div>
           <input type="file" accept="image/*,application/pdf" onchange="pcfDoc(this,'idcard')">
           <div class="st" id="pz-st-idcard"></div>
@@ -1920,35 +1920,35 @@ document.addEventListener('keydown',function(e){
 
 /* ---------- reservation wizard (v2) ---------- */
 var T2={
-en:{st1:'Step 1 of 5 · Choose your unit',st2:'Step 2 of 5 · Your details',st3:'Step 3 of 5 · Payment plan',st4:'Step 4 of 5 · Passport & ID card',st5:'Step 5 of 5 · Reservation appointment',st6:'Done',
+en:{st1:'Step 1 of 5 · Choose your unit',st2:'Step 2 of 5 · Your details',st3:'Step 3 of 5 · Payment plan',st4:'Step 4 of 5 · Passport or ID card',st5:'Step 5 of 5 · Reservation appointment',st6:'Done',
  'inst-note':'Amounts are calculated on the starting price. The final price depends on the building, floor, view and availability.',
  'plan-ok':'I have reviewed this payment plan and I accept it.','e-plan':'Please confirm that you accept the payment plan.',
  dld:'DLD registration fee (4%) — paid at booking',tot:'Total incl. DLD',
- 'doc-info':'To take part in the launch, a copy of your <b>passport</b> and your <b>ID card</b> is required. Both are needed to register your reservation.',
+ 'doc-info':'To take part in the launch, upload a copy of your <b>passport</b> or your <b>ID card</b> (Emirates ID or national ID card). <b>One of them is enough.</b>',
  'd-pass':'Passport (photo page)','d-id':'ID card (Emirates ID or national ID card)','d-fmt':'Photo or scan · JPG, PNG or PDF',
- 'e-docs':'Please upload both your passport and your ID card.','e-ftype':'Please upload a JPG, PNG or PDF file.','e-fbig':'This file is too large. Please upload a smaller photo or a PDF under 1.8 MB.','proc':'Processing…',
+ 'e-docs':'Please upload your passport or your ID card.','e-ftype':'Please upload a JPG, PNG or PDF file.','e-fbig':'This file is too large. Please upload a smaller photo or a PDF under 1.8 MB.','proc':'Processing…',
  'pay-info':"<b>Reservation amount: AED 100,000.</b><br>Paid only in <b>cash</b> or by <b>manager's cheque payable to Nakheel</b>. Tell us which day and time suits you, and AmirReza will call you to arrange the handover.",
  'l-date2':'Which day can you deliver it?','call-h':'Latest date: Monday 7 December. AmirReza will call you to confirm the exact time and place for that day.',
  ack:'I understand that this request holds my place in the queue. The unit is confirmed only after AmirReza confirms availability and the AED 100,000 reservation amount is received.',
  'e-ack':'Please tick the confirmation box.','ok-p':'AmirReza will call you to confirm your unit and arrange the day and place to receive the AED 100,000.'},
-fa:{st1:'مرحله ۱ از ۵ · انتخاب واحد',st2:'مرحله ۲ از ۵ · اطلاعات شما',st3:'مرحله ۳ از ۵ · اقساط',st4:'مرحله ۴ از ۵ · پاسپورت و کارت شناسایی',st5:'مرحله ۵ از ۵ · زمان تحویل مبلغ رزرو',st6:'ثبت شد',
+fa:{st1:'مرحله ۱ از ۵ · انتخاب واحد',st2:'مرحله ۲ از ۵ · اطلاعات شما',st3:'مرحله ۳ از ۵ · اقساط',st4:'مرحله ۴ از ۵ · پاسپورت یا کارت شناسایی',st5:'مرحله ۵ از ۵ · زمان تحویل مبلغ رزرو',st6:'ثبت شد',
  'inst-note':'مبالغ بر اساس شروع قیمت محاسبه شده است. قیمت نهایی به ساختمان، طبقه، ویو و موجودی بستگی دارد.',
  'plan-ok':'اقساط این واحد را بررسی کردم و مورد تأیید من است.','e-plan':'لطفاً تأیید کنید که شرایط اقساط را قبول دارید.',
  dld:'هزینه ثبت DLD (۴٪) — هنگام خرید',tot:'جمع کل با DLD',
- 'doc-info':'برای شرکت در لانچ، تصویر <b>پاسپورت</b> و <b>کارت شناسایی</b> شما الزامی است. هر دو برای ثبت رزرو لازم هستند.',
+ 'doc-info':'برای شرکت در لانچ، تصویر <b>پاسپورت</b> یا <b>کارت شناسایی</b> خود (امارات آیدی یا کارت ملی) را آپلود کنید. <b>یکی از این دو کافی است.</b>',
  'd-pass':'پاسپورت (صفحه عکس‌دار)','d-id':'کارت شناسایی (امارات آیدی یا کارت ملی)','d-fmt':'عکس یا اسکن · JPG، PNG یا PDF',
- 'e-docs':'لطفاً هم پاسپورت و هم کارت شناسایی را آپلود کنید.','e-ftype':'لطفاً فایل JPG، PNG یا PDF آپلود کنید.','e-fbig':'حجم فایل زیاد است. لطفاً عکس کوچک‌تر یا PDF زیر ۱٫۸ مگابایت آپلود کنید.','proc':'در حال پردازش…',
+ 'e-docs':'لطفاً پاسپورت یا کارت شناسایی خود را آپلود کنید.','e-ftype':'لطفاً فایل JPG، PNG یا PDF آپلود کنید.','e-fbig':'حجم فایل زیاد است. لطفاً عکس کوچک‌تر یا PDF زیر ۱٫۸ مگابایت آپلود کنید.','proc':'در حال پردازش…',
  'pay-info':'<b>مبلغ رزرو: ۱۰۰٬۰۰۰ درهم.</b><br>فقط به صورت <b>نقد (کش)</b> یا <b>منیجر چک به نام شرکت نخیل</b>. روز و ساعتی که برایتان مناسب است را مشخص کنید؛ امیررضا با شما تماس می‌گیرد و قرار تحویل را هماهنگ می‌کند.',
  'l-date2':'چه روزی می‌توانید مبلغ را تحویل دهید؟','call-h':'آخرین مهلت: دوشنبه ۷ دسامبر (۱۶ آذر). امیررضا با شما تماس می‌گیرد تا ساعت و محل دقیق همان روز را هماهنگ کند.',
  ack:'می‌دانم که این درخواست، جای من را در صف رزرو نگه می‌دارد. واحد فقط پس از تأیید موجودی توسط امیررضا و دریافت مبلغ ۱۰۰٬۰۰۰ درهم رزرو قطعی می‌شود.',
  'e-ack':'لطفاً گزینه تأیید را علامت بزنید.','ok-p':'امیررضا با شما تماس می‌گیرد تا واحد را تأیید کند و روز و محل تحویل ۱۰۰٬۰۰۰ درهم را هماهنگ کند.'},
-ar:{st1:'الخطوة 1 من 5 · اختر وحدتك',st2:'الخطوة 2 من 5 · بياناتك',st3:'الخطوة 3 من 5 · خطة الدفع',st4:'الخطوة 4 من 5 · جواز السفر والهوية',st5:'الخطوة 5 من 5 · موعد تسليم مبلغ الحجز',st6:'تم',
+ar:{st1:'الخطوة 1 من 5 · اختر وحدتك',st2:'الخطوة 2 من 5 · بياناتك',st3:'الخطوة 3 من 5 · خطة الدفع',st4:'الخطوة 4 من 5 · جواز السفر أو الهوية',st5:'الخطوة 5 من 5 · موعد تسليم مبلغ الحجز',st6:'تم',
  'inst-note':'المبالغ محسوبة على السعر الابتدائي. يعتمد السعر النهائي على المبنى والطابق والإطلالة والتوفر.',
  'plan-ok':'راجعت خطة الدفع هذه وأوافق عليها.','e-plan':'يرجى تأكيد موافقتك على خطة الدفع.',
  dld:'رسوم تسجيل DLD (4%) — عند الحجز',tot:'الإجمالي شامل DLD',
- 'doc-info':'للمشاركة في الإطلاق، يلزم تقديم نسخة من <b>جواز السفر</b> و<b>بطاقة الهوية</b>. كلاهما مطلوب لتسجيل حجزك.',
+ 'doc-info':'للمشاركة في الإطلاق، حمّل نسخة من <b>جواز السفر</b> أو <b>بطاقة الهوية</b> (الهوية الإماراتية أو الهوية الوطنية). <b>يكفي أحدهما.</b>',
  'd-pass':'جواز السفر (صفحة الصورة)','d-id':'بطاقة الهوية (الهوية الإماراتية أو الهوية الوطنية)','d-fmt':'صورة أو مسح ضوئي · JPG أو PNG أو PDF',
- 'e-docs':'يرجى تحميل جواز السفر وبطاقة الهوية معاً.','e-ftype':'يرجى تحميل ملف JPG أو PNG أو PDF.','e-fbig':'حجم الملف كبير. يرجى تحميل صورة أصغر أو ملف PDF أقل من 1.8 ميغابايت.','proc':'جارٍ المعالجة…',
+ 'e-docs':'يرجى تحميل جواز السفر أو بطاقة الهوية.','e-ftype':'يرجى تحميل ملف JPG أو PNG أو PDF.','e-fbig':'حجم الملف كبير. يرجى تحميل صورة أصغر أو ملف PDF أقل من 1.8 ميغابايت.','proc':'جارٍ المعالجة…',
  'pay-info':'<b>مبلغ الحجز: 100,000 درهم.</b><br>يُدفع فقط <b>نقداً</b> أو <b>بشيك مصرفي (مانجر شيك) باسم نخيل</b>. أخبرنا باليوم والوقت المناسبين لك، وسيتصل بك أمير رضا لترتيب التسليم.',
  'l-date2':'في أي يوم يمكنك تسليم المبلغ؟','call-h':'آخر موعد: الاثنين 7 ديسمبر. سيتصل بك أمير رضا لتأكيد الوقت والمكان بالتحديد في ذلك اليوم.',
  ack:'أفهم أن هذا الطلب يحجز مكاني في قائمة الانتظار، وأن الوحدة لا تُثبَّت إلا بعد تأكيد أمير رضا لتوفرها واستلام مبلغ الحجز 100,000 درهم.',
@@ -2041,7 +2041,7 @@ window.pcfNext=function(n){
   err(2,''); pcfStep(3); return;
  }
  if(n===3){ if(!document.getElementById('pz-planok').checked){err(3,t('e-plan'));return;} err(3,''); pcfStep(4); return; }
- if(n===4){ if(!docs.passport||!docs.idcard){err(4,t('e-docs'));return;} err(4,''); pcfStep(5); return; }
+ if(n===4){ if(!docs.passport&&!docs.idcard){err(4,t('e-docs'));return;} err(4,''); pcfStep(5); return; }
 };
 function waText(ref){
  var u=sel, ENL={cash:'Cash',cheque:"Manager's cheque to Nakheel",self:'Myself',exchange:'Exchange house',rep:'Representative',morning:'Morning',afternoon:'Afternoon',evening:'Evening'};
@@ -2058,7 +2058,7 @@ window.pcfSubmit=function(){
  if(who!=='self'&&!val('pz-whon')){err(5,t('e-req'));return;}
  if(d<todayDubai()||d>LATEST_DELIVERY){err(5,t('e-date'));return;}
  if(!document.getElementById('pz-ack').checked){err(5,t('e-ack'));return;}
- if(!docs.passport||!docs.idcard){pcfStep(4); err(4,t('e-docs')); return;}
+ if(!docs.passport&&!docs.idcard){pcfStep(4); err(4,t('e-docs')); return;}
  if(closedNow()){err(5,t('closed'));return;}
  err(5,'');
  var btn=document.getElementById('pz-submit'); btn.disabled=true; btn.textContent=t('sending');
@@ -2075,7 +2075,7 @@ window.pcfSubmit=function(){
    location:'',locationDetails:'',date:d,time:val('pz-time'),
    nationality:val('pz-nat'),residence:val('pz-res'),notes:val('pz-notes'),lang:L(),idAttached:true
   },
-  idFiles:[{label:'Passport',name:docs.passport.name,type:docs.passport.type,data:docs.passport.data},{label:'ID card',name:docs.idcard.name,type:docs.idcard.type,data:docs.idcard.data}]
+  idFiles:[['Passport',docs.passport],['ID card',docs.idcard]].filter(function(x){return x[1];}).map(function(x){return {label:x[0],name:x[1].name,type:x[1].type,data:x[1].data};})
  };
  var waHref='https://wa.me/'+wa()+'?text='+encodeURIComponent(waText(ref));
  function done(ok){
