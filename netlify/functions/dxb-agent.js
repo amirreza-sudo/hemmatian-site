@@ -155,6 +155,22 @@ async function fetchLiveData() {
   const PCF_DEADLINE = Date.parse('2026-12-07T23:59:59+04:00');
   const pcfOpen = Date.now() <= PCF_DEADLINE;
 
+  // Launch 4: The Beach Collection — Frond J beach villas, Palm Jebel Ali (Nakheel) — pjfSelect(...)
+  // 15 standalone 5/6-bedroom villas, one 70/30 plan. Reservation AED 150,000 per villa by MANAGER'S
+  // CHEQUE ONLY. Closes Fri 11 Dec 2026 23:59 Dubai (4 days after Palm Central). Added 2026-11-27.
+  const frondJVillas = [];
+  const pjfRegex = /pjfSelect\('(\w+)','([^']+)','([\d,]+)','([\d,]+)','([^']+)'\)/g;
+  while ((m = pjfRegex.exec(html)) !== null) {
+    frondJVillas.push({
+      type: m[2],
+      priceAED: parseInt(m[3].replace(/,/g, ''), 10),
+      eoiAED: parseInt(m[4].replace(/,/g, ''), 10),
+      plan: m[5]
+    });
+  }
+  const PJF_DEADLINE = Date.parse('2026-12-11T23:59:59+04:00');
+  const pjfOpen = Date.now() <= PJF_DEADLINE;
+
   const liveData = {
     aedToUsdDivisor, aedToTomanRate,
     launches: [
@@ -163,6 +179,10 @@ async function fetchLiveData() {
       {
         name: 'Palm Central Private Residences — Frond D, Palm Jebel Ali (developer: Nakheel). 216 beachfront homes in 3 buildings, private beach, infinity pool. Estimated completion October 2030. RESERVATIONS CLOSE MONDAY 7 DECEMBER 2026, 11:59 PM DUBAI TIME. Reservation amount is AED 100,000 for every unit type, paid ONLY as cash or a manager\'s cheque payable to Nakheel, delivered in person in Dubai (by the client, their exchange house/sarraf, or a representative) — bank/account-to-account transfers are NOT accepted. Visitors reserve through the "Reserve a Unit" button in the Launches section, where they pick the unit, enter their details and choose the delivery date, time and place. A 4% DLD fee applies on top of the price. Prices are starting prices; final price depends on building, floor and view',
         units: pcfOpen ? palmCentralUnits : []
+      },
+      {
+        name: 'The Beach Collection — Frond J beach villas, Palm Jebel Ali (developer: Nakheel). Only 15 standalone beachfront villas in 5 designs (Cyan Sky, Baia Luna, Wave Crest, Ocean Whisper, Bluejay), 5 or 6 bedrooms, each with a private lift, roof lounge and direct beach access. Estimated completion March 2030. RESERVATIONS CLOSE FRIDAY 11 DECEMBER 2026, 11:59 PM DUBAI TIME. Reservation amount is AED 150,000 per villa, paid ONLY by manager\'s cheque payable to Nakheel (Dubai Holding) — cash and bank/account-to-account transfers are NOT accepted. Visitors reserve through the "Reserve a Villa" button in the Launches section (below Palm Central), where they pick the villa, accept the payment plan, upload a passport or ID card and say which day they will be ready to hand over the cheque; AmirReza then arranges the time with them on WhatsApp, and any questions go to him on WhatsApp. Payment plan 70/30: 20% on booking, 50% in 8 instalments Apr 2027–Aug 2029, 30% on completion. A 4% DLD fee applies on top. Swimming pools and landscaping are not included',
+        units: pjfOpen ? frondJVillas : []
       }
     ],
     fetchedAt: new Date().toISOString()
@@ -179,7 +199,7 @@ async function fetchLiveData() {
 function buildSystemPrompt(liveData) {
   const openLaunches = liveData.launches.filter(l => l.units.length);
   const launchBlock = !openLaunches.length
-    ? `NO LAUNCH IS OPEN FOR REGISTRATION RIGHT NOW. The previous launches (including Palm Central Frond D — which closed on 7 December 2026 — Palm Jebel Ali Frond F, Raw District II and Arancia Yards) are closed. The site's Launches section shows no open registration. AmirReza is deliberately keeping the next project secret — do NOT guess or hint at its name, location, developer, price, or whether it is residential or commercial. If a visitor asks about launches, build curiosity, say details go to the list first, and invite them to join the Telegram channel (t.me/amirrez_realtor) or message AmirReza on WhatsApp for early access; you may also offer to note their interest with submit_qualified_lead once you have name, email and WhatsApp.`
+    ? `NO LAUNCH IS OPEN FOR REGISTRATION RIGHT NOW. The previous launches (including Palm Central Frond D — which closed on 7 December 2026 — The Beach Collection Frond J villas — which closed on 11 December 2026 — Palm Jebel Ali Frond F, Raw District II and Arancia Yards) are closed. The site's Launches section shows no open registration. AmirReza is deliberately keeping the next project secret — do NOT guess or hint at its name, location, developer, price, or whether it is residential or commercial. If a visitor asks about launches, build curiosity, say details go to the list first, and invite them to join the Telegram channel (t.me/amirrez_realtor) or message AmirReza on WhatsApp for early access; you may also offer to note their interest with submit_qualified_lead once you have name, email and WhatsApp.`
     : openLaunches.map(l => {
     const lines = l.units.map(u => `  - ${u.type}: from AED ${u.priceAED.toLocaleString()} | reservation/EOI: AED ${u.eoiAED.toLocaleString()} (cash or manager's cheque) | ${u.plan}`).join('\n');
     return `${l.name}:\n${lines}`;
